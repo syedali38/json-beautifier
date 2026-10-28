@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Beautifier Online – Free JSON Formatter & Validator</title>
+    <meta
+      name="description"
+      content="Free online JSON Beautifier to format, validate, and minify JSON instantly. Easy-to-use JSON formatter with error detection and copy functionality."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="eyebrow">Local JSON tool</p>
+        <h1>Free Online JSON Beautifier & Formatter</h1>
+        <p class="subtitle">
+          Paste JSON below, then beautify it, minify it, or clear the editor.
+          Everything stays in your browser.
+        </p>
+      </header>
+
+      <main>
+        <section class="card" aria-label="JSON editor">
+          <label class="editor-label" for="json-input">JSON input</label>
+          <textarea
+            id="json-input"
+            class="editor"
+            spellcheck="false"
+            aria-describedby="status-message"
+            placeholder='Paste JSON here, for example: {"name":"Syed","ready":true}'
+          ></textarea>
+
+          <div class="actions" role="group" aria-label="JSON actions">
+            <button type="button" id="beautify-btn" class="btn btn-primary">
+              Beautify JSON
+            </button>
+            <button type="button" id="minify-btn" class="btn btn-secondary">
+              Minify JSON
+            </button>
+            <button type="button" id="copy-btn" class="btn btn-secondary">
+              Copy JSON
+            </button>
+            <button type="button" id="validate-btn" class="btn btn-secondary">
+              Validate JSON
+            </button>
+            <button type="button" id="clear-btn" class="btn btn-ghost">
+              Clear
+            </button>
+          </div>
+
+          <p id="status-message" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="info-section" aria-labelledby="json-beautifier-heading">
+          <h2 id="json-beautifier-heading">What Is a JSON Beautifier?</h2>
+          <p>
+            A JSON Beautifier is an online tool that converts
+            compact or unformatted JSON data into a clean,
+            readable structure. It uses indentation and line
+            breaks to make JSON easier to understand, review,
+            and debug.
+          </p>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="how-to-heading">
+          <h2 id="how-to-heading">How to Use a JSON Beautifier Online</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Step 1: Paste Your JSON</h3>
+              <p>Paste your JSON data into the input editor.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 2: Beautify JSON</h3>
+              <p>Click the Beautify JSON button to format your JSON with proper indentation.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 3: Validate JSON</h3>
+              <p>Click Validate JSON to check whether your JSON contains syntax errors.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 4: Copy Your JSON</h3>
+              <p>Click Copy JSON to copy the formatted JSON to your clipboard.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        Your JSON never leaves this page. No uploads. No accounts.
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
