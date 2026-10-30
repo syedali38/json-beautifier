@@ -80,6 +80,22 @@
             breaks to make JSON easier to understand, review,
             and debug.
           </p>
+          <h3 id="json-example-heading">JSON Beautifier Example: Before and After</h3>
+          <figure class="code-figure">
+            <figcaption>Before</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"name":"Ali","skills":["Linux","OpenShift"],"active":true}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "name": "Ali",
+  "skills": [
+    "Linux",
+    "OpenShift"
+  ],
+  "active": true
+}</code></pre>
+          </figure>
         </section>
 
         <section class="how-to-section" aria-labelledby="how-to-heading">
@@ -102,6 +118,49 @@
               <p>Click Copy JSON to copy the formatted JSON to your clipboard.</p>
             </article>
           </div>
+        </section>
+
+        <section class="compare-section" aria-labelledby="compare-heading">
+          <h2 id="compare-heading">JSON Beautify vs Minify</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Beautify</h3>
+              <p>
+                Adds indentation and line breaks to make JSON easier to read.
+                Use it when you want to format JSON online and review the data.
+                A JSON prettifier makes this same spacing change.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Minify</h3>
+              <p>
+                Removes unnecessary whitespace to make JSON more compact.
+                Use it when you want a shorter version of the same data.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="errors-section" aria-labelledby="errors-heading">
+          <h2 id="errors-heading">Common JSON Formatting Errors</h2>
+          <p class="section-intro">
+            The Validate JSON button checks syntax and writes the result under the editor.
+            It can identify invalid JSON. It does not correct these errors for you.
+          </p>
+          <ol class="error-list">
+            <li class="step-card">
+              <h3>Trailing commas</h3>
+              <p>A comma after the last value in an object or array is invalid. Remove that comma.</p>
+            </li>
+            <li class="step-card">
+              <h3>Single quotes instead of double quotes</h3>
+              <p>JSON keys and strings must use double quotes. Replace single quotes around text.</p>
+            </li>
+            <li class="step-card">
+              <h3>Comments inside JSON</h3>
+              <p>JSON does not allow <code>//</code> or <code>/* */</code> comments. Remove them before you validate.</p>
+            </li>
+          </ol>
         </section>
 
         <section class="related-section" aria-labelledby="related-tools-heading">
