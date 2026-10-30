@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON to CSV Converter Online – Free &amp; Easy Tool</title>
+    <meta
+      name="description"
+      content="Convert JSON to CSV online for free. Upload JSON files, flatten nested objects, preview CSV data and download results instantly."
+    />
+    <link rel="canonical" href="https://json-beautifier-36d.pages.dev/json-to-csv/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON to CSV Converter Online",
+        "url": "https://json-beautifier-36d.pages.dev/json-to-csv/",
+        "description": "Convert JSON to CSV online for free. Upload JSON files, flatten nested objects, preview CSV data and download results instantly.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/" aria-current="page">JSON to CSV</a>
+        </nav>
+        <h1>Free Online JSON to CSV Converter</h1>
+        <p class="subtitle">
+          Paste JSON or upload a .json file, then convert JSON to CSV in your browser.
+          Nested objects become dotted columns, and the file never leaves this page.
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="input-heading">
+        <h2 id="input-heading">JSON input</h2>
+        <label class="editor-label" for="json-input">JSON to convert</label>
+        <textarea
+          id="json-input"
+          class="editor"
+          spellcheck="false"
+          autocomplete="off"
+          aria-describedby="status-message"
+          placeholder='Paste JSON here, for example: [{"name":"Ali","age":30}]'
+        ></textarea>
+        <div class="actions" role="group" aria-label="JSON input actions">
+          <label class="btn btn-secondary file-btn" for="file-input">Upload JSON</label>
+          <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+          <button type="button" id="sample-btn" class="btn btn-secondary">Load sample JSON</button>
+          <button type="button" id="clear-btn" class="btn btn-ghost">Clear JSON</button>
+        </div>
+        <p id="status-message" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="options-heading">
+        <h2 id="options-heading">Conversion options</h2>
+        <div class="options">
+          <div class="option">
+            <label class="editor-label" for="delimiter">Delimiter</label>
+            <select id="delimiter">
+              <option value=",">Comma</option>
+              <option value=";">Semicolon</option>
+              <option value="tab">Tab</option>
+            </select>
+          </div>
+          <label class="check" for="headers-input">
+            <input id="headers-input" type="checkbox" checked />
+            Include header row
+          </label>
+          <label class="check" for="safe-input">
+            <input id="safe-input" type="checkbox" />
+            Spreadsheet-safe export
+          </label>
+        </div>
+        <p class="hint">
+          Spreadsheet-safe export adds a leading apostrophe to cells that start with
+          =, +, -, or @. Leave it off when you want the original values unchanged.
+        </p>
+        <div class="actions" role="group" aria-label="CSV actions">
+          <button type="button" id="convert-btn" class="btn btn-primary">Convert to CSV</button>
+          <button type="button" id="download-btn" class="btn btn-secondary">Download CSV</button>
+          <button type="button" id="copy-btn" class="btn btn-secondary">Copy CSV</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="preview-heading">
+        <div class="preview-head">
+          <h2 id="preview-heading">CSV preview</h2>
+          <p id="preview-count" class="count">No rows yet</p>
+        </div>
+        <div class="table-wrap" tabindex="0" aria-labelledby="preview-heading">
+          <p id="preview-empty" class="empty">Convert JSON to see a CSV preview.</p>
+          <table id="preview-table" class="preview" hidden>
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="info-section" aria-labelledby="what-heading">
+        <h2 id="what-heading">What Is JSON to CSV Conversion?</h2>
+        <p>
+          JSON to CSV conversion turns structured JSON into rows and columns that a
+          spreadsheet can open. A json to csv converter reads each object as one record
+          and each property as a column. You can convert json to csv online on this page
+          without sending the text to a server.
+        </p>
+      </section>
+
+      <section class="how-to-section" aria-labelledby="how-heading">
+        <h2 id="how-heading">How to Convert JSON to CSV</h2>
+        <div class="step-grid">
+          <article class="step-card">
+            <h3>Step 1: Add JSON</h3>
+            <p>Paste an object or an array of objects, or upload a .json file.</p>
+          </article>
+          <article class="step-card">
+            <h3>Step 2: Choose options</h3>
+            <p>Pick a comma, semicolon, or tab delimiter, and choose whether the first row names the columns.</p>
+          </article>
+          <article class="step-card">
+            <h3>Step 3: Convert and preview</h3>
+            <p>Choose Convert to CSV. The preview shows the columns and the first rows.</p>
+          </article>
+          <article class="step-card">
+            <h3>Step 4: Copy or download</h3>
+            <p>Copy the CSV or download converted-data.csv. The file includes every converted row, not only the preview.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="info-section" aria-labelledby="examples-heading">
+        <h2 id="examples-heading">JSON to CSV Examples</h2>
+        <h3>Array of objects</h3>
+        <pre class="json-example"><code>[
+  {
+    "name": "Ali",
+    "age": 30,
+    "address": { "city": "Karachi", "country": "Pakistan" }
+  }
+]</code></pre>
+        <p>The converter flattens address into dotted columns:</p>
+        <pre class="json-example"><code>name,age,address.city,address.country
+Ali,30,Karachi,Pakistan</code></pre>
+      </section>
+
+      <section class="info-section" aria-labelledby="nested-heading">
+        <h2 id="nested-heading">Nested JSON Conversion Explained</h2>
+        <p>
+          Objects inside objects are walked until a plain value is found. The column name
+          joins each key with a dot, so user.name and user.city stay separate. If a property
+          is missing from one record, that cell is left blank. A JSON null stays visible as
+          the text null, so it is not confused with a missing property.
+        </p>
+        <p>
+          An array inside an object is written as compact JSON in one cell. That keeps every
+          item instead of dropping the list or inventing extra rows. A top-level array is
+          converted only when every item is an object.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="errors-heading">
+        <h2 id="errors-heading">Common Conversion Errors</h2>
+        <h3>Invalid JSON</h3>
+        <p>Trailing commas, comments, and single quotes are rejected. The status line shows the parser message.</p>
+        <h3>Unsupported root</h3>
+        <p>A lone string, number, or mixed array cannot become one honest table. The page explains that instead of guessing.</p>
+        <h3>Empty array</h3>
+        <p>An empty array has no records, so no CSV file is created until you add objects.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+        <h3>Does this json to csv tool upload my data?</h3>
+        <p>No. Parsing, flattening, preview, copy, and download all run in your browser.</p>
+        <h3>How are commas and quotes handled?</h3>
+        <p>Fields that contain the delimiter, a double quote, or a line break are wrapped in double quotes. Quotes inside a field are doubled.</p>
+        <h3>What does spreadsheet-safe export change?</h3>
+        <p>It only prefixes cells that start with =, +, -, or @. The default conversion leaves those characters as they appear in the JSON.</p>
+        <h3>Where can I inspect the JSON first?</h3>
+        <p>
+          Use the <a href="/json-viewer/">JSON Viewer</a> to open the tree, or the
+          <a href="/">JSON Beautifier</a> to format the text, then come back and convert it.
+        </p>
+      </section>
+
+      <footer class="footer">Your JSON never leaves this page. No uploads. No accounts.</footer>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
