@@ -83,8 +83,13 @@
           </label>
         </div>
         <p class="hint">
+          Download CSV saves converted-data.csv as UTF-8 with a leading byte-order mark.
+          Copy CSV does not add that mark.
           Spreadsheet-safe export adds a leading apostrophe to cells that start with
-          =, +, -, or @. Leave it off when you want the original values unchanged.
+          =, +, -, @, a tab, or a carriage return. The preview shows the original value.
+          The apostrophe appears in the generated CSV text.
+          Leave the option off when you want the original values unchanged.
+          The delimiter choice is separate and stays in effect either way.
         </p>
         <div class="actions" role="group" aria-label="CSV actions">
           <button type="button" id="convert-btn" class="btn btn-primary">Convert to CSV</button>
@@ -152,6 +157,16 @@
         <p>The converter flattens address into dotted columns:</p>
         <pre class="json-example"><code>name,age,address.city,address.country
 Ali,30,Karachi,Pakistan</code></pre>
+        <h3>Array property</h3>
+        <pre class="json-example"><code>[{"name":"Ali","tags":["design","json"]}]</code></pre>
+        <p>
+          The CSV preview displays ["design","json"] in the tags cell.
+          The downloaded CSV quotes this field because the JSON text contains commas
+          and quotation marks. The array remains in one CSV cell.
+          It does not create additional CSV rows.
+        </p>
+        <pre class="json-example"><code>name,tags
+Ali,"[""design"",""json""]"</code></pre>
       </section>
 
       <section class="info-section" aria-labelledby="nested-heading">
@@ -174,7 +189,13 @@ Ali,30,Karachi,Pakistan</code></pre>
         <h3>Invalid JSON</h3>
         <p>Trailing commas, comments, and single quotes are rejected. The status line shows the parser message.</p>
         <h3>Unsupported root</h3>
-        <p>A lone string, number, or mixed array cannot become one honest table. The page explains that instead of guessing.</p>
+        <p>
+          A top-level string, number, boolean, or null is rejected.
+          An array is accepted only when every element is an object, so an array of strings is rejected.
+          An empty object has no properties, so it produces no CSV columns.
+          The status message identifies the error.
+          The converter does not rewrite invalid or unsupported input.
+        </p>
         <h3>Empty array</h3>
         <p>An empty array has no records, so no CSV file is created until you add objects.</p>
       </section>
@@ -186,7 +207,7 @@ Ali,30,Karachi,Pakistan</code></pre>
         <h3>How are commas and quotes handled?</h3>
         <p>Fields that contain the delimiter, a double quote, or a line break are wrapped in double quotes. Quotes inside a field are doubled.</p>
         <h3>What does spreadsheet-safe export change?</h3>
-        <p>It only prefixes cells that start with =, +, -, or @. The default conversion leaves those characters as they appear in the JSON.</p>
+        <p>Nothing, unless you check Spreadsheet-safe export. It is off by default, so the CSV keeps the original cell text.</p>
         <h3>Where can I inspect the JSON first?</h3>
         <p>
           Use the <a href="/json-viewer/">JSON Viewer</a> to open the tree, or the
