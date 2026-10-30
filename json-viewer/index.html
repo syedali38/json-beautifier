@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Viewer Online – Free JSON Tree Viewer</title>
+    <meta
+      name="description"
+      content="View JSON online with a free interactive JSON viewer. Explore JSON objects and arrays in an expandable tree, search data and copy JSON paths."
+    />
+    <link rel="canonical" href="https://json-beautifier-36d.pages.dev/json-viewer/" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="eyebrow"><a href="../index.html">JSON Beautifier</a></p>
+        <h1>Free Online JSON Viewer</h1>
+        <p class="subtitle">
+          Paste JSON, then explore it as a tree. Expand nested objects and arrays,
+          search keys and values, and copy a path to any property. Everything stays
+          in your browser.
+        </p>
+      </header>
+
+      <div class="workspace">
+        <section class="panel" aria-labelledby="editor-heading">
+          <div class="panel-head">
+            <h2 id="editor-heading">JSON input</h2>
+          </div>
+          <label class="editor-label" for="json-input">JSON editor with line numbers</label>
+          <div class="editor-shell">
+            <div class="gutter" aria-hidden="true">
+              <div id="line-numbers" class="line-numbers">1</div>
+            </div>
+            <textarea
+              id="json-input"
+              class="editor"
+              wrap="off"
+              spellcheck="false"
+              autocomplete="off"
+              aria-describedby="status-message"
+              placeholder='Paste JSON here, for example: {"name":"Ada","skills":["JSON"]}'
+            ></textarea>
+          </div>
+          <div class="actions" role="group" aria-label="Editor actions">
+            <button type="button" id="view-btn" class="btn btn-primary">View JSON</button>
+            <button type="button" id="copy-json-btn" class="btn btn-secondary">Copy formatted JSON</button>
+            <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
+            <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+          </div>
+          <p id="status-message" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel" aria-labelledby="tree-heading">
+          <div class="panel-head">
+            <h2 id="tree-heading">JSON tree</h2>
+          </div>
+          <div class="tree-tools">
+            <label class="editor-label" for="json-search">Search keys and values</label>
+            <input id="json-search" class="search-input" type="search" autocomplete="off" placeholder="Search keys and values" />
+            <div class="actions" role="group" aria-label="Tree actions">
+              <button type="button" id="expand-btn" class="btn btn-secondary">Expand All</button>
+              <button type="button" id="collapse-btn" class="btn btn-secondary">Collapse All</button>
+            </div>
+          </div>
+          <p class="legend">
+            <span class="token token-string">string</span>
+            <span class="token token-number">number</span>
+            <span class="token token-boolean">boolean</span>
+            <span class="token token-null">null</span>
+            <span class="token token-object">object</span>
+            <span class="token token-array">array</span>
+          </p>
+          <div id="json-tree" class="tree" role="region" aria-label="Interactive JSON tree" tabindex="0">
+            <p class="tree-empty">Paste JSON and choose View JSON to see the tree.</p>
+          </div>
+        </section>
+      </div>
+
+      <section class="info-section" aria-labelledby="what-heading">
+        <h2 id="what-heading">What Is a JSON Viewer?</h2>
+        <p>
+          A JSON viewer turns a block of JSON text into an interactive tree. Objects
+          and arrays become branches you can open and close. Strings, numbers,
+          booleans, and null stay visible as individual values, so a large response
+          is easier to scan than a single minified line.
+        </p>
+        <p>
+          This page accepts a JSON object, a JSON array, or a single JSON value such
+          as a string or number. Nested objects and arrays stay attached to their
+          parent, and each row can copy the path that points at that value.
+        </p>
+      </section>
+
+      <section class="how-to-section" aria-labelledby="how-heading">
+        <h2 id="how-heading">How to Use the JSON Viewer</h2>
+        <div class="step-grid">
+          <article class="step-card">
+            <h3>Step 1: Paste your JSON</h3>
+            <p>Paste an object, array, or single value into the editor. Line numbers track each line as you type or scroll.</p>
+          </article>
+          <article class="step-card">
+            <h3>Step 2: View the tree</h3>
+            <p>Choose View JSON. Valid JSON appears on the right. Invalid JSON stays in the editor and the status line explains the problem.</p>
+          </article>
+          <article class="step-card">
+            <h3>Step 3: Expand branches</h3>
+            <p>Use a row’s arrow to open that branch, or choose Expand All and Collapse All. Very large nodes open in batches.</p>
+          </article>
+          <article class="step-card">
+            <h3>Step 4: Search and copy</h3>
+            <p>Search for a key or value, then use Copy path on a row. Copy formatted JSON copies the whole document with indentation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="how-to-section" aria-labelledby="features-heading">
+        <h2 id="features-heading">JSON Tree Viewer Features</h2>
+        <div class="step-grid">
+          <article class="step-card">
+            <h3>Line-numbered editor</h3>
+            <p>The input keeps a gutter of line numbers so you can match a parser message to the text you pasted.</p>
+          </article>
+          <article class="step-card">
+            <h3>Expandable JSON tree</h3>
+            <p>Objects and arrays open independently. Collapsed branches are not drawn until you open them.</p>
+          </article>
+          <article class="step-card">
+            <h3>Type colors</h3>
+            <p>Strings, numbers, booleans, null, objects, and arrays each use their own color so types are easy to tell apart.</p>
+          </article>
+          <article class="step-card">
+            <h3>Search, copy, and sample data</h3>
+            <p>Search looks through keys and values. Copy path copies an address such as $.tags[0]. Load Sample JSON inserts a small nested example.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="info-section" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+        <h3>What is a JSON path?</h3>
+        <p>
+          A JSON path is a short address for one value. $.owner.name points at a
+          property, and $.tags[0] points at the first item in an array. Copy path
+          on a row copies that address.
+        </p>
+        <h3>Does this viewer upload my JSON?</h3>
+        <p>
+          No. The editor, parser, search, and tree all run in your browser. This
+          page does not send the JSON you paste to a server.
+        </p>
+        <h3>Why did the viewer refuse my text?</h3>
+        <p>
+          The text is not valid JSON. The status line includes the parser message.
+          Trailing commas, comments, and single quotes are common reasons JSON is rejected.
+        </p>
+        <h3>Why does a large array show only some items?</h3>
+        <p>
+          The tree draws a limited batch so a huge document does not freeze the page.
+          Choose Show more for the next batch, or search for a key or value to reveal a match.
+        </p>
+      </section>
+
+      <footer class="footer">Your JSON never leaves this page. No uploads. No accounts.</footer>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
