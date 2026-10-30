@@ -208,6 +208,23 @@ mark.match { background: #e9d5ff; color: inherit; padding: 0 1px; border-radius:
 .info-section { padding: 22px; }
 .info-section p, .step-card p { margin: 0 0 12px; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
 .info-section h3 { margin: 16px 0 8px; color: var(--purple-700); font-size: 1.05rem; }
+.info-section a { color: var(--purple-700); font-weight: 700; }
+
+.json-example {
+  margin: 8px 0 20px;
+  padding: 16px;
+  overflow-x: auto;
+  max-width: 100%;
+  border: 1px solid #eadcff;
+  border-radius: 14px;
+  background: #fdfbff;
+  color: var(--text);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .step-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .step-card { padding: 20px; }
 .step-card h3 { margin: 0 0 8px; color: var(--purple-700); font-size: 1.05rem; }

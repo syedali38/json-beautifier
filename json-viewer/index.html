@@ -9,6 +9,22 @@
       content="View JSON online with a free interactive JSON viewer. Explore JSON objects and arrays in an expandable tree, search data and copy JSON paths."
     />
     <link rel="canonical" href="https://json-beautifier-36d.pages.dev/json-viewer/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON Viewer Online",
+        "url": "https://json-beautifier-36d.pages.dev/json-viewer/",
+        "description": "View JSON online with a free interactive JSON viewer. Explore JSON objects and arrays in an expandable tree, search data and copy JSON paths.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -91,6 +107,11 @@
           as a string or number. Nested objects and arrays stay attached to their
           parent, and each row can copy the path that points at that value.
         </p>
+        <p>
+          This json viewer online reads text that you paste. To use it as a json file viewer,
+          open a .json file in a text editor and paste that text into the box above.
+          The file is not uploaded.
+        </p>
       </section>
 
       <section class="how-to-section" aria-labelledby="how-heading">
@@ -135,6 +156,82 @@
             <p>Search looks through keys and values. Copy path copies an address such as $.tags[0]. Load Sample JSON inserts a small nested example.</p>
           </article>
         </div>
+      </section>
+
+      <section class="info-section" aria-labelledby="tree-works-heading">
+        <h2 id="tree-works-heading">How an Interactive JSON Tree Works</h2>
+        <p>
+          After you choose View JSON, the json tree viewer shows the root value as one row.
+          Its path is $. An object row shows how many properties it contains, and an array
+          row shows how many items it contains. Open a row to reveal only its immediate
+          children. Each child keeps its own path, such as $.user.name or $[0].
+        </p>
+        <p>
+          Colors distinguish strings, numbers, booleans, null, objects, and arrays.
+          Closing a branch hides its children again, so a large document does not have
+          to stay fully open while you read one part of it.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="explore-heading">
+        <h2 id="explore-heading">How to Explore Nested JSON Objects and Arrays</h2>
+        <p>
+          Start at the root and open one level at a time. If the value is an object,
+          each child is a named property. If the value is an array, each child is numbered
+          from zero. Open that child when it is also an object or array.
+        </p>
+        <p>
+          A path records the route you took. $.order.items[0].sku means the order property,
+          then its items array, then the first item, then the sku property. Copy path on
+          that row copies the route without making you count brackets by hand.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="when-heading">
+        <h2 id="when-heading">When to Use a JSON Viewer Instead of a Formatter</h2>
+        <p>
+          Use this page to inspect structure: find a nested value, check one array item,
+          or copy the path to a property. Use the
+          <a href="../index.html">JSON Beautifier</a>
+          when you want to indent a document, minify it, or copy the formatted text.
+        </p>
+        <p>
+          Formatting changes the appearance of the text. Viewing lets you move through
+          the data and leave the pasted text as it is.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="examples-heading">
+        <h2 id="examples-heading">JSON Viewer Examples</h2>
+
+        <h3>Simple JSON object</h3>
+        <p>Three properties sit directly on the root object. The path to the role is $.role.</p>
+        <pre class="json-example"><code>{
+  "name": "Ada",
+  "role": "developer",
+  "active": true
+}</code></pre>
+
+        <h3>Nested JSON object</h3>
+        <p>
+          order is an object, and items is an array inside it. The first sku is
+          $.order.items[0].sku, which is "pen".
+        </p>
+        <pre class="json-example"><code>{
+  "order": {
+    "id": "A-100",
+    "items": [
+      { "sku": "pen", "qty": 2 }
+    ]
+  }
+}</code></pre>
+
+        <h3>JSON array</h3>
+        <p>The root itself is an array, so the first city is $[0].city, which is "Lahore".</p>
+        <pre class="json-example"><code>[
+  { "city": "Lahore", "temp": 31 },
+  { "city": "Karachi", "temp": 29 }
+]</code></pre>
       </section>
 
       <section class="info-section" aria-labelledby="faq-heading">
