@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      gtag('set', 'ads_data_redaction', true);
+      window.loadGoogleAnalytics = function () {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TLZNPLNGX8';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-TLZNPLNGX8');
+      };
+      try {
+        if (localStorage.getItem('jsonforgekit-analytics-consent') === 'granted') {
+          window.loadGoogleAnalytics();
+        }
+      } catch (error) {}
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JSON Viewer Online – Free JSON Tree Viewer</title>
@@ -25,6 +52,7 @@
         }
       }
     </script>
+    <link rel="stylesheet" href="/consent.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -272,8 +300,15 @@
       </section>
       </main>
 
-      <footer class="footer">Your JSON never leaves this page. No uploads. No accounts.</footer>
+      <footer class="footer">
+        Your JSON never leaves this page. No uploads. No accounts.
+        <span class="footer-links">
+          <a href="/privacy/">Privacy policy</a>
+          <button type="button" id="privacy-choices" class="privacy-choice">Privacy choices</button>
+        </span>
+      </footer>
     </div>
+    <script src="/consent.js" defer></script>
     <script src="script.js" defer></script>
   </body>
 </html>

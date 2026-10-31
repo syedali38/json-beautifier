@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      gtag('set', 'ads_data_redaction', true);
+      window.loadGoogleAnalytics = function () {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TLZNPLNGX8';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-TLZNPLNGX8');
+      };
+      try {
+        if (localStorage.getItem('jsonforgekit-analytics-consent') === 'granted') {
+          window.loadGoogleAnalytics();
+        }
+      } catch (error) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy – JSONForgeKit</title>
+    <meta
+      name="description"
+      content="How jsonforgekit.com uses Google Analytics, stores your consent choice, and keeps pasted JSON in your browser."
+    />
+    <link rel="canonical" href="https://jsonforgekit.com/privacy/" />
+    <link rel="stylesheet" href="/consent.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/">JSON to YAML</a>
+          <a href="/json-escape-unescape/">JSON Escape</a>
+        </nav>
+        <h1>Privacy Policy</h1>
+        <p class="subtitle">
+          This page describes analytics on jsonforgekit.com. It does not describe a company office or a support desk.
+        </p>
+      </header>
+
+      <main>
+        <section class="info-section" aria-labelledby="tools-heading">
+          <h2 id="tools-heading">JSON tools</h2>
+          <p>
+            The JSON tools on this website run in your browser. Text you paste, open from a file, or convert is not uploaded to a server run by this website. The site does not ask you to create an account.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="analytics-heading">
+          <h2 id="analytics-heading">Google Analytics</h2>
+          <p>
+            Google Analytics 4, measurement ID G-TLZNPLNGX8, is not loaded until you choose Accept analytics. Before that choice, and after you reject, this site does not request the Google tag and does not send an analytics hit to Google.
+          </p>
+          <p>
+            Consent Mode starts with analytics storage, ad storage, ad user data, and ad personalization set to denied. Accept analytics changes only analytics storage to granted, then loads the Google tag once. Advertising storage stays denied.
+          </p>
+          <p>
+            When analytics storage is granted, Google Analytics may receive a page view and related technical data such as browser type and a cookie identifier. Google describes that processing in the
+            <a href="https://policies.google.com/privacy">Google Privacy Policy</a>
+            and in
+            <a href="https://support.google.com/analytics/answer/6004245">Google Analytics data practices</a>.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="choice-heading">
+          <h2 id="choice-heading">Your choice</h2>
+          <p>
+            Accept analytics and Reject analytics are stored in this browser under the local storage name jsonforgekit-analytics-consent. That saved value is not the JSON you paste into a tool.
+          </p>
+          <p>
+            Use Privacy choices on any page to open the banner again. Choosing Reject analytics before the Google tag has loaded leaves the tag unloaded. If the tag is already loaded, the banner warns that the page must reload and that text still in the editor will be lost. Cancel leaves the saved choice and the page unchanged. Turn off analytics saves the denied choice and reloads so the tag is no longer active. Rejecting also removes Google Analytics cookies this site can see, such as cookies whose names start with _ga. A hit that Google already received cannot be recalled from this site.
+          </p>
+          <p>
+            The JSON tools keep working whether you accept, reject, or have not chosen.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="contact-heading">
+          <h2 id="contact-heading">Contact</h2>
+          <p>This page does not publish an email address or a postal address.</p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="footer-links">
+          <a href="/privacy/" aria-current="page">Privacy policy</a>
+          <button type="button" id="privacy-choices" class="privacy-choice">Privacy choices</button>
+        </span>
+      </footer>
+    </div>
+    <script src="/consent.js" defer></script>
+  </body>
+</html>

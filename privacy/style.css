@@ -1,0 +1,93 @@
+:root {
+  --purple-900: #3b1d6e;
+  --purple-700: #6d28d9;
+  --purple-50: #faf5ff;
+  --white: #ffffff;
+  --text: #2e1a47;
+  --muted: #6b5b80;
+  --shadow: 0 16px 40px rgba(109, 40, 217, 0.12);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; min-height: 100%; }
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, #e9d5ff 0%, transparent 42%),
+    linear-gradient(180deg, var(--purple-50) 0%, var(--white) 100%);
+}
+
+.page {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 18px;
+}
+
+.nav a {
+  color: var(--purple-700);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] { text-decoration: underline; }
+.nav a[aria-current="page"] { color: var(--purple-900); }
+
+h1 {
+  margin: 0 0 10px;
+  color: var(--purple-900);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.info-section {
+  margin-top: 16px;
+  padding: 22px;
+  background: var(--white);
+  border: 1px solid #e9d8fd;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.info-section h2 {
+  margin: 0 0 12px;
+  color: var(--purple-900);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+}
+
+.info-section p { margin: 0 0 12px; color: var(--muted); line-height: 1.7; }
+.info-section p:last-child { margin-bottom: 0; }
+.info-section a { color: var(--purple-700); font-weight: 700; }
+
+.nav a:focus-visible,
+.info-section a:focus-visible {
+  outline: 3px solid #d8b4fe;
+  outline-offset: 3px;
+}
+
+.footer { margin-top: 18px; color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 800px) {
+  .page { width: min(100% - 24px, 1100px); padding: 24px 0 36px; }
+  .info-section { padding: 16px; }
+}
