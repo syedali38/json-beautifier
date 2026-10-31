@@ -4,6 +4,7 @@ const gutter = lineNumbers.parentElement;
 const statusMessage = document.getElementById("status-message");
 const treeContainer = document.getElementById("json-tree");
 const searchInput = document.getElementById("json-search");
+const fileInput = document.getElementById("file-input");
 
 const LINE_HEIGHT = 22;
 const GUTTER_PAD = 12;
@@ -12,6 +13,7 @@ const MAX_EXTRA_NODES = 400;
 const MAX_SEARCH_MATCHES = 100;
 const MAX_VISITED = 40000;
 const MAX_PREVIEW = 80;
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
 const SAMPLE = {
   product: "JSON Viewer",
@@ -584,13 +586,53 @@ document.getElementById("sample-btn").addEventListener("click", function () {
   viewJson();
   showStatus("Sample JSON loaded.", "success");
 });
+function resetFileInput() {
+  fileInput.value = "";
+}
+
 document.getElementById("clear-btn").addEventListener("click", function () {
   editor.value = "";
   searchInput.value = "";
+  resetFileInput();
   renderLineNumbers();
   clearTreeMessage("Paste JSON and choose View JSON to see the tree.");
   showStatus("Editor cleared.", "success");
   editor.focus();
+});
+
+fileInput.addEventListener("change", function () {
+  const file = fileInput.files && fileInput.files[0];
+  resetFileInput();
+  if (!file) return;
+  if (file.size === 0) {
+    showStatus("This file is empty. Choose a JSON file with content.", "error");
+    return;
+  }
+  if (file.size > MAX_FILE_BYTES) {
+    showStatus("This file is larger than 5 MiB. Choose a JSON file of 5 MiB or smaller.", "error");
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function () {
+    const text = typeof reader.result === "string" ? reader.result : "";
+    if (!text.trim()) {
+      showStatus("This file contains only whitespace. Choose a file with JSON content.", "error");
+      return;
+    }
+    editor.value = text;
+    renderLineNumbers();
+    const parsed = readJson();
+    if (!parsed.ok) {
+      clearTreeMessage("This file is not valid JSON.");
+      showStatus(parsed.message, "error");
+      return;
+    }
+    viewJson();
+  };
+  reader.onerror = function () {
+    showStatus("The file could not be read. Choose a .json text file and try again.", "error");
+  };
+  reader.readAsText(file);
 });
 document.getElementById("copy-json-btn").addEventListener("click", function () {
   const result = readJson();

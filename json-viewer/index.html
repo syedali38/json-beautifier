@@ -60,6 +60,10 @@
             ></textarea>
           </div>
           <div class="actions" role="group" aria-label="Editor actions">
+            <label class="btn btn-secondary file-btn">
+              Open JSON File
+              <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+            </label>
             <button type="button" id="view-btn" class="btn btn-primary">View JSON</button>
             <button type="button" id="copy-json-btn" class="btn btn-secondary">Copy formatted JSON</button>
             <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
@@ -108,9 +112,9 @@
           parent, and each row can copy the path that points at that value.
         </p>
         <p>
-          This json viewer online reads text that you paste. To use it as a json file viewer,
-          open a .json file in a text editor and paste that text into the box above.
-          The file is not uploaded.
+          This json viewer online reads text that you paste. You can also open a .json file
+          directly in the browser and use this page as a json file viewer.
+          The file is processed locally and is not uploaded to a server.
         </p>
       </section>
 
