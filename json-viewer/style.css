@@ -132,7 +132,7 @@ h1 { margin: 0 0 10px; color: var(--purple-900); font-size: clamp(2rem, 5vw, 3re
 .btn-secondary { color: var(--purple-700); background: var(--purple-100); }
 .btn-ghost { color: var(--purple-900); background: var(--white); border: 1px solid #e4d4f5; }
 
-.btn:focus-visible, .toggle:focus-visible, .copy-path:focus-visible, .show-more:focus-visible, .search-input:focus-visible, .tree:focus-visible, .file-btn:focus-within, .nav a:focus-visible {
+.btn:focus-visible, .toggle:focus-visible, .copy-path:focus-visible, .show-more:focus-visible, .search-input:focus-visible, .tree:focus-visible, .tree-row:focus-visible, .file-btn:focus-within, .nav a:focus-visible {
   outline: 3px solid #d8b4fe;
   outline-offset: 2px;
 }
@@ -190,6 +190,30 @@ h1 { margin: 0 0 10px; color: var(--purple-900); font-size: clamp(2rem, 5vw, 3re
 }
 
 .tree-row.is-match { background: var(--purple-100); }
+.tree-row.is-selected {
+  background: var(--purple-100);
+  outline: 2px solid var(--purple-700);
+  outline-offset: -2px;
+}
+
+.selected-path {
+  margin: 0 0 10px;
+  max-width: 100%;
+  padding: 8px 10px;
+  overflow-x: auto;
+  border: 1px solid #eadcff;
+  border-radius: 10px;
+  background: var(--purple-50);
+  color: var(--purple-900);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.selected-path-label {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+}
 
 .toggle {
   flex: 0 0 auto;
@@ -236,7 +260,8 @@ mark.match { background: #e9d5ff; color: inherit; padding: 0 1px; border-radius:
 
 .info-section, .how-to-section { margin-top: 24px; }
 .info-section { padding: 22px; }
-.info-section p, .step-card p { margin: 0 0 12px; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
+.info-section p, .step-card p, .info-section li { margin: 0 0 12px; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
+.info-section ol { margin: 0 0 12px; padding-left: 1.3rem; }
 .info-section h3 { margin: 16px 0 8px; color: var(--purple-700); font-size: 1.05rem; }
 .info-section a { color: var(--purple-700); font-weight: 700; }
 

@@ -25,9 +25,11 @@ const SAMPLE = {
 };
 
 const nodeState = new WeakMap();
+const selectedPathValue = document.getElementById("selected-path-value");
 let currentValue = null;
 let lastRaw = null;
 let hasTree = false;
+let selectedPath = "";
 let nodesRendered = 0;
 let nodeBudget = Infinity;
 let budgetHit = false;
@@ -253,6 +255,7 @@ function createNode(value, path, label, mode) {
   element.className = "tree-node";
   const row = document.createElement("div");
   row.className = "tree-row" + (keyMatch || valueMatch ? " is-match" : "");
+  row.tabIndex = 0;
 
   let toggle = null;
   if (expandable) {
@@ -300,6 +303,12 @@ function createNode(value, path, label, mode) {
     });
   });
   row.appendChild(copyBtn);
+  row.addEventListener("click", function () {
+    selectRow(nodeState.get(element));
+  });
+  row.addEventListener("focusin", function () {
+    selectRow(nodeState.get(element));
+  });
   element.appendChild(row);
 
   const childrenHost = document.createElement("div");
@@ -349,6 +358,32 @@ function createNode(value, path, label, mode) {
   return element;
 }
 
+function resetSelectedPath() {
+  selectedPath = "";
+  selectedPathValue.textContent = "None";
+}
+
+function selectRow(state) {
+  if (!state) return;
+  const previous = treeContainer.querySelector(".tree-row.is-selected");
+  if (previous) previous.classList.remove("is-selected");
+  const row = state.element.querySelector(".tree-row");
+  row.classList.add("is-selected");
+  selectedPath = state.path;
+  selectedPathValue.textContent = state.path;
+}
+
+function markSelectedRow() {
+  if (!selectedPath) return;
+  const nodes = treeContainer.querySelectorAll(".tree-node");
+  for (let i = 0; i < nodes.length; i += 1) {
+    const state = nodeState.get(nodes[i]);
+    if (!state || state.path !== selectedPath) continue;
+    nodes[i].querySelector(".tree-row").classList.add("is-selected");
+    return;
+  }
+}
+
 function showTree(value, mode) {
   nodesRendered = 0;
   nodeBudget = Infinity;
@@ -359,6 +394,7 @@ function showTree(value, mode) {
   const rootState = nodeState.get(root);
   if (!mode || !mode.filter) {
     openNode(rootState);
+    markSelectedRow();
     return;
   }
   const stack = [];
@@ -373,6 +409,7 @@ function showTree(value, mode) {
       if (childState && mode.expandPaths.has(childState.path)) stack.push(childState);
     }
   }
+  markSelectedRow();
 }
 
 function clearTreeMessage(text) {
@@ -384,6 +421,7 @@ function clearTreeMessage(text) {
   hasTree = false;
   currentValue = null;
   lastRaw = null;
+  resetSelectedPath();
 }
 
 function viewJson() {
@@ -396,6 +434,7 @@ function viewJson() {
   lastRaw = editor.value;
   hasTree = true;
   searchInput.value = "";
+  resetSelectedPath();
   showTree(currentValue, null);
   showStatus("JSON tree updated.", "success");
 }

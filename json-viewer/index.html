@@ -127,6 +127,7 @@
             <span class="token token-object">object</span>
             <span class="token token-array">array</span>
           </p>
+          <p id="selected-path" class="selected-path"><span class="selected-path-label">Selected path:</span> <span id="selected-path-value">None</span></p>
           <div id="json-tree" class="tree" role="region" aria-label="Interactive JSON tree" tabindex="0">
             <p class="tree-empty">Paste JSON and choose View JSON to see the tree.</p>
           </div>
@@ -280,6 +281,36 @@
   { "city": "Lahore", "temp": 31 },
   { "city": "Karachi", "temp": 29 }
 ]</code></pre>
+
+        <h3>How to Find a Nested JSON Value and Path</h3>
+        <ol>
+          <li>Paste the JSON into the viewer.</li>
+          <li>Select View JSON.</li>
+          <li>Search for Mouse.</li>
+          <li>Locate the matching product row. Search highlights that row and opens its parent branches. It does not select the row.</li>
+          <li>Select the row to display its path.</li>
+          <li>Copy the path if needed.</li>
+        </ol>
+        <p>The product row for Mouse shows $.order.items[1].product.</p>
+        <pre class="json-example"><code>{
+  "order": {
+    "id": 1025,
+    "customer": {
+      "name": "Ali",
+      "city": "Karachi"
+    },
+    "items": [
+      {
+        "product": "Laptop",
+        "price": 850
+      },
+      {
+        "product": "Mouse",
+        "price": 25
+      }
+    ]
+  }
+}</code></pre>
       </section>
 
       <section class="info-section" aria-labelledby="faq-heading">
@@ -295,15 +326,31 @@
           No. The editor, parser, search, and tree all run in your browser. This
           page does not send the JSON you paste to a server.
         </p>
+        <h3>Is there a file size limit?</h3>
+        <p>
+          An uploaded file larger than 5 MiB is rejected before it is read.
+          The text already in the editor stays as it is.
+        </p>
         <h3>Why did the viewer refuse my text?</h3>
         <p>
           The text is not valid JSON. The status line includes the parser message.
           Trailing commas, comments, and single quotes are common reasons JSON is rejected.
         </p>
+        <h3>Can search miss a match?</h3>
+        <p>
+          Search looks through keys and values. A very large document can reach
+          a safety limit, and the search stops before every match is found.
+          The status line says when that happens. The number it reports is only
+          the matches found before it stopped.
+        </p>
         <h3>Why does a large array show only some items?</h3>
         <p>
-          The tree draws a limited batch so a huge document does not freeze the page.
-          Choose Show more for the next batch, or search for a key or value to reveal a match.
+          A large array or object shows its children in batches of up to 50.
+          Choose Show more for the next batch. The remaining values are still
+          in the JSON; they are
+          only waiting to be drawn. Expand All can also stop before every branch
+          is open. The status line then tells you to use Show more or open a
+          branch for the rest.
         </p>
       </section>
       </main>
