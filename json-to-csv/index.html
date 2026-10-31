@@ -43,6 +43,7 @@
         </p>
       </header>
 
+      <main>
       <section class="panel" aria-labelledby="input-heading">
         <h2 id="input-heading">JSON input</h2>
         <label class="editor-label" for="json-input">JSON to convert</label>
@@ -55,8 +56,10 @@
           placeholder='Paste JSON here, for example: [{"name":"Ali","age":30}]'
         ></textarea>
         <div class="actions" role="group" aria-label="JSON input actions">
-          <label class="btn btn-secondary file-btn" for="file-input">Upload JSON</label>
-          <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+          <label class="btn btn-secondary file-btn">
+            Upload JSON
+            <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+          </label>
           <button type="button" id="sample-btn" class="btn btn-secondary">Load sample JSON</button>
           <button type="button" id="clear-btn" class="btn btn-ghost">Clear JSON</button>
         </div>
@@ -136,11 +139,11 @@
           </article>
           <article class="step-card">
             <h3>Step 3: Convert and preview</h3>
-            <p>Choose Convert to CSV. The preview shows the columns and the first rows.</p>
+            <p>Choose Convert to CSV. The preview shows the columns and up to 100 rows.</p>
           </article>
           <article class="step-card">
             <h3>Step 4: Copy or download</h3>
-            <p>Copy the CSV or download converted-data.csv. The file includes every converted row, not only the preview.</p>
+            <p>Copy the CSV or download converted-data.csv. Download CSV contains all converted rows, not only the preview.</p>
           </article>
         </div>
       </section>
@@ -168,6 +171,27 @@ Ali,30,Karachi,Pakistan</code></pre>
         </p>
         <pre class="json-example"><code>name,tags
 Ali,"[""design"",""json""]"</code></pre>
+        <h3>One object containing an array</h3>
+        <pre class="json-example"><code>{
+  "records": [
+    {"name": "Ali"},
+    {"name": "Sara"}
+  ]
+}</code></pre>
+        <p>
+          This is one object. The records array stays in one CSV cell.
+          Paste the inner array to create one row for Ali and another for Sara.
+        </p>
+        <pre class="json-example"><code>[{"name":"Ali"},{"name":"Sara"}]</code></pre>
+        <pre class="json-example"><code>name
+Ali
+Sara</code></pre>
+        <h3>Missing property and null</h3>
+        <pre class="json-example"><code>[{"name":"Ali"},{"name":"Sara","note":null}]</code></pre>
+        <p>Ali has no note property, so that cell is blank. Sara has a JSON null, so the cell is the text null.</p>
+        <pre class="json-example"><code>name,note
+Ali,
+Sara,null</code></pre>
       </section>
 
       <section class="info-section" aria-labelledby="nested-heading">
@@ -199,6 +223,8 @@ Ali,"[""design"",""json""]"</code></pre>
         </p>
         <h3>Empty array</h3>
         <p>An empty array has no records, so no CSV file is created until you add objects.</p>
+        <h3>Conflicting column names</h3>
+        <p>If a dotted property and a nested object flatten to the same column, conversion stops. The status line names that column, and the preview is cleared. Values are not merged.</p>
       </section>
 
       <section class="info-section" aria-labelledby="faq-heading">
@@ -215,6 +241,7 @@ Ali,"[""design"",""json""]"</code></pre>
           <a href="/">JSON Beautifier</a> to format the text, then come back and convert it.
         </p>
       </section>
+      </main>
 
       <footer class="footer">Your JSON never leaves this page. No uploads. No accounts.</footer>
     </div>

@@ -24,37 +24,90 @@ function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
-function flattenInto(value, prefix, row) {
+function rememberCollision(collisions, name, firstRecord, secondRecord) {
+  for (let i = 0; i < collisions.length; i += 1) {
+    if (collisions[i].name === name) return;
+  }
+  collisions.push({ name: name, first: firstRecord, second: secondRecord });
+}
+
+function assignCell(row, path, segments, text, collisions, columnPaths, objectNumber) {
+  const signature = JSON.stringify(segments);
+  const known = columnPaths.get(path);
+  if (known) {
+    if (known.signature !== signature) {
+      rememberCollision(collisions, path, known.record, objectNumber);
+      return;
+    }
+  } else {
+    columnPaths.set(path, { signature: signature, record: objectNumber });
+  }
+  if (Object.prototype.hasOwnProperty.call(row, path)) return;
+  row[path] = text;
+}
+
+function flattenInto(value, prefix, segments, row, collisions, columnPaths, objectNumber) {
   const keys = Object.keys(value);
   for (let i = 0; i < keys.length; i += 1) {
     const key = keys[i];
     const path = prefix ? prefix + "." + key : key;
+    const nextSegments = segments.concat(key);
     const descriptor = Object.getOwnPropertyDescriptor(value, key);
     const child = descriptor ? descriptor.value : undefined;
     if (isPlainObject(child)) {
       if (Object.keys(child).length === 0) {
-        row[path] = "{}";
+        assignCell(row, path, nextSegments, "{}", collisions, columnPaths, objectNumber);
       } else {
-        flattenInto(child, path, row);
+        flattenInto(child, path, nextSegments, row, collisions, columnPaths, objectNumber);
       }
     } else if (Array.isArray(child)) {
-      row[path] = JSON.stringify(child);
+      assignCell(row, path, nextSegments, JSON.stringify(child), collisions, columnPaths, objectNumber);
     } else if (child === null) {
-      row[path] = "null";
+      assignCell(row, path, nextSegments, "null", collisions, columnPaths, objectNumber);
     } else if (typeof child === "string" || typeof child === "number" || typeof child === "boolean") {
-      row[path] = String(child);
+      assignCell(row, path, nextSegments, String(child), collisions, columnPaths, objectNumber);
     } else {
-      row[path] = JSON.stringify(child);
+      assignCell(row, path, nextSegments, JSON.stringify(child), collisions, columnPaths, objectNumber);
     }
   }
 }
 
-function buildTable(records) {
-  const rows = records.map(function (record) {
-    const row = {};
-    flattenInto(record, "", row);
-    return row;
+function collisionMessage(collisions) {
+  const quoted = collisions.map(function (collision) {
+    return '"' + collision.name + '"';
+  }).join(", ");
+  const columnWord = collisions.length === 1 ? "Column " : "Columns ";
+  const verb = collisions.length === 1 ? "comes" : "come";
+  const sameObject = collisions.every(function (collision) {
+    return collision.first === collision.second;
   });
+  if (sameObject) {
+    return columnWord + quoted + " " + verb + " from more than one property path in object " + collisions[0].first + ". Conversion stopped so values are not overwritten.";
+  }
+  const samePair = collisions.every(function (collision) {
+    return collision.first === collisions[0].first && collision.second === collisions[0].second;
+  });
+  if (samePair) {
+    return columnWord + quoted + " " + verb + " from different property paths in object " + collisions[0].first + " and object " + collisions[0].second + ". Conversion stopped so values are not overwritten.";
+  }
+  const details = collisions.map(function (collision) {
+    return '"' + collision.name + '" in object ' + collision.first + " and object " + collision.second;
+  }).join(", ");
+  return "These columns come from different property paths: " + details + ". Conversion stopped so values are not overwritten.";
+}
+
+function buildTable(records) {
+  const rows = [];
+  const columnPaths = new Map();
+  for (let i = 0; i < records.length; i += 1) {
+    const row = {};
+    const collisions = [];
+    flattenInto(records[i], "", [], row, collisions, columnPaths, i + 1);
+    if (collisions.length > 0) {
+      return { error: collisionMessage(collisions) };
+    }
+    rows.push(row);
+  }
   const columns = [];
   const seen = new Set();
   rows.forEach(function (row) {
@@ -124,6 +177,7 @@ function convertValue(value, options) {
   const problem = explainRoot(value);
   if (problem) return { ok: false, message: problem };
   const table = buildTable(recordsFrom(value));
+  if (table.error) return { ok: false, message: table.error };
   if (table.columns.length === 0) {
     return { ok: false, message: "These objects have no properties, so the CSV has no columns." };
   }
@@ -315,6 +369,7 @@ safeInput.addEventListener("change", function () {
 
 fileInput.addEventListener("change", function () {
   const file = fileInput.files && fileInput.files[0];
+  fileInput.value = "";
   if (!file) return;
   if (file.size > MAX_INPUT_CHARS) {
     showStatus("This file is too large to convert in the browser. Try a .json file under 12 MB.", "error");

@@ -103,7 +103,7 @@ h1 {
 
 select, .file-input { padding: 12px 14px; }
 
-.editor:focus, select:focus, .file-input:focus, .btn:focus-visible, .check:focus-within, .nav a:focus-visible, .table-wrap:focus-visible, .info-section a:focus-visible {
+.editor:focus, select:focus, .file-input:focus, .file-btn:focus-within, .btn:focus-visible, .check:focus-within, .nav a:focus-visible, .table-wrap:focus-visible, .info-section a:focus-visible {
   outline: 3px solid #d8b4fe;
   outline-offset: 2px;
 }
