@@ -34,9 +34,20 @@ body {
   padding: 40px 0 48px;
 }
 
-.eyebrow { margin: 0 0 8px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.eyebrow a { color: var(--purple-700); text-decoration: none; }
-.eyebrow a:hover { text-decoration: underline; }
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 18px;
+}
+.nav a {
+  color: var(--purple-700);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.nav a[aria-current="page"] { color: var(--purple-900); text-decoration: underline; }
+.nav a:hover { text-decoration: underline; }
 
 h1 { margin: 0 0 10px; color: var(--purple-900); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; }
 
@@ -121,7 +132,7 @@ h1 { margin: 0 0 10px; color: var(--purple-900); font-size: clamp(2rem, 5vw, 3re
 .btn-secondary { color: var(--purple-700); background: var(--purple-100); }
 .btn-ghost { color: var(--purple-900); background: var(--white); border: 1px solid #e4d4f5; }
 
-.btn:focus-visible, .toggle:focus-visible, .copy-path:focus-visible, .show-more:focus-visible, .search-input:focus-visible, .tree:focus-visible, .file-btn:focus-within {
+.btn:focus-visible, .toggle:focus-visible, .copy-path:focus-visible, .show-more:focus-visible, .search-input:focus-visible, .tree:focus-visible, .file-btn:focus-within, .nav a:focus-visible {
   outline: 3px solid #d8b4fe;
   outline-offset: 2px;
 }

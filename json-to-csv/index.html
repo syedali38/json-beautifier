@@ -254,6 +254,8 @@ Sara,null</code></pre>
         <p>An empty array has no records, so no CSV file is created until you add objects.</p>
         <h3>Conflicting column names</h3>
         <p>If a dotted property and a nested object flatten to the same column, conversion stops. The status line names that column, and the preview is cleared. Values are not merged.</p>
+        <h3>Input too large</h3>
+        <p>Pasted JSON longer than 12,000,000 characters is not converted. A file larger than 12,000,000 bytes is not read. The editor is left as it was.</p>
       </section>
 
       <section class="info-section" aria-labelledby="faq-heading">
@@ -268,6 +270,8 @@ Sara,null</code></pre>
         <p>
           Use the <a href="/json-viewer/">JSON Viewer</a> to open the tree, or the
           <a href="/">JSON Beautifier</a> to format the text, then come back and convert it.
+          Use the <a href="/json-to-yaml/">JSON to YAML converter</a> when you need a structured configuration document instead of a spreadsheet table.
+          Use <a href="/json-escape-unescape/">JSON Escape and Unescape</a> when you need to encode or decode a JSON string.
         </p>
       </section>
       </main>

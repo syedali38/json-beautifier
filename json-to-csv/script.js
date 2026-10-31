@@ -221,7 +221,7 @@ function readEditor() {
   const raw = editor.value;
   if (!raw.trim()) return { ok: false, message: "Paste JSON or upload a .json file first." };
   if (raw.length > MAX_INPUT_CHARS) {
-    return { ok: false, message: "This JSON is too large to convert in the browser. Try a file under 12 MB." };
+    return { ok: false, message: "This pasted JSON is longer than 12,000,000 characters and was not converted." };
   }
   try {
     return { ok: true, value: JSON.parse(raw) };
@@ -372,7 +372,7 @@ fileInput.addEventListener("change", function () {
   fileInput.value = "";
   if (!file) return;
   if (file.size > MAX_INPUT_CHARS) {
-    showStatus("This file is too large to convert in the browser. Try a .json file under 12 MB.", "error");
+    showStatus("This file is larger than 12,000,000 bytes and was not read.", "error");
     return;
   }
   const reader = new FileReader();

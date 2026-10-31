@@ -196,6 +196,22 @@
           </ol>
         </section>
 
+        <section class="info-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently Asked Questions</h2>
+          <h3>Does the JSON Beautifier fix invalid JSON?</h3>
+          <p>
+            No. The tool can identify invalid JSON and display validation errors, but it does not automatically fix problems such as trailing commas, single-quoted strings, or comments.
+          </p>
+          <h3>What is the difference between beautifying and minifying JSON?</h3>
+          <p>
+            Beautifying adds indentation and line breaks to make valid JSON easier to read. Minifying removes unnecessary whitespace to make valid JSON more compact. Both preserve the JSON data. A very large whole number can change, because JavaScript does not store every integer exactly.
+          </p>
+          <h3>Does my JSON leave my browser?</h3>
+          <p>
+            JSON processing happens locally in your browser. The tool does not need to upload your JSON to a server to format, validate, or minify it.
+          </p>
+        </section>
+
         <section class="related-section" aria-labelledby="related-tools-heading">
           <h2 id="related-tools-heading">Related JSON Tools</h2>
           <a class="tool-card" href="/json-viewer/">
