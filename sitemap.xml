@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://json-beautifier-36d.pages.dev/</loc>
+    <loc>https://jsonforgekit.com/</loc>
   </url>
   <url>
-    <loc>https://json-beautifier-36d.pages.dev/json-viewer/</loc>
+    <loc>https://jsonforgekit.com/json-viewer/</loc>
   </url>
   <url>
-    <loc>https://json-beautifier-36d.pages.dev/json-to-csv/</loc>
+    <loc>https://jsonforgekit.com/json-to-csv/</loc>
   </url>
   <url>
-    <loc>https://json-beautifier-36d.pages.dev/json-to-yaml/</loc>
+    <loc>https://jsonforgekit.com/json-to-yaml/</loc>
   </url>
 </urlset>

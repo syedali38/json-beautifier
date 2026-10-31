@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://json-beautifier-36d.pages.dev/sitemap.xml
+Sitemap: https://jsonforgekit.com/sitemap.xml
