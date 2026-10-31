@@ -263,6 +263,10 @@ h1 {
   line-height: 1.7;
 }
 
+.how-to-section .section-intro {
+  margin-top: 16px;
+}
+
 .error-list {
   margin: 0;
   padding: 0;
