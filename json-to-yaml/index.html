@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON to YAML Converter Online – Free Browser Tool</title>
+    <meta
+      name="description"
+      content="Convert JSON to YAML online for free. Open a JSON file, preview YAML, and copy or download the result in your browser."
+    />
+    <link rel="canonical" href="https://json-beautifier-36d.pages.dev/json-to-yaml/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON to YAML Converter Online",
+        "url": "https://json-beautifier-36d.pages.dev/json-to-yaml/",
+        "description": "Convert JSON to YAML online for free. Open a JSON file, preview YAML, and copy or download the result in your browser.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/" aria-current="page">JSON to YAML</a>
+        </nav>
+        <h1>Free Online JSON to YAML Converter</h1>
+        <p class="subtitle">
+          Paste JSON or open a .json file, then convert JSON to YAML in your browser.
+          The text stays on this page and is not uploaded.
+        </p>
+      </header>
+
+      <main>
+        <section class="panel" aria-labelledby="input-heading">
+          <h2 id="input-heading">JSON input</h2>
+          <label class="editor-label" for="json-input">JSON to convert</label>
+          <textarea
+            id="json-input"
+            class="editor"
+            spellcheck="false"
+            autocomplete="off"
+            aria-describedby="status-message"
+            placeholder='Paste JSON here, for example: {"name":"Ada","active":true}'
+          ></textarea>
+          <div class="actions" role="group" aria-label="JSON input actions">
+            <label class="btn btn-secondary file-btn">
+              Open JSON File
+              <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+            </label>
+            <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
+            <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+          </div>
+          <p id="status-message" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel" aria-labelledby="output-heading">
+          <h2 id="output-heading">YAML output</h2>
+          <div class="actions" role="group" aria-label="YAML actions">
+            <button type="button" id="convert-btn" class="btn btn-primary">Convert to YAML</button>
+            <button type="button" id="copy-btn" class="btn btn-secondary">Copy YAML</button>
+            <button type="button" id="download-btn" class="btn btn-secondary">Download YAML</button>
+          </div>
+          <p id="yaml-empty" class="empty">Convert JSON to see YAML here.</p>
+          <pre id="yaml-output" class="yaml-output" hidden tabindex="0" aria-label="YAML output"></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="what-heading">
+          <h2 id="what-heading">What Is JSON to YAML Conversion?</h2>
+          <p>
+            JSON to YAML conversion writes the same values as a YAML document.
+            A json to yaml converter turns each object into a mapping and each array into a list.
+            You can convert json to yaml online here without sending the text to a server.
+          </p>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="how-heading">
+          <h2 id="how-heading">How to Convert JSON to YAML</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Step 1: Add JSON</h3>
+              <p>Paste JSON into the editor, or open a .json file from this browser.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 2: Convert</h3>
+              <p>Choose Convert to YAML. Invalid JSON stays in the editor, and the status line explains the problem.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 3: Read the YAML</h3>
+              <p>The preview shows the document produced from the current JSON.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 4: Copy or download</h3>
+              <p>Copy the YAML, or download converted-data.yaml.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="examples-heading">
+          <h2 id="examples-heading">JSON to YAML Examples</h2>
+          <h3>Nested values</h3>
+          <pre class="json-example"><code>{
+  "name": "Ada",
+  "active": true,
+  "score": null,
+  "city": "東京",
+  "tags": ["json", "yaml"],
+  "address": {},
+  "notes": []
+}</code></pre>
+          <pre class="json-example"><code>name: Ada
+active: true
+score: null
+city: 東京
+tags:
+  - json
+  - yaml
+address: {}
+notes: []
+</code></pre>
+          <h3>Strings that must stay strings</h3>
+          <p>
+            Words such as yes, no, on, off, true, and number-like text are quoted.
+            This is a practical help for tools that still read YAML 1.1. It is not a claim that every YAML 1.1 program will accept the file.
+          </p>
+          <pre class="json-example"><code>{
+  "yes": "yes",
+  "no": "no",
+  "on": "on",
+  "off": "off",
+  "flag": "true",
+  "code": "01",
+  "version": "1.0",
+  "empty": "",
+  "note": "a: b # c"
+}</code></pre>
+          <pre class="json-example"><code>"yes": "yes"
+"no": "no"
+"on": "on"
+"off": "off"
+flag: "true"
+code: "01"
+version: "1.0"
+empty: ""
+note: "a: b # c"
+</code></pre>
+          <h3>A line break inside a string</h3>
+          <pre class="json-example"><code>{ "message": "line1\nline2" }</code></pre>
+          <pre class="json-example"><code>message: |-
+  line1
+  line2
+</code></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="numbers-heading">
+          <h2 id="numbers-heading">JSON Numbers in the Browser</h2>
+          <p>
+            JavaScript reads JSON numbers as floating-point values.
+            Integers outside ±9007199254740991 can change when the text is parsed.
+            A whole number and the same number written as 1.0 become one value.
+            The YAML shows the number JavaScript kept, not a repaired copy of the original digits.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="errors-heading">
+          <h2 id="errors-heading">Common Conversion Errors</h2>
+          <h3>Invalid JSON</h3>
+          <p>Trailing commas, comments, and single quotes are rejected. The status line includes the parser message. The converter does not rewrite the JSON.</p>
+          <h3>Empty input</h3>
+          <p>An empty editor, an empty file, or a file that contains only whitespace has nothing to convert.</p>
+          <h3>File too large</h3>
+          <p>A file larger than 5 MiB is rejected before it is read.</p>
+        </section>
+
+        <section class="info-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently Asked Questions</h2>
+          <h3>Does this json to yaml tool upload my data?</h3>
+          <p>No. Parsing, conversion, copy, and download all run in your browser.</p>
+          <h3>Why are some strings quoted?</h3>
+          <p>A plain yes, no, on, off, true, or number-like string can be read as another type. Quotes keep the original text a string.</p>
+          <h3>Where can I inspect the JSON first?</h3>
+          <p>
+            Use the <a href="/json-viewer/">JSON Viewer</a> to open the tree, the
+            <a href="/">JSON Beautifier</a> to format the text, or the
+            <a href="/json-to-csv/">JSON to CSV converter</a> when you need a table.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">Your JSON never leaves this page. No uploads. No accounts.</footer>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
