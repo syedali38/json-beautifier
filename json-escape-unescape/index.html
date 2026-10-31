@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Escape and Unescape Online – Free String Tool</title>
+    <meta
+      name="description"
+      content="Escape and unescape JSON strings online. This JSON string escape tool handles quotes, backslashes, newlines, tabs, and Unicode in your browser."
+    />
+    <link rel="canonical" href="https://jsonforgekit.com/json-escape-unescape/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON Escape and Unescape Online",
+        "url": "https://jsonforgekit.com/json-escape-unescape/",
+        "description": "Escape and unescape JSON strings online. This JSON string escape tool handles quotes, backslashes, newlines, tabs, and Unicode in your browser.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/">JSON to YAML</a>
+          <a href="/json-escape-unescape/" aria-current="page">JSON Escape</a>
+        </nav>
+        <h1>Free Online JSON Escape and Unescape</h1>
+        <p class="subtitle">
+          Escape raw text into a JSON string, or unescape one JSON string back to text.
+          Escape includes the surrounding double quotes. The text stays in your browser.
+        </p>
+      </header>
+
+      <main>
+        <section class="panel" aria-labelledby="input-heading">
+          <h2 id="input-heading">Text input</h2>
+          <label class="editor-label" for="text-input">Text to escape or unescape</label>
+          <textarea
+            id="text-input"
+            class="editor"
+            spellcheck="false"
+            autocomplete="off"
+            wrap="off"
+            aria-describedby="status-message"
+            placeholder='Paste raw text, or a JSON string such as "hello\nworld"'
+          ></textarea>
+          <div class="actions" role="group" aria-label="Escape actions">
+            <button type="button" id="escape-btn" class="btn btn-primary">Escape</button>
+            <button type="button" id="unescape-btn" class="btn btn-secondary">Unescape</button>
+            <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+          </div>
+          <p id="status-message" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel" aria-labelledby="output-heading">
+          <h2 id="output-heading">Escaped output</h2>
+          <label class="editor-label" for="text-output">JSON string or decoded text</label>
+          <textarea
+            id="text-output"
+            class="editor output"
+            readonly
+            spellcheck="false"
+            wrap="off"
+            aria-label="JSON string or decoded text"
+          ></textarea>
+          <div class="actions" role="group" aria-label="Output actions">
+            <button type="button" id="copy-btn" class="btn btn-secondary">Copy output</button>
+          </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="what-heading">
+          <h2 id="what-heading">What JSON String Escaping Does</h2>
+          <p>
+            JSON string escaping makes quotes, backslashes, and line breaks safe inside a
+            JSON string. You can escape JSON online or unescape JSON online on this page.
+            The result is a JSON string escape, not URL encoding and not HTML encoding.
+          </p>
+          <p>
+            Escape reads the input as raw text. If you paste an already escaped string and
+            choose Escape again, the quotes and backslashes are escaped a second time.
+            Use Unescape to reverse one level.
+          </p>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="how-heading">
+          <h2 id="how-heading">How to Escape and Unescape JSON</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Step 1: Paste text</h3>
+              <p>Paste raw text to escape, or one quoted JSON string to unescape.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 2: Choose an action</h3>
+              <p>Choose Escape or Unescape. The status line reports success or the problem.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 3: Read the output</h3>
+              <p>Escaped output includes the surrounding double quotes. Unescape removes them.</p>
+            </article>
+            <article class="step-card">
+              <h3>Step 4: Copy or clear</h3>
+              <p>Copy output takes the full result. Clear empties both boxes.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="examples-heading">
+          <h2 id="examples-heading">JSON Escape Examples</h2>
+          <h3>Quotes and backslashes</h3>
+          <pre class="json-example"><code>say "hi"
+"say \"hi\""
+
+a\b
+"a\\b"</code></pre>
+          <h3>Escaping the result again</h3>
+          <p>The second Escape treats the first result as raw text, so the quotes and backslashes are escaped again:</p>
+          <pre class="json-example"><code>"say \"hi\""
+"\"say \\\"hi\\\"\""</code></pre>
+          <h3>Line breaks and Unicode</h3>
+          <p>
+            A newline becomes <code>\n</code> and a tab becomes <code>\t</code>.
+            Characters such as 東京 and emoji stay as themselves.
+            The line separators U+2028 and U+2029 are written as <code>\u2028</code> and <code>\u2029</code>.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="errors-heading">
+          <h2 id="errors-heading">Invalid Escape Sequences</h2>
+          <p>
+            Unescape accepts one JSON string, including the surrounding double quotes.
+            Whitespace around that string is allowed. Text after the closing quote is rejected.
+          </p>
+          <p>
+            <code>\x41</code>, <code>\a</code>, a short <code>\u12</code>, and an unpaired
+            <code>\uD800</code> are rejected. An object, array, number, boolean, or null is
+            rejected. The output box is cleared when conversion stops.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently Asked Questions</h2>
+          <h3>Does this tool upload my text?</h3>
+          <p>No. Escape, unescape, and copy all run in your browser.</p>
+          <h3>Do the results include quotation marks?</h3>
+          <p>Escape adds the surrounding double quotes. Unescape requires those quotes and returns the text inside them.</p>
+          <h3>Where can I format the JSON first?</h3>
+          <p>
+            Use the <a href="/">JSON Beautifier</a> to format a document, the
+            <a href="/json-viewer/">JSON Viewer</a> to inspect a tree, or the
+            <a href="/json-to-csv/">JSON to CSV</a> and
+            <a href="/json-to-yaml/">JSON to YAML</a> tools when you need another format.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">Your text never leaves this page. No uploads. No accounts.</footer>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
