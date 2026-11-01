@@ -226,10 +226,15 @@ Sara,null</code></pre>
       <section class="info-section" aria-labelledby="nested-heading">
         <h2 id="nested-heading">Nested JSON Conversion Explained</h2>
         <p>
-          Objects inside objects are walked until a plain value is found. The column name
-          joins each key with a dot, so user.name and user.city stay separate. If a property
-          is missing from one record, that cell is left blank. A JSON null stays visible as
-          the text null, so it is not confused with a missing property.
+          Nested object properties are flattened into dotted column names, so user.name and
+          user.city stay separate. An empty nested object is kept as {} in one cell.
+          If a property is missing from one record, that cell is left blank. A JSON null
+          stays visible as the text null, so it is not confused with a missing property.
+        </p>
+        <p>
+          JSON numbers, true, and false are written as cell text. CSV text does not keep
+          the original JSON types. A very large whole number can change when JavaScript
+          parses the JSON, because not every integer can be represented exactly.
         </p>
         <p>
           An array inside an object is written as compact JSON in one cell. That keeps every
@@ -266,6 +271,12 @@ Sara,null</code></pre>
         <p>Fields that contain the delimiter, a double quote, or a line break are wrapped in double quotes. Quotes inside a field are doubled.</p>
         <h3>What does spreadsheet-safe export change?</h3>
         <p>Nothing, unless you check Spreadsheet-safe export. It is off by default, so the CSV keeps the original cell text.</p>
+        <h3>Can I convert a JSON file to CSV?</h3>
+        <p>
+          Yes. Upload a local .json file to convert a JSON file to CSV.
+          Supported JSON is converted in your browser.
+          A file larger than 12,000,000 bytes is rejected and is not read.
+        </p>
         <h3>Where can I inspect the JSON first?</h3>
         <p>
           Use the <a href="/json-viewer/">JSON Viewer</a> to open the tree, or the

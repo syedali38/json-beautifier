@@ -211,6 +211,6 @@ select, .file-input { padding: 12px 14px; }
   .page { width: min(100% - 24px, 1100px); padding: 24px 0 36px; }
   .options, .step-grid { grid-template-columns: 1fr; }
   .panel, .info-section, .step-card { padding: 16px; }
-  .btn, .file-btn, select, .file-input { width: 100%; }
+  .btn, .file-btn, select { width: 100%; }
   .editor { min-height: 220px; }
 }
