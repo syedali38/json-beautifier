@@ -120,11 +120,11 @@
           <div class="step-grid">
             <article class="step-card">
               <h3>Step 1: Add JSON</h3>
-              <p>Paste JSON into the editor, or open a .json file from this browser.</p>
+              <p>Paste JSON into the editor, or open a .json file from this browser. A valid file is converted to YAML as soon as it is read.</p>
             </article>
             <article class="step-card">
               <h3>Step 2: Convert</h3>
-              <p>Choose Convert to YAML. Invalid JSON stays in the editor, and the status line explains the problem.</p>
+              <p>For pasted JSON, choose Convert to YAML. Invalid JSON stays in the editor, and the status line explains the problem.</p>
             </article>
             <article class="step-card">
               <h3>Step 3: Read the YAML</h3>
@@ -191,6 +191,29 @@ note: "a: b # c"
   line1
   line2
 </code></pre>
+          <h3>A top-level array</h3>
+          <p>A JSON array of objects becomes a YAML sequence. Each object is one list item.</p>
+          <pre class="json-example"><code>[
+  {
+    "name": "Ada",
+    "city": "Quetta"
+  },
+  {
+    "name": "Ali",
+    "city": "Karachi"
+  }
+]</code></pre>
+          <pre class="json-example"><code>- name: Ada
+  city: Quetta
+- name: Ali
+  city: Karachi
+</code></pre>
+          <h3>Long strings</h3>
+          <p>
+            A long string that contains spaces may wrap across YAML lines near the 80-character line width.
+            A long unbroken string may stay on one line.
+            Either way, the YAML keeps the original string value.
+          </p>
         </section>
 
         <section class="info-section" aria-labelledby="numbers-heading">
@@ -210,7 +233,7 @@ note: "a: b # c"
           <h3>Empty input</h3>
           <p>An empty editor, an empty file, or a file that contains only whitespace has nothing to convert.</p>
           <h3>File too large</h3>
-          <p>A file larger than 5 MiB is rejected before it is read.</p>
+          <p>A JSON file larger than 5 MiB is rejected before it is read. Pasted JSON is not checked against that limit. Very large pasted text can still be limited by the browser's memory and performance.</p>
         </section>
 
         <section class="info-section" aria-labelledby="faq-heading">
