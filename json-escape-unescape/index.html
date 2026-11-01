@@ -148,20 +148,54 @@
         <section class="info-section" aria-labelledby="examples-heading">
           <h2 id="examples-heading">JSON Escape Examples</h2>
           <h3>Quotes and backslashes</h3>
-          <pre class="json-example"><code>say "hi"
-"say \"hi\""
-
-a\b
-"a\\b"</code></pre>
+          <p>Raw input</p>
+          <pre class="json-example"><code>say "hi"</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"say \"hi\""</code></pre>
+          <p>Raw input</p>
+          <pre class="json-example"><code>a\b</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"a\\b"</code></pre>
           <h3>Escaping the result again</h3>
-          <p>The second Escape treats the first result as raw text, so the quotes and backslashes are escaped again:</p>
-          <pre class="json-example"><code>"say \"hi\""
-"\"say \\\"hi\\\"\""</code></pre>
+          <p>The second Escape treats the first result as raw text, so the quotes and backslashes are escaped again.</p>
+          <p>Raw input</p>
+          <pre class="json-example"><code>"say \"hi\""</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"\"say \\\"hi\\\"\""</code></pre>
+          <h3>A JSON document</h3>
+          <p>
+            Escape treats this document as raw text. It does not parse or reformat it.
+            The result is a JSON string literal, and the surrounding double quotes are part of the output.
+            Unescape accepts that escaped string and returns the original text.
+            A bare JSON object is not accepted by Unescape.
+          </p>
+          <p>Raw input</p>
+          <pre class="json-example"><code>{"name":"Ali"}</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"{\"name\":\"Ali\"}"</code></pre>
           <h3>Line breaks and Unicode</h3>
           <p>
-            A newline becomes <code>\n</code> and a tab becomes <code>\t</code>.
+            A newline becomes <code>\n</code>, a tab becomes <code>\t</code>, and a carriage return becomes <code>\r</code>.
+            Backspace becomes <code>\b</code> and form feed becomes <code>\f</code>.
+            Other control characters may be written with <code>\u00XX</code> notation.
             Characters such as 東京 and emoji stay as themselves.
             The line separators U+2028 and U+2029 are written as <code>\u2028</code> and <code>\u2029</code>.
+          </p>
+          <p>Raw input, with a newline between the lines</p>
+          <pre class="json-example"><code>Line 1&#10;Line 2</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"Line 1\nLine 2"</code></pre>
+          <p>Raw input, with a tab between the letters</p>
+          <pre class="json-example"><code>a&#9;b</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"a\tb"</code></pre>
+          <p>Raw input, with a carriage return between the letters</p>
+          <pre class="json-example"><code>a&#13;b</code></pre>
+          <p>Escaped output</p>
+          <pre class="json-example"><code>"a\rb"</code></pre>
+          <p>
+            Browser text boxes may normalize carriage returns to line feeds.
+            When this happens, a carriage return entered in the text box is escaped as <code>\n</code> rather than <code>\r</code>.
           </p>
         </section>
 

@@ -50,7 +50,7 @@ function unescapeText(text) {
     return { ok: false, message: "Invalid JSON string: " + details };
   }
   if (typeof value !== "string") {
-    return { ok: false, message: "Unescape accepts one JSON string. Objects, arrays, numbers, booleans, and null are left unchanged." };
+    return { ok: false, message: "Unescape accepts one JSON string. Objects, arrays, numbers, booleans, and null are not supported. The output has been cleared." };
   }
   if (hasUnpairedSurrogate(value)) {
     return { ok: false, message: "This JSON string contains an unpaired Unicode surrogate. Unescape stopped so the text is not corrupted." };
