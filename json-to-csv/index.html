@@ -160,7 +160,7 @@
         <div class="step-grid">
           <article class="step-card">
             <h3>Step 1: Add JSON</h3>
-            <p>Paste an object or an array of objects, or upload a .json file.</p>
+            <p>Paste an object or an array of objects, upload a .json file, or choose Load sample JSON.</p>
           </article>
           <article class="step-card">
             <h3>Step 2: Choose options</h3>
@@ -168,7 +168,7 @@
           </article>
           <article class="step-card">
             <h3>Step 3: Convert and preview</h3>
-            <p>Choose Convert to CSV. The preview shows the columns and up to 100 rows.</p>
+            <p>After you paste JSON, choose Convert to CSV. A valid uploaded file and Load sample JSON convert immediately. The preview shows the columns and up to 100 rows.</p>
           </article>
           <article class="step-card">
             <h3>Step 4: Copy or download</h3>
@@ -179,7 +179,13 @@
 
       <section class="info-section" aria-labelledby="examples-heading">
         <h2 id="examples-heading">JSON to CSV Examples</h2>
+        <h3>Plain object</h3>
+        <pre class="json-example"><code>{"name":"Ali","age":30}</code></pre>
+        <p>A single root object becomes one CSV row:</p>
+        <pre class="json-example"><code>name,age
+Ali,30</code></pre>
         <h3>Array of objects</h3>
+        <p>JSON array to CSV conversion turns a top-level non-empty array of objects into one CSV row per object.</p>
         <pre class="json-example"><code>[
   {
     "name": "Ali",
