@@ -120,7 +120,7 @@
           <div class="step-grid">
             <article class="step-card">
               <h3>Step 1: Add JSON</h3>
-              <p>Paste JSON into the editor, or open a .json file from this browser. A valid file is converted to YAML as soon as it is read.</p>
+              <p>Paste JSON into the editor. A JSON file to YAML conversion starts as soon as a valid file is read. Load Sample JSON converts immediately.</p>
             </article>
             <article class="step-card">
               <h3>Step 2: Convert</h3>
@@ -132,7 +132,7 @@
             </article>
             <article class="step-card">
               <h3>Step 4: Copy or download</h3>
-              <p>Copy the YAML, or download converted-data.yaml.</p>
+              <p>Copy the YAML, or download converted-data.yaml. JSON to YML uses the same YAML text. Both .yaml and .yml are common filename extensions, and this download uses .yaml.</p>
             </article>
           </div>
         </section>
@@ -219,11 +219,19 @@ note: "a: b # c"
         <section class="info-section" aria-labelledby="numbers-heading">
           <h2 id="numbers-heading">JSON Numbers in the Browser</h2>
           <p>
-            JavaScript reads JSON numbers as floating-point values.
-            Integers outside ±9007199254740991 can change when the text is parsed.
-            A whole number and the same number written as 1.0 become one value.
-            The YAML shows the number JavaScript kept, not a repaired copy of the original digits.
+            JSON.parse uses JavaScript numbers, so it cannot preserve every numeric representation or every integer beyond the safe-integer range.
+            The YAML shows the number JavaScript kept.
           </p>
+          <p>Input</p>
+          <pre class="json-example"><code>1.0</code></pre>
+          <p>Output</p>
+          <pre class="json-example"><code>1
+</code></pre>
+          <p>Input</p>
+          <pre class="json-example"><code>9007199254740993</code></pre>
+          <p>Output</p>
+          <pre class="json-example"><code>9007199254740992
+</code></pre>
         </section>
 
         <section class="info-section" aria-labelledby="errors-heading">
