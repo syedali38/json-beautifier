@@ -199,6 +199,34 @@
           </p>
         </section>
 
+        <section class="info-section" aria-labelledby="unescape-examples-heading">
+          <h2 id="unescape-examples-heading">JSON Unescape Examples</h2>
+          <p>
+            Paste one quoted JSON string to unescape JSON online.
+            Unescape accepts that string, including the surrounding double quotes, and returns the text inside them.
+            A bare JSON object is not accepted.
+          </p>
+          <h3>Quotes and backslashes</h3>
+          <p>Escaped input</p>
+          <pre class="json-example"><code>"C:\\Users\\Ali said \"hi\""</code></pre>
+          <p>Unescaped output</p>
+          <pre class="json-example"><code>C:\Users\Ali said "hi"</code></pre>
+          <h3>Newline and tab</h3>
+          <p>Escaped input</p>
+          <pre class="json-example"><code>"Line 1\n\ta"</code></pre>
+          <p>Unescaped output, with a newline and then a tab</p>
+          <pre class="json-example"><code>Line 1&#10;&#9;a</code></pre>
+          <h3>A quoted JSON object</h3>
+          <p>
+            The input is one JSON string whose text is an object.
+            Unescape returns that text. It does not parse the object.
+          </p>
+          <p>Escaped input</p>
+          <pre class="json-example"><code>"{\"name\":\"Ali\"}"</code></pre>
+          <p>Unescaped output</p>
+          <pre class="json-example"><code>{"name":"Ali"}</code></pre>
+        </section>
+
         <section class="info-section" aria-labelledby="errors-heading">
           <h2 id="errors-heading">Invalid Escape Sequences</h2>
           <p>
@@ -221,6 +249,17 @@
           <p>No. Escape, unescape, and copy all run in your browser.</p>
           <h3>Do the results include quotation marks?</h3>
           <p>Escape adds the surrounding double quotes. Unescape requires those quotes and returns the text inside them.</p>
+          <h3>How do I unescape JSON online?</h3>
+          <p>
+            Paste one JSON string, including the surrounding double quotes, and choose Unescape.
+            The output is the text inside the string. Parsing and copy run in your browser.
+          </p>
+          <h3>Why does JSON unescape fail?</h3>
+          <p>
+            Unescape accepts one quoted JSON string.
+            A bare object, array, number, true, false, or null is rejected, and the output is cleared.
+            A missing quote, an invalid escape such as <code>\x41</code>, or text after the closing quote also stops the conversion.
+          </p>
           <h3>Where can I format the JSON first?</h3>
           <p>
             Use the <a href="/">JSON Beautifier</a> to format a document, the
