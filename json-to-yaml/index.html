@@ -74,38 +74,40 @@
       </header>
 
       <main>
-        <section class="panel" aria-labelledby="input-heading">
-          <h2 id="input-heading">JSON input</h2>
-          <label class="editor-label" for="json-input">JSON to convert</label>
-          <textarea
-            id="json-input"
-            class="editor"
-            spellcheck="false"
-            autocomplete="off"
-            aria-describedby="status-message"
-            placeholder='Paste JSON here, for example: {"name":"Ada","active":true}'
-          ></textarea>
-          <div class="actions" role="group" aria-label="JSON input actions">
-            <label class="btn btn-secondary file-btn">
-              Open JSON File
-              <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
-            </label>
-            <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
-            <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
-          </div>
-          <p id="status-message" class="status" role="status" aria-live="polite"></p>
-        </section>
+        <div class="editor-grid">
+          <section class="panel" aria-labelledby="input-heading">
+            <h2 id="input-heading">JSON input</h2>
+            <label class="editor-label" for="json-input">JSON to convert</label>
+            <textarea
+              id="json-input"
+              class="editor"
+              spellcheck="false"
+              autocomplete="off"
+              aria-describedby="status-message"
+              placeholder='Paste JSON here, for example: {"name":"Ada","active":true}'
+            ></textarea>
+            <div class="actions" role="group" aria-label="JSON input actions">
+              <label class="btn btn-secondary file-btn">
+                Open JSON File
+                <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+              </label>
+              <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
+              <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+            </div>
+            <p id="status-message" class="status" role="status" aria-live="polite"></p>
+          </section>
 
-        <section class="panel" aria-labelledby="output-heading">
-          <h2 id="output-heading">YAML output</h2>
-          <div class="actions" role="group" aria-label="YAML actions">
-            <button type="button" id="convert-btn" class="btn btn-primary">Convert to YAML</button>
-            <button type="button" id="copy-btn" class="btn btn-secondary">Copy YAML</button>
-            <button type="button" id="download-btn" class="btn btn-secondary">Download YAML</button>
-          </div>
-          <p id="yaml-empty" class="empty">Convert JSON to see YAML here.</p>
-          <pre id="yaml-output" class="yaml-output" hidden tabindex="0" aria-label="YAML output"></pre>
-        </section>
+          <section class="panel" aria-labelledby="output-heading">
+            <h2 id="output-heading">YAML output</h2>
+            <div class="actions" role="group" aria-label="YAML actions">
+              <button type="button" id="convert-btn" class="btn btn-primary">Convert to YAML</button>
+              <button type="button" id="copy-btn" class="btn btn-secondary">Copy YAML</button>
+              <button type="button" id="download-btn" class="btn btn-secondary">Download YAML</button>
+            </div>
+            <p id="yaml-empty" class="empty">Convert JSON to see YAML here.</p>
+            <pre id="yaml-output" class="yaml-output" hidden tabindex="0" aria-label="YAML output"></pre>
+          </section>
+        </div>
 
         <section class="info-section" aria-labelledby="what-heading">
           <h2 id="what-heading">What Is JSON to YAML Conversion?</h2>
