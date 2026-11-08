@@ -80,14 +80,31 @@
 
       <main>
         <section class="card" aria-label="JSON editor">
-          <label class="editor-label" for="json-input">JSON input</label>
-          <textarea
-            id="json-input"
-            class="editor"
-            spellcheck="false"
-            aria-describedby="status-message"
-            placeholder='Paste JSON here, for example: {"name":"Syed","ready":true}'
-          ></textarea>
+          <div class="editor-grid">
+            <div class="editor-pane">
+              <label class="editor-label" for="json-input">JSON input</label>
+              <textarea
+                id="json-input"
+                class="editor"
+                spellcheck="false"
+                autocomplete="off"
+                aria-describedby="status-message"
+                placeholder='Paste JSON here, for example: {"name":"Syed","ready":true}'
+              ></textarea>
+            </div>
+            <div class="editor-pane">
+              <label class="editor-label" for="json-output">JSON result</label>
+              <textarea
+                id="json-output"
+                class="editor"
+                readonly
+                spellcheck="false"
+                autocomplete="off"
+                aria-describedby="status-message"
+                placeholder="Beautified or minified JSON appears here."
+              ></textarea>
+            </div>
+          </div>
 
           <div class="actions" role="group" aria-label="JSON actions">
             <button type="button" id="beautify-btn" class="btn btn-primary">
@@ -150,7 +167,7 @@
             </article>
             <article class="step-card">
               <h3>Step 2: Beautify JSON</h3>
-              <p>Click the Beautify JSON button to format your JSON with proper indentation.</p>
+              <p>Click Beautify JSON. Formatted JSON appears in the Result panel with 2-space indentation. The original text in the input box stays as it is.</p>
             </article>
             <article class="step-card">
               <h3>Step 3: Validate JSON</h3>
@@ -158,10 +175,10 @@
             </article>
             <article class="step-card">
               <h3>Step 4: Copy Your JSON</h3>
-              <p>Click Copy JSON to copy the formatted JSON to your clipboard.</p>
+              <p>Click Copy JSON to copy the Result panel to your clipboard.</p>
             </article>
           </div>
-          <p class="section-intro">Minify JSON removes unnecessary whitespace and produces a compact single-line result.</p>
+          <p class="section-intro">Minify JSON writes a compact single-line result in the Result panel and leaves the input unchanged.</p>
         </section>
 
         <section class="compare-section" aria-labelledby="compare-heading">

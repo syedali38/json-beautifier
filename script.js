@@ -1,4 +1,5 @@
 const editor = document.getElementById("json-input");
+const output = document.getElementById("json-output");
 const statusMessage = document.getElementById("status-message");
 const beautifyButton = document.getElementById("beautify-btn");
 const minifyButton = document.getElementById("minify-btn");
@@ -9,6 +10,10 @@ const clearButton = document.getElementById("clear-btn");
 function showStatus(text, type) {
   statusMessage.textContent = text;
   statusMessage.className = "status" + (type ? " " + type : "");
+}
+
+function clearOutput() {
+  output.value = "";
 }
 
 function parseJsonFromEditor() {
@@ -31,26 +36,28 @@ function parseJsonFromEditor() {
 beautifyButton.addEventListener("click", function () {
   const parsed = parseJsonFromEditor();
   if (!parsed.ok) {
+    clearOutput();
     return;
   }
 
-  editor.value = JSON.stringify(parsed.value, null, 2);
+  output.value = JSON.stringify(parsed.value, null, 2);
   showStatus("JSON beautified successfully.", "success");
 });
 
 minifyButton.addEventListener("click", function () {
   const parsed = parseJsonFromEditor();
   if (!parsed.ok) {
+    clearOutput();
     return;
   }
 
-  editor.value = JSON.stringify(parsed.value);
+  output.value = JSON.stringify(parsed.value);
   showStatus("JSON minified successfully.", "success");
 });
 
 function copyUsingTextareaSelection() {
-  editor.focus();
-  editor.select();
+  output.focus();
+  output.select();
 
   try {
     return document.execCommand("copy");
@@ -60,16 +67,16 @@ function copyUsingTextareaSelection() {
 }
 
 copyButton.addEventListener("click", function () {
-  const rawText = editor.value;
+  const resultText = output.value;
 
-  if (!rawText.trim()) {
-    showStatus("Please paste some JSON first.", "error");
+  if (!resultText.trim()) {
+    showStatus("Beautify or minify JSON first.", "error");
     return;
   }
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard
-      .writeText(rawText)
+      .writeText(resultText)
       .then(function () {
         showStatus("JSON copied to clipboard.", "success");
       })
@@ -115,6 +122,13 @@ validateButton.addEventListener("click", function () {
 
 clearButton.addEventListener("click", function () {
   editor.value = "";
+  clearOutput();
   showStatus("Editor cleared.", "success");
   editor.focus();
+});
+
+editor.addEventListener("input", function () {
+  if (!output.value) return;
+  clearOutput();
+  showStatus("", "");
 });
