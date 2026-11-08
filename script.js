@@ -16,35 +16,35 @@ function parseJsonFromEditor() {
 
   if (!rawText) {
     showStatus("Please paste some JSON first.", "error");
-    return null;
+    return { ok: false };
   }
 
   try {
-    return JSON.parse(rawText);
+    return { ok: true, value: JSON.parse(rawText) };
   } catch (error) {
     const details = error && error.message ? error.message : "Unknown parsing error";
     showStatus("Invalid JSON: " + details, "error");
-    return null;
+    return { ok: false };
   }
 }
 
 beautifyButton.addEventListener("click", function () {
   const parsed = parseJsonFromEditor();
-  if (parsed === null) {
+  if (!parsed.ok) {
     return;
   }
 
-  editor.value = JSON.stringify(parsed, null, 2);
+  editor.value = JSON.stringify(parsed.value, null, 2);
   showStatus("JSON beautified successfully.", "success");
 });
 
 minifyButton.addEventListener("click", function () {
   const parsed = parseJsonFromEditor();
-  if (parsed === null) {
+  if (!parsed.ok) {
     return;
   }
 
-  editor.value = JSON.stringify(parsed);
+  editor.value = JSON.stringify(parsed.value);
   showStatus("JSON minified successfully.", "success");
 });
 
