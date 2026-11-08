@@ -75,38 +75,40 @@
       </header>
 
       <main>
-        <section class="panel" aria-labelledby="input-heading">
-          <h2 id="input-heading">YAML input</h2>
-          <label class="editor-label" for="yaml-input">YAML to convert</label>
-          <textarea
-            id="yaml-input"
-            class="editor"
-            spellcheck="false"
-            autocomplete="off"
-            aria-describedby="status-message"
-            placeholder="Paste YAML here, for example: name: Ada"
-          ></textarea>
-          <div class="actions" role="group" aria-label="YAML input actions">
-            <label class="btn btn-secondary file-btn">
-              Open YAML File
-              <input id="file-input" class="file-input" type="file" accept=".yaml,.yml,text/yaml,application/yaml" />
-            </label>
-            <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample YAML</button>
-            <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
-          </div>
-          <p id="status-message" class="status" role="status" aria-live="polite"></p>
-        </section>
+        <div class="editor-grid">
+          <section class="panel" aria-labelledby="input-heading">
+            <h2 id="input-heading">YAML input</h2>
+            <label class="editor-label" for="yaml-input">YAML to convert</label>
+            <textarea
+              id="yaml-input"
+              class="editor"
+              spellcheck="false"
+              autocomplete="off"
+              aria-describedby="status-message"
+              placeholder="Paste YAML here, for example: name: Ada"
+            ></textarea>
+            <div class="actions" role="group" aria-label="YAML input actions">
+              <label class="btn btn-secondary file-btn">
+                Open YAML File
+                <input id="file-input" class="file-input" type="file" accept=".yaml,.yml,text/yaml,application/yaml" />
+              </label>
+              <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample YAML</button>
+              <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+            </div>
+            <p id="status-message" class="status" role="status" aria-live="polite"></p>
+          </section>
 
-        <section class="panel" aria-labelledby="output-heading">
-          <h2 id="output-heading">JSON output</h2>
-          <div class="actions" role="group" aria-label="JSON actions">
-            <button type="button" id="convert-btn" class="btn btn-primary">Convert to JSON</button>
-            <button type="button" id="copy-btn" class="btn btn-secondary">Copy JSON</button>
-            <button type="button" id="download-btn" class="btn btn-secondary">Download JSON</button>
-          </div>
-          <p id="json-empty" class="empty">Convert YAML to see JSON here.</p>
-          <pre id="json-output" class="json-output" hidden tabindex="0" aria-label="JSON output"></pre>
-        </section>
+          <section class="panel" aria-labelledby="output-heading">
+            <h2 id="output-heading">JSON output</h2>
+            <div class="actions" role="group" aria-label="JSON actions">
+              <button type="button" id="convert-btn" class="btn btn-primary">Convert to JSON</button>
+              <button type="button" id="copy-btn" class="btn btn-secondary">Copy JSON</button>
+              <button type="button" id="download-btn" class="btn btn-secondary">Download JSON</button>
+            </div>
+            <p id="json-empty" class="empty">Convert YAML to see JSON here.</p>
+            <pre id="json-output" class="json-output" hidden tabindex="0" aria-label="JSON output"></pre>
+          </section>
+        </div>
 
         <section class="info-section" aria-labelledby="what-heading">
           <h2 id="what-heading">What Is YAML to JSON Conversion?</h2>

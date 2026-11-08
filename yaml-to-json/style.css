@@ -74,6 +74,17 @@ h1 {
 
 .panel { margin-bottom: 16px; padding: 22px; }
 
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.editor-grid .panel {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
 .panel h2, .info-section h2, .how-to-section h2 {
   margin: 0 0 12px;
   color: var(--purple-900);
@@ -84,9 +95,12 @@ h1 {
 .editor-label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--purple-900); }
 
 .editor {
+  display: block;
+  box-sizing: border-box;
   width: 100%;
   min-height: 280px;
-  resize: vertical;
+  resize: none;
+  overflow: auto;
   padding: 16px;
   border: 1px solid #ddc8f5;
   border-radius: 14px;
@@ -157,6 +171,16 @@ h1 {
 
 .empty { margin: 0; color: var(--muted); line-height: 1.5; }
 
+#yaml-input,
+#json-output,
+#json-empty {
+  box-sizing: border-box;
+  height: 320px;
+  min-height: 320px;
+  max-width: 100%;
+  overflow: auto;
+}
+
 .status { min-height: 1.4em; margin: 14px 0 0; line-height: 1.5; }
 .status.error, .status.success { border-radius: 10px; padding: 10px 12px; }
 .status.error { color: var(--error); background: var(--error-bg); }
@@ -180,4 +204,17 @@ h1 {
   .panel, .info-section, .step-card { padding: 16px; }
   .btn, .file-btn { width: 100%; }
   .editor { min-height: 220px; }
+}
+
+@media (max-width: 640px) {
+  .editor-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #yaml-input,
+  #json-output,
+  #json-empty {
+    height: 240px;
+    min-height: 240px;
+  }
 }
