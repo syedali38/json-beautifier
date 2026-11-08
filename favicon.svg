@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="JSONForgeKit">
+  <rect width="32" height="32" rx="7" fill="#6d28d9"/>
+  <path fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M13.2 6.5C10 8 8.8 9.8 8.8 12.2c0 1.8.9 2.8 2.6 3.5-1.7.7-2.6 1.7-2.6 3.5 0 2.4 1.2 4.2 4.4 5.7"/>
+  <path fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M18.8 6.5C22 8 23.2 9.8 23.2 12.2c0 1.8-.9 2.8-2.6 3.5 1.7.7 2.6 1.7 2.6 3.5 0 2.4-1.2 4.2-4.4 5.7"/>
+</svg>
