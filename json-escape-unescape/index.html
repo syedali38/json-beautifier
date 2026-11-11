@@ -77,7 +77,18 @@
         <div class="editor-grid">
           <section class="panel" aria-labelledby="input-heading">
             <h2 id="input-heading">Text input</h2>
-            <label class="editor-label" for="text-input">Text to escape or unescape</label>
+            <div class="input-toolbar">
+              <label class="editor-label" for="text-input">Text to escape or unescape</label>
+              <div class="example-picker">
+                <label class="example-label" for="example-select">Try an example</label>
+                <select id="example-select" class="example-select">
+                  <option value="">Choose an example</option>
+                  <option value="quotes">Plain text with quotes and backslashes</option>
+                  <option value="multiline">Multiline text with tabs and newlines</option>
+                  <option value="json-string">JSON string to unescape</option>
+                </select>
+              </div>
+            </div>
             <textarea
               id="text-input"
               class="editor"
@@ -87,11 +98,21 @@
               aria-describedby="status-message"
               placeholder='Paste raw text, or a JSON string such as "hello\nworld"'
             ></textarea>
-            <div class="actions" role="group" aria-label="Escape actions">
+            <div class="actions" role="group" aria-label="Input actions">
+              <button type="button" id="open-file-btn" class="btn btn-secondary" aria-describedby="file-message">Open Text/JSON File</button>
+              <input
+                id="file-input"
+                class="file-input"
+                type="file"
+                accept=".txt,.json,text/plain,application/json"
+                tabindex="-1"
+                aria-hidden="true"
+              />
               <button type="button" id="escape-btn" class="btn btn-primary">Escape</button>
               <button type="button" id="unescape-btn" class="btn btn-secondary">Unescape</button>
               <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
             </div>
+            <p id="file-message" class="file-status" role="status" aria-live="polite"></p>
             <p id="status-message" class="status" role="status" aria-live="polite"></p>
           </section>
 
@@ -109,6 +130,7 @@
             ></textarea>
             <div class="actions" role="group" aria-label="Output actions">
               <button type="button" id="copy-btn" class="btn btn-secondary">Copy output</button>
+              <button type="button" id="download-btn" class="btn btn-secondary">Download output</button>
             </div>
           </section>
         </div>
@@ -135,8 +157,8 @@
           <h2 id="how-heading">How to Escape and Unescape JSON</h2>
           <div class="step-grid">
             <article class="step-card">
-              <h3>Step 1: Paste text</h3>
-              <p>Paste raw text to escape, or one quoted JSON string to unescape.</p>
+              <h3>Step 1: Add text</h3>
+              <p>Paste raw text to escape, or one quoted JSON string to unescape. Open Text/JSON File reads a .txt or .json file into the box.</p>
             </article>
             <article class="step-card">
               <h3>Step 2: Choose an action</h3>
@@ -147,8 +169,8 @@
               <p>Escaped output includes the surrounding double quotes. Unescape removes them.</p>
             </article>
             <article class="step-card">
-              <h3>Step 4: Copy or clear</h3>
-              <p>Copy output takes the full result. Clear empties both boxes.</p>
+              <h3>Step 4: Copy, download, or clear</h3>
+              <p>Copy output copies the latest result. Download output saves that result as a .txt file. Clear empties both boxes.</p>
             </article>
           </div>
         </section>
