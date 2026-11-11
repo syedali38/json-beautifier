@@ -147,6 +147,56 @@ function recordsFrom(value) {
   return [value];
 }
 
+function findRowSources(value) {
+  const sources = [];
+  function walk(node, path) {
+    if (!isPlainObject(node)) return;
+    const keys = Object.keys(node);
+    for (let i = 0; i < keys.length; i += 1) {
+      const key = keys[i];
+      const descriptor = Object.getOwnPropertyDescriptor(node, key);
+      const child = descriptor ? descriptor.value : undefined;
+      const nextPath = path.concat(key);
+      if (Array.isArray(child)) {
+        if (child.every(isPlainObject)) {
+          sources.push({ path: nextPath, count: child.length });
+        }
+      } else if (isPlainObject(child)) {
+        walk(child, nextPath);
+      }
+    }
+  }
+  walk(value, []);
+  return sources;
+}
+
+function valueAtPath(value, path) {
+  let current = value;
+  for (let i = 0; i < path.length; i += 1) {
+    if (!isPlainObject(current) || !Object.prototype.hasOwnProperty.call(current, path[i])) {
+      return { ok: false };
+    }
+    const descriptor = Object.getOwnPropertyDescriptor(current, path[i]);
+    current = descriptor ? descriptor.value : undefined;
+  }
+  return { ok: true, value: current };
+}
+
+function formatSourcePath(path) {
+  const dotted = path.every(function (key) {
+    return key.length > 0 && key.indexOf(".") === -1 && key.indexOf("[") === -1 && key.indexOf("]") === -1;
+  });
+  if (dotted) return path.join(".");
+  return path.map(function (key) {
+    return "[" + JSON.stringify(key) + "]";
+  }).join("");
+}
+
+function formatSourceLabel(source) {
+  const noun = source.count === 1 ? "object" : "objects";
+  return formatSourcePath(source.path) + " (" + source.count + " " + noun + ")";
+}
+
 function escapeField(value, delimiter, spreadsheetSafe) {
   let text = value == null ? "" : String(value);
   if (spreadsheetSafe && /^[=+\-@\t\r]/.test(text)) {
@@ -174,9 +224,18 @@ function tableToCsv(table, options) {
 }
 
 function convertValue(value, options) {
-  const problem = explainRoot(value);
+  let source = value;
+  const rowPath = options && options.rowPath;
+  if (rowPath && rowPath.length) {
+    const found = valueAtPath(value, rowPath);
+    if (!found.ok || !Array.isArray(found.value)) {
+      return { ok: false, message: "The selected array is no longer in this JSON. Choose Whole JSON or another array." };
+    }
+    source = found.value;
+  }
+  const problem = explainRoot(source);
   if (problem) return { ok: false, message: problem };
-  const table = buildTable(recordsFrom(value));
+  const table = buildTable(recordsFrom(source));
   if (table.error) return { ok: false, message: table.error };
   if (table.columns.length === 0) {
     return { ok: false, message: "These objects have no properties, so the CSV has no columns." };
@@ -197,6 +256,9 @@ const fileInput = document.getElementById("file-input");
 const delimiterInput = document.getElementById("delimiter");
 const headersInput = document.getElementById("headers-input");
 const safeInput = document.getElementById("safe-input");
+const rowSourceInput = document.getElementById("row-source");
+let rowSources = [];
+let rebuildingSources = false;
 const previewTable = document.getElementById("preview-table");
 const previewHead = previewTable.querySelector("thead");
 const previewBody = previewTable.querySelector("tbody");
@@ -208,12 +270,53 @@ function showStatus(text, type) {
   statusMessage.className = "status" + (type ? " " + type : "");
 }
 
+function currentRowPath() {
+  if (!rowSourceInput.value) return null;
+  const source = rowSources[Number(rowSourceInput.value)];
+  if (!source) return null;
+  return source.path.slice();
+}
+
+function resetRowSourceSelect() {
+  rowSources = [];
+  rebuildingSources = true;
+  rowSourceInput.replaceChildren();
+  const option = document.createElement("option");
+  option.value = "";
+  option.textContent = "Whole JSON";
+  rowSourceInput.appendChild(option);
+  rowSourceInput.value = "";
+  rebuildingSources = false;
+}
+
+function rebuildRowSourceSelect(value) {
+  const previousKey = JSON.stringify(currentRowPath() || []);
+  rowSources = findRowSources(value);
+  rebuildingSources = true;
+  rowSourceInput.replaceChildren();
+  const whole = document.createElement("option");
+  whole.value = "";
+  whole.textContent = "Whole JSON";
+  rowSourceInput.appendChild(whole);
+  let nextValue = "";
+  rowSources.forEach(function (source, index) {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = formatSourceLabel(source);
+    rowSourceInput.appendChild(option);
+    if (previousKey === JSON.stringify(source.path)) nextValue = String(index);
+  });
+  rowSourceInput.value = nextValue;
+  rebuildingSources = false;
+}
+
 function currentOptions() {
   const selected = delimiterInput.value;
   return {
     delimiter: selected === "tab" ? "\t" : selected,
     includeHeaders: headersInput.checked,
-    spreadsheetSafe: safeInput.checked
+    spreadsheetSafe: safeInput.checked,
+    rowPath: currentRowPath()
   };
 }
 
@@ -272,10 +375,12 @@ function runConversion() {
   const parsed = readEditor();
   if (!parsed.ok) {
     clearPreview();
+    resetRowSourceSelect();
     showStatus(parsed.message, "error");
     return null;
   }
   const result = convertValue(parsed.value, currentOptions());
+  rebuildRowSourceSelect(parsed.value);
   if (!result.ok) {
     clearPreview();
     showStatus(result.message, "error");
@@ -345,6 +450,7 @@ document.getElementById("copy-btn").addEventListener("click", function () {
 
 document.getElementById("sample-btn").addEventListener("click", function () {
   editor.value = JSON.stringify(SAMPLE, null, 2);
+  resetRowSourceSelect();
   runConversion();
   showStatus("Sample JSON loaded and converted.", "success");
 });
@@ -352,9 +458,17 @@ document.getElementById("sample-btn").addEventListener("click", function () {
 document.getElementById("clear-btn").addEventListener("click", function () {
   editor.value = "";
   fileInput.value = "";
+  resetRowSourceSelect();
   clearPreview();
   showStatus("Editor cleared.", "success");
   editor.focus();
+});
+
+editor.addEventListener("input", resetRowSourceSelect);
+
+rowSourceInput.addEventListener("change", function () {
+  if (rebuildingSources) return;
+  if (editor.value.trim()) runConversion();
 });
 
 delimiterInput.addEventListener("change", function () {
@@ -378,6 +492,7 @@ fileInput.addEventListener("change", function () {
   const reader = new FileReader();
   reader.onload = function () {
     editor.value = typeof reader.result === "string" ? reader.result : "";
+    resetRowSourceSelect();
     runConversion();
   };
   reader.onerror = function () {

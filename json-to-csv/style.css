@@ -138,6 +138,8 @@ select, .file-input { padding: 12px 14px; }
   border: 0;
 }
 
+.row-source { max-width: 360px; margin-bottom: 14px; }
+.row-source .hint { margin: 8px 0 0; }
 .options { display: grid; grid-template-columns: minmax(180px, 240px) 1fr 1fr; gap: 14px; align-items: end; }
 
 .check {
@@ -210,6 +212,7 @@ select, .file-input { padding: 12px 14px; }
 @media (max-width: 800px) {
   .page { width: min(100% - 24px, 1100px); padding: 24px 0 36px; }
   .options, .step-grid { grid-template-columns: 1fr; }
+  .row-source { max-width: none; }
   .panel, .info-section, .step-card { padding: 16px; }
   .btn, .file-btn, select { width: 100%; }
   .editor { min-height: 220px; }

@@ -98,6 +98,16 @@
 
       <section class="panel" aria-labelledby="options-heading">
         <h2 id="options-heading">Conversion options</h2>
+        <div class="row-source option">
+          <label class="editor-label" for="row-source">Rows from</label>
+          <select id="row-source" aria-describedby="row-source-hint">
+            <option value="">Whole JSON</option>
+          </select>
+          <p id="row-source-hint" class="hint">
+            Whole JSON converts the root value. Choose an array of objects to use those objects as rows.
+            Other fields in the wrapper are left out.
+          </p>
+        </div>
         <div class="options">
           <div class="option">
             <label class="editor-label" for="delimiter">Delimiter</label>
@@ -215,8 +225,13 @@ Ali,"[""design"",""json""]"</code></pre>
   ]
 }</code></pre>
         <p>
-          This is one object. The records array stays in one CSV cell.
-          Paste the inner array to create one row for Ali and another for Sara.
+          With Rows from set to Whole JSON, this is one object. The records array stays in one CSV cell:
+        </p>
+        <pre class="json-example"><code>records
+"[{""name"":""Ali""},{""name"":""Sara""}]"</code></pre>
+        <p>
+          Choose records under Rows from to use the objects inside that array as rows.
+          Pasting the inner array with Whole JSON selected also creates those rows:
         </p>
         <pre class="json-example"><code>[{"name":"Ali"},{"name":"Sara"}]</code></pre>
         <pre class="json-example"><code>name
@@ -244,9 +259,11 @@ Sara,null</code></pre>
           parses the JSON, because not every integer can be represented exactly.
         </p>
         <p>
-          An array inside an object is written as compact JSON in one cell. That keeps every
-          item instead of dropping the list or inventing extra rows. A top-level array is
-          converted only when every item is an object.
+          An array inside an object stays in one cell when Rows from is Whole JSON. That keeps every
+          item instead of dropping the list or inventing extra rows. Choose that array under Rows from
+          when every item is an object and you want one row per object. Arrays reached only by going
+          through another array are not offered. A top-level array is converted only when every item
+          is an object.
         </p>
       </section>
 
