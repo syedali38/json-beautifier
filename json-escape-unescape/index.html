@@ -117,7 +117,7 @@
           </section>
 
           <section class="panel" aria-labelledby="output-heading">
-            <h2 id="output-heading">Escaped output</h2>
+            <h2 id="output-heading">Escape or unescape result</h2>
             <label class="editor-label" for="text-output">JSON string or decoded text</label>
             <textarea
               id="text-output"
@@ -246,6 +246,11 @@
           <pre class="json-example"><code>"Line 1\n\ta"</code></pre>
           <p>Unescaped output, with a newline and then a tab</p>
           <pre class="json-example"><code>Line 1&#10;&#9;a</code></pre>
+          <h3>Unicode escapes</h3>
+          <p>Escaped input</p>
+          <pre class="json-example"><code>"Tokyo \u6771\u4eac"</code></pre>
+          <p>Unescaped output</p>
+          <pre class="json-example"><code>Tokyo 東京</code></pre>
           <h3>A quoted JSON object</h3>
           <p>
             The input is one JSON string whose text is an object.
@@ -276,7 +281,12 @@
         <section class="info-section" aria-labelledby="faq-heading">
           <h2 id="faq-heading">Frequently Asked Questions</h2>
           <h3>Does this tool upload my text?</h3>
-          <p>No. Escape, unescape, and copy all run in your browser.</p>
+          <p>No. Escape, unescape, copy, opening a local file, and downloading the generated text all run in your browser.</p>
+          <h3>Is this a string unescape tool?</h3>
+          <p>
+            Yes, for one quoted JSON string. It decodes escaped quotes, backslashes, newlines, tabs, and Unicode escapes such as <code>\u6771</code>.
+            This string unescape does not decode URL percent-encoding such as <code>%20</code>, or HTML entities such as <code>&amp;quot;</code>.
+          </p>
           <h3>Do the results include quotation marks?</h3>
           <p>Escape adds the surrounding double quotes. Unescape requires those quotes and returns the text inside them.</p>
           <h3>How do I unescape JSON online?</h3>
