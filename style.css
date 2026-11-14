@@ -212,6 +212,10 @@ h1 {
   line-height: 1.7;
 }
 
+.info-section p + p {
+  margin-top: 12px;
+}
+
 .info-section h3 {
   margin: 22px 0 12px;
   color: var(--purple-900);
@@ -338,6 +342,20 @@ h1 {
   color: var(--purple-700);
   font-size: 1.05rem;
   line-height: 1.4;
+}
+
+.step-card h3 a {
+  color: var(--purple-700);
+  text-decoration: underline;
+}
+
+.step-card h3 a:hover {
+  color: var(--purple-600);
+}
+
+.step-card h3 a:focus-visible {
+  outline: 3px solid #d8b4fe;
+  outline-offset: 3px;
 }
 
 .step-card p {

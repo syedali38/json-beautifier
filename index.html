@@ -130,27 +130,60 @@
         <section class="info-section" aria-labelledby="json-beautifier-heading">
           <h2 id="json-beautifier-heading">What Is a JSON Beautifier?</h2>
           <p>
-            A JSON Beautifier is an online tool that converts
-            compact or unformatted JSON data into a clean,
-            readable structure. It uses indentation and line
-            breaks to make JSON easier to understand, review,
-            and debug.
+            This JSON Beautifier uses two panels. Paste into JSON input. Beautify
+            JSON and Minify JSON parse that text with the browser's JSON.parse,
+            then write a new serialization to the read-only JSON result panel
+            with JSON.stringify. The input stays as you pasted it.
           </p>
           <p>
-            This tool formats, validates, and minifies JSON text
-            directly in your browser. If you want to explore nested
-            JSON objects and arrays in an expandable tree instead,
-            use our <a href="/json-viewer/">JSON Viewer</a>.
+            Beautify JSON writes two-space indentation. Minify JSON writes the
+            same parsed value without extra whitespace. Validate JSON also calls
+            JSON.parse, but it only updates the status line under the editor. It
+            does not fill or change the result panel.
           </p>
-          <h3 id="json-example-heading">JSON Beautifier Example: Before and After</h3>
+          <p>
+            Invalid JSON is not repaired. Beautify JSON and Minify JSON then
+            clear the result panel. For an expandable tree instead of formatted
+            text, use the
+            <a href="/json-viewer/">JSON Viewer</a>.
+          </p>
+          <h3 id="json-example-heading">Beautify messy JSON</h3>
+          <p>
+            This object is valid JSON with extra spaces and a nested address
+            object. Beautify JSON writes it with two-space indentation.
+          </p>
           <figure class="code-figure">
-            <figcaption>Before</figcaption>
-            <pre class="json-sample" tabindex="0"><code>{"name":"Ali","skills":["Linux","OpenShift"],"active":true}</code></pre>
+            <figcaption>Before Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{ "name": "Ali",  "address" : { "city" : "Karachi" }, "skills":[ "Linux" , "OpenShift" ], "active": true }</code></pre>
           </figure>
           <figure class="code-figure">
-            <figcaption>After</figcaption>
+            <figcaption>After Beautify</figcaption>
             <pre class="json-sample" tabindex="0"><code>{
   "name": "Ali",
+  "address": {
+    "city": "Karachi"
+  },
+  "skills": [
+    "Linux",
+    "OpenShift"
+  ],
+  "active": true
+}</code></pre>
+          </figure>
+          <h3 id="minify-example-heading">Minify formatted JSON</h3>
+          <p>
+            Minify JSON starts from the formatted text above and writes one
+            compact line. That compact line is not always the same as the text
+            you originally pasted, because both actions re-serialize the parsed
+            value.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Before Minify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "name": "Ali",
+  "address": {
+    "city": "Karachi"
+  },
   "skills": [
     "Linux",
     "OpenShift"
@@ -159,8 +192,49 @@
 }</code></pre>
           </figure>
           <figure class="code-figure">
-            <figcaption>Minified JSON</figcaption>
-            <pre class="json-sample" tabindex="0"><code>{"name":"Ali","skills":["Linux","OpenShift"],"active":true}</code></pre>
+            <figcaption>After Minify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"name":"Ali","address":{"city":"Karachi"},"skills":["Linux","OpenShift"],"active":true}</code></pre>
+          </figure>
+          <h3 id="array-example-heading">Root array</h3>
+          <p>
+            The input may be a JSON array, not only an object. Beautify JSON
+            still writes two-space indentation.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Before Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>[{"id":1,"ok":true},{"id":2,"ok":false}]</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>[
+  {
+    "id": 1,
+    "ok": true
+  },
+  {
+    "id": 2,
+    "ok": false
+  }
+]</code></pre>
+          </figure>
+          <h3 id="nested-example-heading">Nested object</h3>
+          <p>
+            Nested objects become indented child blocks. The user object below
+            stays nested; it is not flattened.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Before Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"user":{"name":"Ada","city":"Quetta"},"active":true}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "user": {
+    "name": "Ada",
+    "city": "Quetta"
+  },
+  "active": true
+}</code></pre>
           </figure>
         </section>
 
@@ -169,79 +243,338 @@
           <div class="step-grid">
             <article class="step-card">
               <h3>Step 1: Paste Your JSON</h3>
-              <p>Paste your JSON data into the input editor.</p>
+              <p>
+                Paste one JSON value into JSON input. An object, array, string,
+                number, boolean, or null is accepted. Leading and trailing
+                spaces are ignored. A box that contains only spaces is treated
+                as empty. This page does not open files.
+              </p>
             </article>
             <article class="step-card">
               <h3>Step 2: Beautify JSON</h3>
-              <p>Click Beautify JSON. Valid JSON appears in the Result panel with 2-space indentation. Click Minify JSON for a compact result without extra formatting whitespace. The original text in the input box stays as it is.</p>
+              <p>
+                Choose Beautify JSON to write two-space indentation to JSON
+                result, or Minify JSON for a compact line. The input is not
+                rewritten. If parsing fails, the result panel is cleared.
+              </p>
             </article>
             <article class="step-card">
               <h3>Step 3: Validate JSON</h3>
-              <p>Click Validate JSON to check whether your JSON contains syntax errors.</p>
+              <p>
+                Choose Validate JSON to check the input only. A successful check
+                updates the status line. It does not fill the result panel, so
+                Copy JSON still needs Beautify JSON or Minify JSON first.
+              </p>
             </article>
             <article class="step-card">
               <h3>Step 4: Copy Your JSON</h3>
-              <p>Click Copy JSON to copy the Result panel to your clipboard.</p>
+              <p>
+                Copy JSON copies the result panel, not the input. Clear empties
+                both panels. If you edit the input after a successful Beautify
+                or Minify, the previous result is cleared.
+              </p>
             </article>
           </div>
         </section>
 
         <section class="compare-section" aria-labelledby="compare-heading">
           <h2 id="compare-heading">JSON Beautify vs Minify</h2>
+          <p class="section-intro">
+            Beautify JSON and Minify JSON both parse the input and write a new
+            JSON text. They are not a whitespace-only pass. Duplicate keys,
+            some object key order, and some numbers can change. Validate JSON
+            does not rewrite anything.
+          </p>
           <div class="step-grid">
             <article class="step-card">
               <h3>Beautify</h3>
               <p>
-                Adds indentation and line breaks to make JSON easier to read.
-                Use it when you want to format JSON online and review the data.
-                A JSON prettifier makes this same spacing change.
+                Parses the input, then writes JSON.stringify with two-space
+                indent to the result panel. Use it when you want to read the
+                structure.
               </p>
             </article>
             <article class="step-card">
               <h3>Minify</h3>
               <p>
-                Removes unnecessary whitespace to make JSON more compact.
-                Use it when you want a shorter version of the same data.
+                Parses the input, then writes JSON.stringify without extra
+                spaces to the result panel. Use it when you want a compact copy
+                of the parsed value.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Validate</h3>
+              <p>
+                Parses the input and only updates the status line. The input and
+                result panels stay as they are. A valid large integer can still
+                change later if you Beautify or Minify it.
               </p>
             </article>
           </div>
         </section>
 
+        <section class="info-section" aria-labelledby="beyond-whitespace-heading">
+          <h2 id="beyond-whitespace-heading">What Beautify and Minify Change Besides Whitespace</h2>
+          <p>
+            Because this page uses JSON.parse and then JSON.stringify, the
+            result can differ from the input even when the JSON is valid.
+            Validate JSON does not apply these changes.
+          </p>
+          <h3>Duplicate keys</h3>
+          <p>
+            If a key is repeated, JSON.parse keeps the last value. Beautify
+            JSON and Minify JSON then write only that value.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"role":"reader","role":"admin"}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "role": "admin"
+}</code></pre>
+          </figure>
+          <h3>Integer-like object keys</h3>
+          <p>
+            Keys that look like array indexes are written in numeric order,
+            then the remaining keys. The names are not renamed.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"10":"ten","2":"two","name":"Ada","1":"one"}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "1": "one",
+  "2": "two",
+  "10": "ten",
+  "name": "Ada"
+}</code></pre>
+          </figure>
+          <h3>JavaScript numbers</h3>
+          <p>
+            JSON.parse uses JavaScript numbers. A trailing .0 is not kept.
+            Integers outside ±9007199254740991 can change. JSON.stringify
+            writes -0 as 0.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>1.0</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify or Minify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>1</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"n":1.0}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "n": 1
+}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>9007199254740993</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify or Minify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>9007199254740992</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"n":-0}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "n": 0
+}</code></pre>
+          </figure>
+          <h3>Unicode</h3>
+          <p>
+            Non-ASCII characters stay as characters. Beautify JSON does not
+            turn 東京 into \u escapes.
+          </p>
+          <figure class="code-figure">
+            <figcaption>Input</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{"city":"東京"}</code></pre>
+          </figure>
+          <figure class="code-figure">
+            <figcaption>After Beautify</figcaption>
+            <pre class="json-sample" tabindex="0"><code>{
+  "city": "東京"
+}</code></pre>
+          </figure>
+        </section>
+
         <section class="errors-section" aria-labelledby="errors-heading">
           <h2 id="errors-heading">Common JSON Formatting Errors</h2>
           <p class="section-intro">
-            The Validate JSON button checks syntax and writes the result under the editor.
-            It can identify invalid JSON. It does not correct these errors for you.
+            Validate JSON, Beautify JSON, and Minify JSON all use JSON.parse.
+            Failures are reported on the status line as Invalid JSON: plus the
+            browser's parser message. That message wording varies by browser.
+            This page does not rewrite the invalid text. Beautify JSON and
+            Minify JSON also clear the result panel.
           </p>
           <ol class="error-list">
             <li class="step-card">
               <h3>Trailing commas</h3>
-              <p>A comma after the last value in an object or array is invalid. Remove that comma.</p>
+              <p>
+                A comma after the last value is invalid. Example:
+                <code>{"a":1,}</code>
+              </p>
             </li>
             <li class="step-card">
               <h3>Single quotes instead of double quotes</h3>
-              <p>JSON keys and strings must use double quotes. Replace single quotes around text.</p>
+              <p>
+                JSON keys and strings must use double quotes. Example:
+                <code>{'a':1}</code>
+              </p>
             </li>
             <li class="step-card">
               <h3>Comments inside JSON</h3>
-              <p>JSON does not allow <code>//</code> or <code>/* */</code> comments. Remove them before you validate.</p>
+              <p>
+                <code>//</code> and <code>/* */</code> are not allowed. Example:
+                <code>{"a":1} // note</code>
+              </p>
+            </li>
+            <li class="step-card">
+              <h3>Unquoted property names</h3>
+              <p>
+                Keys must be quoted strings. Example:
+                <code>{a:1}</code>
+              </p>
+            </li>
+            <li class="step-card">
+              <h3>Extra JSON values</h3>
+              <p>
+                Only one JSON value is parsed. Example:
+                <code>{"a":1}{"b":2}</code>
+              </p>
+            </li>
+            <li class="step-card">
+              <h3>NaN and Infinity</h3>
+              <p>
+                Those tokens are not JSON numbers. Examples:
+                <code>NaN</code>
+                and
+                <code>Infinity</code>
+              </p>
             </li>
           </ol>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="result-panel-heading">
+          <h2 id="result-panel-heading">Copy, Clear, and the Result Panel</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Copy JSON</h3>
+              <p>
+                Copy JSON copies the result panel only. If that panel is empty,
+                the status is Beautify or minify JSON first. The page tries the
+                clipboard API, then a selected-text copy. If the browser blocks
+                both, select the result and use Ctrl+C, or Cmd+C on Mac.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Clear</h3>
+              <p>
+                Clear empties JSON input and JSON result, sets the status to
+                Editor cleared, and focuses the input.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Editing the input</h3>
+              <p>
+                After a result is shown, any change in JSON input clears the
+                result and the status. Copy JSON then has nothing to copy until
+                you Beautify or Minify again.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="other-tools-heading">
+          <h2 id="other-tools-heading">When to Use Another JSONForgeKit Tool</h2>
+          <p class="section-intro">
+            This page formats, minifies, and validates JSON text. Use a
+            different page when you need a tree, a spreadsheet, YAML, or a JSON
+            string escape.
+          </p>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3><a href="/json-viewer/">JSON Viewer</a></h3>
+              <p>
+                Inspect objects and arrays as an expandable tree, search values,
+                and copy a path such as $.tags[0].
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/json-to-csv/">JSON to CSV</a></h3>
+              <p>
+                Flatten objects into rows and columns and download a CSV file.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/json-to-yaml/">JSON to YAML</a></h3>
+              <p>
+                Write the same values as a YAML document.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/yaml-to-json/">YAML to JSON</a></h3>
+              <p>
+                Convert a YAML or YML document into JSON, then format it here if
+                you need indented text.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/json-escape-unescape/">JSON Escape / Unescape</a></h3>
+              <p>
+                Escape or unescape one JSON string. That is not the same as
+                beautifying an object.
+              </p>
+            </article>
+          </div>
         </section>
 
         <section class="info-section" aria-labelledby="faq-heading">
           <h2 id="faq-heading">Frequently Asked Questions</h2>
           <h3>Does the JSON Beautifier fix invalid JSON?</h3>
           <p>
-            No. The tool can identify invalid JSON and display validation errors, but it does not automatically fix problems such as trailing commas, single-quoted strings, or comments.
+            No. Invalid JSON is reported on the status line. Beautify JSON and
+            Minify JSON clear the result panel. Trailing commas, single-quoted
+            strings, comments, and the other errors above are not rewritten.
           </p>
-          <h3>What is the difference between beautifying and minifying JSON?</h3>
+          <h3>Why did a number or key order change after Beautify?</h3>
           <p>
-            Beautifying adds indentation and line breaks to make valid JSON easier to read. Minifying removes unnecessary whitespace to make valid JSON more compact. Both preserve the JSON data. A very large whole number can change, because JavaScript does not store every integer exactly.
+            Beautify JSON and Minify JSON re-serialize the parsed value. 1.0
+            becomes 1, 9007199254740993 becomes 9007199254740992, -0 becomes 0,
+            a repeated key keeps the last value, and integer-like keys such as
+            1, 2, and 10 are written in numeric order.
           </p>
-          <h3>Does my JSON leave my browser?</h3>
+          <h3>Does my JSON leave the browser?</h3>
           <p>
-            JSON processing happens locally in your browser. The tool does not need to upload your JSON to a server to format, validate, or minify it.
+            Beautify, minify, validate, copy, and clear run in this browser.
+            The JSON in the editors is not uploaded to a server. Optional
+            Google Analytics loads only if you choose Accept analytics. That
+            choice is not the JSON you paste.
+          </p>
+          <h3>Why does Copy JSON require Beautify or Minify first?</h3>
+          <p>
+            Copy JSON reads the result panel. Validate JSON does not write that
+            panel. If the result is empty, the status is Beautify or minify JSON
+            first.
+          </p>
+          <h3>Does Validate change my JSON?</h3>
+          <p>
+            No. Validate JSON only updates the status line. The input and result
+            panels stay as they are.
           </p>
         </section>
       </main>
