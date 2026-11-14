@@ -113,14 +113,21 @@
         <section class="info-section" aria-labelledby="what-heading">
           <h2 id="what-heading">What Is YAML to JSON Conversion?</h2>
           <p>
-            YAML to JSON conversion writes the same values as a JSON document.
-            A YAML to JSON converter turns each mapping into an object and each sequence into an array.
-            You can convert YAML to JSON online here without sending the text to a server.
+            This converter reads the editor with a YAML parseDocument step, using YAML 1.2
+            and the core schema. It then turns that document into a JavaScript value and
+            writes JSON with JSON.stringify and two-space indentation. It converts one
+            YAML document. The JSON is a new document, not a restyle of the YAML source.
           </p>
           <p>
-            This page reads YAML 1.2 using the core schema. It converts one document.
-            A .yml file is YAML too, so the same converter can turn YML to JSON.
-            The download is converted-data.json.
+            Unquoted yes, no, on, and off stay strings. true and false become booleans.
+            That is YAML 1.2, not YAML 1.1. The reverse direction is the
+            <a href="/json-to-yaml/">JSON to YAML converter</a>,
+            which quotes "yes" when it writes YAML so tools that still follow YAML 1.1
+            are less likely to treat that word as a boolean.
+          </p>
+          <p>
+            Parsing, conversion, copy, and download all run in this browser. The YAML is
+            not uploaded. A .yml file is YAML too. The download is converted-data.json.
           </p>
         </section>
 
@@ -129,21 +136,73 @@
           <div class="step-grid">
             <article class="step-card">
               <h3>Step 1: Add YAML</h3>
-              <p>Paste YAML into the editor, or open a .yaml or .yml file from this browser. A valid file is converted as soon as it is read. Load Sample YAML converts immediately.</p>
+              <p>
+                Paste YAML into the editor, choose Open YAML File, or choose Load Sample YAML.
+                Open YAML File converts as soon as a valid file is read.
+                Load Sample YAML converts immediately.
+              </p>
             </article>
             <article class="step-card">
-              <h3>Step 2: Convert</h3>
-              <p>For pasted YAML, choose Convert to JSON. Invalid YAML stays in the editor, and the status line explains the problem.</p>
+              <h3>Step 2: Convert pasted YAML</h3>
+              <p>
+                Pasted YAML needs Convert to JSON. Invalid YAML stays in the editor.
+                The status line explains the problem, and the JSON preview is cleared.
+              </p>
             </article>
             <article class="step-card">
               <h3>Step 3: Read the JSON</h3>
-              <p>The preview shows JSON with two-space indentation. Changing the YAML clears that preview until you convert again.</p>
+              <p>
+                The preview shows JSON with two-space indentation.
+                Editing the YAML clears that preview until you convert again.
+                Copy JSON and Download JSON need a current preview.
+              </p>
             </article>
             <article class="step-card">
-              <h3>Step 4: Copy or download</h3>
-              <p>Copy JSON copies the preview. Download JSON saves converted-data.json.</p>
+              <h3>Step 4: Copy, download, or clear</h3>
+              <p>
+                Copy JSON copies the JSON already in the preview.
+                Download JSON saves that same text as converted-data.json.
+                Neither button converts again. If the preview is empty, both ask you to convert first.
+                Clear empties both panels.
+              </p>
             </article>
           </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="read-heading">
+          <h2 id="read-heading">How This Converter Reads YAML</h2>
+          <p>
+            After a successful parse, the page writes pretty-printed JSON from the JavaScript
+            value. It does not support every YAML feature. Custom tags, merge keys, binary
+            data, and circular aliases are rejected instead of being rewritten into a different JSON value.
+          </p>
+          <h3>YAML 1.2 core schema</h3>
+          <p>
+            Unquoted yes, no, on, off, y, and n stay strings. true and false become JSON
+            booleans. null, ~, and an empty value become JSON null. Quoted text stays text,
+            so "01" does not become the number 1.
+          </p>
+          <h3>.yaml and .yml files</h3>
+          <p>
+            Open YAML File accepts .yaml and .yml. Both are read as YAML text.
+            YML to JSON uses the same conversion as YAML to JSON.
+          </p>
+          <h3>Unique mapping keys</h3>
+          <p>
+            A mapping key cannot be repeated. If a key appears twice, conversion stops
+            with YAML mapping keys must be unique. The last value is not kept.
+          </p>
+          <h3>Anchors, aliases, and expansion</h3>
+          <p>
+            An alias that simply repeats a value is written out in full in the JSON.
+            The JSON does not keep YAML anchors. A circular alias is rejected.
+            Merge keys such as &lt;&lt; are not expanded.
+          </p>
+          <h3>JSON formatting and download</h3>
+          <p>
+            Successful output is JSON.stringify with two-space indentation.
+            Download JSON saves converted-data.json.
+          </p>
         </section>
 
         <section class="info-section" aria-labelledby="examples-heading">
@@ -190,15 +249,97 @@ code: "01"
           <pre class="json-example"><code>{
   "message": "line1\nline2\n"
 }</code></pre>
+          <h3>yes, on, and off versus true and false</h3>
+          <p>
+            In YAML 1.2, unquoted yes, on, and off stay strings. true and false become booleans.
+          </p>
+          <pre class="json-example"><code>flag: yes
+power: on
+mode: off
+ok: true
+stop: false
+</code></pre>
+          <pre class="json-example"><code>{
+  "flag": "yes",
+  "power": "on",
+  "mode": "off",
+  "ok": true,
+  "stop": false
+}</code></pre>
+          <h3>Quoted "01" versus unquoted 01</h3>
+          <p>Unquoted 01 is a number. Quoted "01" stays a string.</p>
+          <pre class="json-example"><code>plain: 01
+quoted: "01"
+</code></pre>
+          <pre class="json-example"><code>{
+  "plain": 1,
+  "quoted": "01"
+}</code></pre>
+          <h3>null, ~, and an empty value</h3>
+          <p>All three become JSON null.</p>
+          <pre class="json-example"><code>a: null
+b: ~
+c:
+</code></pre>
+          <pre class="json-example"><code>{
+  "a": null,
+  "b": null,
+  "c": null
+}</code></pre>
+          <h3>Anchors and aliases</h3>
+          <p>
+            The alias is expanded. The JSON contains the repeated value, not a YAML anchor.
+          </p>
+          <pre class="json-example"><code>city: &amp;c Quetta
+home: *c
+work: *c
+</code></pre>
+          <pre class="json-example"><code>{
+  "city": "Quetta",
+  "home": "Quetta",
+  "work": "Quetta"
+}</code></pre>
+          <h3>Literal blocks | versus |-</h3>
+          <p>
+            | keeps a trailing newline. |- strips that final newline. The existing example
+            above uses |, so the JSON string ends with a newline.
+          </p>
+          <pre class="json-example"><code>plain: |
+  line1
+  line2
+stripped: |-
+  line1
+  line2
+</code></pre>
+          <pre class="json-example"><code>{
+  "plain": "line1\nline2\n",
+  "stripped": "line1\nline2"
+}</code></pre>
+          <h3>A YAML sequence or string as the whole document</h3>
+          <p>
+            The root value does not have to be a mapping. A sequence, string, number, boolean, or null is converted.
+            An unquoted yes as the whole document becomes a JSON string.
+          </p>
+          <pre class="json-example"><code>- Ada
+- Ali
+</code></pre>
+          <pre class="json-example"><code>[
+  "Ada",
+  "Ali"
+]</code></pre>
+          <pre class="json-example"><code>yes</code></pre>
+          <pre class="json-example"><code>"yes"</code></pre>
         </section>
 
         <section class="info-section" aria-labelledby="numbers-heading">
-          <h2 id="numbers-heading">YAML Numbers in the Browser</h2>
+          <h2 id="numbers-heading">How Numbers and Keys Appear in the JSON</h2>
           <p>
-            JSON.parse is not used here, but the result is still a JavaScript value.
-            A whole number and the same number written as 1.0 become one JSON number.
-            Integers outside ±9007199254740991 can change. The JSON shows the number JavaScript kept.
+            YAML is turned into a JavaScript value before JSON is written. JSON.stringify
+            then prints that value. This is not JSON.parse. The JSON shows the number and
+            key order JavaScript kept.
           </p>
+          <h3>1.0 becomes 1</h3>
+          <p>A trailing .0 is not kept in the JSON.</p>
           <p>Input</p>
           <pre class="json-example"><code>small: 1.0
 big: 9007199254740993
@@ -208,37 +349,167 @@ big: 9007199254740993
   "small": 1,
   "big": 9007199254740992
 }</code></pre>
+          <h3>Large integer precision</h3>
+          <p>
+            Integers outside ±9007199254740991 can change. 9007199254740993 is not
+            preserved, as in the example above.
+          </p>
+          <h3>Negative zero becomes 0</h3>
+          <p>YAML -0 is written as JSON 0.</p>
+          <p>Input</p>
+          <pre class="json-example"><code>value: -0
+</code></pre>
+          <p>Output</p>
+          <pre class="json-example"><code>{
+  "value": 0
+}</code></pre>
+          <h3>Integer-like mapping keys</h3>
+          <p>
+            Keys that look like array indexes are written in numeric order, then the
+            remaining keys. The names are not renamed. They appear as JSON strings.
+          </p>
+          <p>Input</p>
+          <pre class="json-example"><code>10: ten
+2: two
+name: Ada
+1: one
+</code></pre>
+          <p>Output</p>
+          <pre class="json-example"><code>{
+  "1": "one",
+  "2": "two",
+  "10": "ten",
+  "name": "Ada"
+}</code></pre>
+          <h3>Non-finite YAML numbers</h3>
+          <p>
+            .inf and .nan are rejected. The status line is
+            This YAML cannot be converted to JSON. A value is not a finite JSON number.
+          </p>
         </section>
 
         <section class="info-section" aria-labelledby="errors-heading">
           <h2 id="errors-heading">Common Conversion Errors</h2>
-          <h3>Invalid YAML</h3>
-          <p>A broken sequence, a bad indent, or other syntax the parser rejects stays in the editor. The status line includes the parser message. The preview is cleared.</p>
-          <h3>Empty input</h3>
-          <p>An empty editor, a comment with no document, an empty file, or a file that contains only whitespace has nothing to convert. YAML null and ~ are values, and those become JSON null.</p>
-          <h3>More than one document</h3>
-          <p>A file with two documents separated by --- is rejected. This page converts one YAML document.</p>
-          <h3>Duplicate keys and unsupported YAML</h3>
+          <h3>Invalid YAML syntax</h3>
           <p>
-            A mapping key cannot be repeated. Custom tags, binary data, merge keys, and a circular alias are rejected instead of being rewritten into a different JSON value.
-            An alias that simply repeats a value is written out in full.
+            A broken mapping, a bad indent, or other syntax the parser rejects stays in the editor.
+            The status line starts with Invalid YAML: and then includes the parser message.
+            The preview is cleared.
           </p>
-          <h3>Input too large</h3>
-          <p>A YAML file larger than 5 MiB is rejected before it is read. Pasted YAML longer than 5,000,000 characters is not converted. The editor is left as it was.</p>
+          <h3>Tab indentation</h3>
+          <p>
+            YAML indentation must use spaces. The second line below is indented with a tab.
+            Status: Invalid YAML: Tabs are not allowed as indentation at line 2, column 1:
+          </p>
+          <pre class="json-example"><code>name: Ada
+	city: Quetta
+</code></pre>
+          <h3>Misleading indentation</h3>
+          <p>
+            Some odd indents do not fail. They convert to a different value than the layout suggests.
+            This input becomes one list item, not a nested list.
+          </p>
+          <pre class="json-example"><code>tags:
+- yaml
+  - json
+</code></pre>
+          <pre class="json-example"><code>{
+  "tags": [
+    "yaml - json"
+  ]
+}</code></pre>
+          <h3>Empty and comment-only input</h3>
+          <p>
+            An empty editor, whitespace-only text, or a comment with no document shows
+            Paste YAML or open a .yaml or .yml file first.
+            YAML null and ~ are values, and those become JSON null.
+          </p>
+          <h3>Empty uploaded file</h3>
+          <p>
+            A file whose size is 0 is not read. Status:
+            This file is empty. Choose a YAML file with content.
+            The editor and preview are left as they were.
+          </p>
+          <h3>Multiple YAML documents</h3>
+          <p>
+            Two documents separated by --- are rejected. A single --- at the start of one
+            document is allowed. Status: Only one YAML document can be converted.
+          </p>
+          <pre class="json-example"><code>a: 1
+---
+b: 2
+</code></pre>
+          <h3>Duplicate mapping keys</h3>
+          <p>Status: YAML mapping keys must be unique.</p>
+          <pre class="json-example"><code>role: reader
+role: admin
+</code></pre>
+          <h3>Unsupported merge keys</h3>
+          <p>Status: This YAML cannot be converted to JSON. Merge keys are not expanded.</p>
+          <pre class="json-example"><code>a: 1
+&lt;&lt;: { b: 2 }
+</code></pre>
+          <h3>Unsupported custom tags</h3>
+          <p>Status: This YAML cannot be converted to JSON. An unsupported tag was found.</p>
+          <pre class="json-example"><code>value: !custom foo
+</code></pre>
+          <h3>Unsupported binary values</h3>
+          <p>Status: This YAML cannot be converted to JSON. Binary data is not supported.</p>
+          <pre class="json-example"><code>data: !!binary aGVsbG8=
+</code></pre>
+          <h3>Circular aliases</h3>
+          <p>Status: This YAML cannot be converted to JSON. A circular alias was found.</p>
+          <pre class="json-example"><code>&amp;a
+- *a
+</code></pre>
+          <h3>.inf and .nan</h3>
+          <p>
+            Status: This YAML cannot be converted to JSON. A value is not a finite JSON number.
+          </p>
+          <h3>File larger than 5 MiB</h3>
+          <p>
+            A YAML file larger than 5 MiB is rejected before it is read. Status:
+            This file is larger than 5 MiB and was not read.
+          </p>
+          <h3>Pasted text longer than 5,000,000 characters</h3>
+          <p>
+            Pasted YAML longer than 5,000,000 characters is not converted. Status:
+            This YAML is longer than 5,000,000 characters and was not converted.
+            The editor is left as it was, and the preview is cleared.
+          </p>
         </section>
 
         <section class="info-section" aria-labelledby="faq-heading">
           <h2 id="faq-heading">Frequently Asked Questions</h2>
-          <h3>Does this YAML to JSON tool upload my data?</h3>
-          <p>No. Parsing, conversion, copy, and download all run in your browser.</p>
-          <h3>Can I open a .yml file?</h3>
-          <p>Yes. Open YAML File accepts .yaml and .yml. Both are read as YAML text. The downloaded file is converted-data.json.</p>
-          <h3>Why did yes stay a string?</h3>
-          <p>This converter uses YAML 1.2. In that version, an unquoted yes or no is text. It is not the boolean true or false.</p>
-          <h3>Where can I work with JSON the other way?</h3>
+          <h3>Why does the JSON preview disappear when I change the YAML?</h3>
           <p>
-            Use the <a href="/json-to-yaml/">JSON to YAML converter</a> to write YAML,
-            the <a href="/">JSON Beautifier</a> to format JSON, or the
+            Editing the YAML clears the JSON so the preview cannot stay out of date.
+            Convert to JSON writes a new preview from the current editor.
+            Copy JSON and Download JSON use that preview. They do not convert again.
+          </p>
+          <h3>Does Copy JSON convert again?</h3>
+          <p>
+            No. Copy JSON copies the JSON already in the preview.
+            Download JSON saves that same text as converted-data.json.
+            If the preview is empty, Copy JSON shows Convert YAML to JSON before copying.
+            Download JSON shows Convert YAML to JSON before downloading.
+          </p>
+          <h3>Why does yes remain a string?</h3>
+          <p>
+            This converter uses YAML 1.2. An unquoted yes, no, on, or off is text.
+            true and false are booleans. The
+            <a href="/json-to-yaml/">JSON to YAML converter</a>
+            quotes "yes" when writing YAML, which is the other direction.
+          </p>
+          <h3>Can I open a .yml file?</h3>
+          <p>
+            Yes. Open YAML File accepts .yaml and .yml. Both are read as YAML text.
+            The downloaded file is converted-data.json.
+          </p>
+          <h3>When should I use JSON to YAML instead?</h3>
+          <p>
+            Use the <a href="/json-to-yaml/">JSON to YAML converter</a> when you already have JSON
+            and need YAML, the <a href="/">JSON Beautifier</a> to format JSON, or the
             <a href="/json-viewer/">JSON Viewer</a> to inspect the tree.
           </p>
         </section>
