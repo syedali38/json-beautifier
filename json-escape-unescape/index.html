@@ -158,7 +158,12 @@
           <div class="step-grid">
             <article class="step-card">
               <h3>Step 1: Add text</h3>
-              <p>Paste raw text to escape, or one quoted JSON string to unescape. Open Text/JSON File reads a .txt or .json file into the box.</p>
+              <p>Paste raw text to escape, or one quoted JSON string to unescape.</p>
+              <p>
+                Open Text/JSON File accepts .txt and .json files up to 5 MiB and fills the input box.
+                Opening a file does not Escape or Unescape.
+                A rejected file leaves the current text unchanged.
+              </p>
             </article>
             <article class="step-card">
               <h3>Step 2: Choose an action</h3>
@@ -170,7 +175,17 @@
             </article>
             <article class="step-card">
               <h3>Step 4: Copy, download, or clear</h3>
-              <p>Copy output copies the latest result. Download output saves that result as a .txt file. Clear empties both boxes.</p>
+              <p>
+                Copy output and Download output use the last successful conversion.
+                Neither button converts the current input.
+                Editing the input leaves the previous output visible, but that result is no longer valid.
+                Choose Escape or Unescape again before Copy or Download will work.
+              </p>
+              <p>
+                After Escape, Download output saves json-escaped.txt.
+                After Unescape, it saves json-unescaped.txt.
+                Clear empties both boxes.
+              </p>
             </article>
           </div>
         </section>
@@ -276,6 +291,11 @@
           <p>
             Escape and Unescape both stop when the input is longer than 2,000,000 characters. The text is not shortened.
           </p>
+          <p>
+            A file larger than 5 MiB is rejected before it loads.
+            Pasted text is not subject to that file-upload size limit.
+            Conversion still uses the 2,000,000-character limit above.
+          </p>
         </section>
 
         <section class="info-section" aria-labelledby="faq-heading">
@@ -299,6 +319,19 @@
             Unescape accepts one quoted JSON string.
             A bare object, array, number, true, false, or null is rejected, and the output is cleared.
             A missing quote, an invalid escape such as <code>\x41</code>, or text after the closing quote also stops the conversion.
+            Unpaired Unicode surrogates are rejected on Escape and Unescape.
+          </p>
+          <h3>Why is the old output still visible after I edited the input?</h3>
+          <p>
+            Editing the input does not clear the output box.
+            That previous result is no longer valid for Copy output or Download output.
+            Choose Escape or Unescape again.
+          </p>
+          <h3>What file does Download output save?</h3>
+          <p>
+            After Escape, Download output saves json-escaped.txt.
+            After Unescape, it saves json-unescaped.txt.
+            The file contains the last successful conversion.
           </p>
           <h3>Where can I format the JSON first?</h3>
           <p>
