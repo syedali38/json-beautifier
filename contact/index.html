@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      gtag('set', 'ads_data_redaction', true);
+      window.loadGoogleAnalytics = function () {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TLZNPLNGX8';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-TLZNPLNGX8');
+      };
+      try {
+        if (localStorage.getItem('jsonforgekit-analytics-consent') === 'granted') {
+          window.loadGoogleAnalytics();
+        }
+      } catch (error) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact JSONForgeKit – Email and Support Form</title>
+    <meta
+      name="description"
+      content="Contact JSONForgeKit by email at support@jsonforgekit.com or send a short message with the contact form. After you send, Formspree shows a spam check, then a confirmation."
+    />
+    <link rel="canonical" href="https://jsonforgekit.com/contact/" />
+    <link rel="stylesheet" href="/consent.css" />
+    <link rel="stylesheet" href="/privacy/style.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/">JSON to YAML</a>
+          <a href="/yaml-to-json/">YAML to JSON</a>
+          <a href="/json-escape-unescape/">JSON Escape</a>
+        </nav>
+        <h1>Contact JSONForgeKit</h1>
+        <p class="subtitle">
+          Email
+          <a href="mailto:support@jsonforgekit.com">support@jsonforgekit.com</a>
+          or use the form below. The JSON tools still run in your browser and do
+          not need this page.
+        </p>
+      </header>
+
+      <main>
+        <section class="info-section" aria-labelledby="email-heading">
+          <h2 id="email-heading">Email</h2>
+          <p>
+            Write to
+            <a href="mailto:support@jsonforgekit.com">support@jsonforgekit.com</a>.
+            That address is the public contact for this website.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="form-heading">
+          <h2 id="form-heading">Contact form</h2>
+          <p>
+            After you choose Send, your browser opens Formspree to complete a
+            Google reCAPTCHA spam check. A confirmation or error page appears
+            after that check, not on this page. The form works if you have
+            accepted analytics, rejected it, or have not chosen.
+          </p>
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mrpqergb"
+            method="POST"
+          >
+            <div class="contact-field">
+              <label for="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                maxlength="100"
+                required
+              />
+            </div>
+            <div class="contact-field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="254"
+                required
+              />
+            </div>
+            <div class="contact-field">
+              <label for="subject">Subject</label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                maxlength="150"
+                required
+              />
+            </div>
+            <div class="contact-field">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                maxlength="5000"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="contact-submit">Send</button>
+          </form>
+        </section>
+
+        <section class="info-section" aria-labelledby="privacy-heading">
+          <h2 id="privacy-heading">What the form sends</h2>
+          <p>
+            Name, email, subject, and message are submitted to Formspree.
+            Formspree emails the site operator and may keep the submission for
+            up to 30 days. Do not send passwords, private JSON, or other
+            sensitive data.
+          </p>
+          <p>
+            Formspree describes that processing in the
+            <a href="https://formspree.io/legal/privacy-policy/">Formspree Privacy Policy</a>.
+            Google describes reCAPTCHA in the
+            <a href="https://policies.google.com/privacy">Google Privacy Policy</a>
+            and
+            <a href="https://policies.google.com/terms">Google Terms of Service</a>.
+            More detail is on the
+            <a href="/privacy/">Privacy policy</a>
+            page.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="footer-links">
+          <a href="/about/">About</a>
+          <a href="/contact/" aria-current="page">Contact</a>
+          <a href="/privacy/">Privacy policy</a>
+          <button type="button" id="privacy-choices" class="privacy-choice">Privacy choices</button>
+        </span>
+      </footer>
+    </div>
+    <script src="/consent.js" defer></script>
+  </body>
+</html>
