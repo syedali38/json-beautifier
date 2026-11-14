@@ -169,7 +169,13 @@
           </article>
           <article class="step-card">
             <h3>Step 2: View the tree</h3>
-            <p>Choose View JSON. The parsed JSON appears in the JSON tree panel. Invalid JSON stays in the editor and the status line explains the problem.</p>
+            <p>
+              Open JSON File and Load Sample JSON build the tree as soon as the JSON is valid.
+              Pasted JSON needs View JSON.
+              Editing the editor does not change an existing tree.
+              View JSON rebuilds the tree from the current editor.
+              Invalid JSON stays in the editor, and an older tree is left as it was.
+            </p>
           </article>
           <article class="step-card">
             <h3>Step 3: Expand branches</h3>
@@ -177,7 +183,14 @@
           </article>
           <article class="step-card">
             <h3>Step 4: Search and copy</h3>
-            <p>Search for a key or value, then use Copy path on a row. Copy formatted JSON copies the whole document with indentation.</p>
+            <p>
+              Search is case-insensitive.
+              It keeps matching keys or values and their parent rows, and hides other siblings.
+              Clearing the search box restores the full tree.
+              Search needs a current tree; if you edited the JSON, choose View JSON first.
+              Copy path copies that row’s address.
+              Copy formatted JSON parses the current editor. It does not copy the tree on screen.
+            </p>
           </article>
         </div>
       </section>
@@ -296,7 +309,7 @@
           <li>Paste the JSON into the viewer.</li>
           <li>Select View JSON.</li>
           <li>Search for Mouse.</li>
-          <li>Locate the matching product row. Search highlights that row and opens its parent branches. It does not select the row.</li>
+          <li>Locate the matching product row. Search keeps that row and its parent branches, and hides the non-matching Laptop item. It highlights the match and does not select the row. Clearing the search restores the full tree.</li>
           <li>Select the row to display its path.</li>
           <li>Copy the path if needed.</li>
         </ol>
@@ -327,8 +340,9 @@
         <h3>What is a JSON path?</h3>
         <p>
           A JSON path is a short address for one value. $.owner.name points at a
-          property, and $.tags[0] points at the first item in an array. Copy path
-          on a row copies that address.
+          property, and $.tags[0] points at the first item in an array.
+          A key that is not a simple identifier, such as user-id, is copied as $["user-id"], not $.user-id.
+          Copy path on a row copies that address.
         </p>
         <h3>Does this viewer upload my JSON?</h3>
         <p>
@@ -339,6 +353,23 @@
         <p>
           An uploaded file larger than 5 MiB is rejected before it is read.
           The text already in the editor stays as it is.
+          Pasted JSON is not checked against that file-size cap.
+        </p>
+        <h3>Why did other properties disappear after I searched?</h3>
+        <p>
+          Search keeps matching keys or values and the rows that lead to them.
+          Other siblings are hidden until you clear the search box.
+        </p>
+        <h3>Why is the tree still showing old JSON after I edited the editor?</h3>
+        <p>
+          The tree does not update as you type.
+          Choose View JSON to rebuild it from the current editor.
+        </p>
+        <h3>Why is a long string cut off in the tree?</h3>
+        <p>
+          The row preview shows at most 80 characters, then an ellipsis.
+          The JSON in the editor still has the full string.
+          Copy formatted JSON copies that complete value.
         </p>
         <h3>Why did the viewer refuse my text?</h3>
         <p>
