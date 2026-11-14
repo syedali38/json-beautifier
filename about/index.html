@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      gtag('set', 'ads_data_redaction', true);
+      window.loadGoogleAnalytics = function () {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TLZNPLNGX8';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-TLZNPLNGX8');
+      };
+      try {
+        if (localStorage.getItem('jsonforgekit-analytics-consent') === 'granted') {
+          window.loadGoogleAnalytics();
+        }
+      } catch (error) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About JSONForgeKit – Browser JSON, YAML and CSV Tools</title>
+    <meta
+      name="description"
+      content="JSONForgeKit is a free set of browser tools for formatting JSON, viewing trees, converting JSON and YAML, exporting CSV, and escaping strings. Paste stays on your device."
+    />
+    <link rel="canonical" href="https://jsonforgekit.com/about/" />
+    <link rel="stylesheet" href="/consent.css" />
+    <link rel="stylesheet" href="/privacy/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/">JSON to YAML</a>
+          <a href="/yaml-to-json/">YAML to JSON</a>
+          <a href="/json-escape-unescape/">JSON Escape</a>
+        </nav>
+        <h1>About JSONForgeKit</h1>
+        <p class="subtitle">
+          JSONForgeKit is a small website of free JSON tools. Each page runs in
+          your browser so you can format, inspect, or convert data without
+          creating an account.
+        </p>
+      </header>
+
+      <main>
+        <section class="info-section" aria-labelledby="what-heading">
+          <h2 id="what-heading">What this site is</h2>
+          <p>
+            JSONForgeKit is the name of this website. It is a collection of
+            focused tools for JSON, YAML, and CSV, not a described company
+            office or a support desk.
+          </p>
+          <p>
+            The homepage is a
+            <a href="/">JSON Beautifier</a>
+            that formats, validates, and minifies JSON. The other pages cover
+            jobs that sit next to that: reading a tree, turning objects into a
+            spreadsheet, moving between JSON and YAML, and escaping a JSON
+            string.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="who-heading">
+          <h2 id="who-heading">Who it is for</h2>
+          <p>
+            The tools are for people who already have some JSON, YAML, or CSV
+            in front of them and need to read it or change its shape.
+          </p>
+          <p>
+            Developers often paste an API response to indent it, check a nested
+            value, or flatten records for a spreadsheet. Students use the same
+            pages to see how objects, arrays, and YAML mappings relate. Anyone
+            working with config files, exports, or sample payloads can convert
+            or inspect that text here.
+          </p>
+          <p>
+            You do not need an account. Open a page and paste text. Most tools
+            can also open a local file. Use the result in this browser.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="tools-heading">
+          <h2 id="tools-heading">The six tools</h2>
+          <p>
+            <a href="/">JSON Beautifier</a>
+            is the homepage. Paste JSON, then beautify it with two-space
+            indentation, minify it, validate the syntax, or copy the result.
+            The input stays as you pasted it. Invalid JSON is reported; it is
+            not rewritten for you. Trailing commas, single quotes, and comments
+            are common reasons validation fails.
+          </p>
+          <p>
+            <a href="/json-viewer/">JSON Viewer</a>
+            turns JSON into an expandable tree. You can search keys and values,
+            copy a path such as <code>$.tags[0]</code>, open a local .json
+            file, or load a small sample. Copy formatted JSON makes an indented
+            copy without changing the editor. A file larger than 5 MiB is
+            rejected before it is read.
+          </p>
+          <p>
+            <a href="/json-to-csv/">JSON to CSV</a>
+            flattens objects into rows and columns. Nested objects become
+            dotted names such as <code>address.city</code>. You can choose a
+            comma, semicolon, or tab delimiter, include a header row, preview
+            the table, copy the CSV, or download it. When JSON wraps an array
+            of objects, Rows from can use that array as the records.
+          </p>
+          <p>
+            <a href="/json-to-yaml/">JSON to YAML</a>
+            writes the same values as YAML. You can paste JSON or open a .json
+            file, then copy or download <code>converted-data.yaml</code>.
+            Strings that a YAML 1.1 reader might treat as booleans or numbers,
+            such as <code>yes</code> or <code>01</code>, are quoted so they
+            stay text.
+          </p>
+          <p>
+            <a href="/yaml-to-json/">YAML to JSON</a>
+            reads one YAML 1.2 document using the core schema. Open a .yaml or
+            .yml file, or paste YAML, then copy or download JSON. Unquoted
+            <code>yes</code> and <code>no</code> stay strings in this version
+            of YAML. A file with more than one document, separated by
+            <code>---</code>, is rejected.
+          </p>
+          <p>
+            <a href="/json-escape-unescape/">JSON Escape / Unescape</a>
+            works on a JSON string, not on formatting a whole object. Escape
+            turns raw text into a quoted JSON string. Unescape expects those
+            surrounding quotes and returns the text inside. This is not URL
+            encoding or HTML encoding.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="browser-heading">
+          <h2 id="browser-heading">Processing in your browser</h2>
+          <p>
+            Formatting, viewing, conversion, copy, download, and opening a
+            local file run in this browser. The text you paste or read from a
+            file is not uploaded to a server run by this website.
+          </p>
+          <p>
+            JavaScript numbers cannot keep every integer exactly. Several tools
+            mention that a very large whole number can change after it is
+            parsed. The converters also describe their own limits, such as file
+            size and which YAML features they reject.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="privacy-heading">
+          <h2 id="privacy-heading">Privacy</h2>
+          <p>
+            The JSON or YAML you put in a tool is not the same as the
+            optional analytics on this site. Google Analytics 4 loads only if
+            you choose Accept analytics. Until then, and after you reject, this
+            site does not request the Google tag.
+          </p>
+          <p>
+            Accept analytics grants analytics storage only. Advertising storage
+            stays denied. The
+            <a href="/privacy/">Privacy policy</a>
+            explains the consent banner, the saved choice in this browser, and
+            how to open Privacy choices again.
+          </p>
+          <p>
+            The tools keep working if you accept analytics, reject it, or have
+            not chosen yet.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="footer-links">
+          <a href="/about/" aria-current="page">About</a>
+          <a href="/privacy/">Privacy policy</a>
+          <button type="button" id="privacy-choices" class="privacy-choice">Privacy choices</button>
+        </span>
+      </footer>
+    </div>
+    <script src="/consent.js" defer></script>
+  </body>
+</html>
