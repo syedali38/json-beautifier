@@ -179,11 +179,22 @@
           </article>
           <article class="step-card">
             <h3>Step 3: Convert and preview</h3>
-            <p>After you paste JSON, choose Convert to CSV. A valid uploaded file and Load sample JSON convert immediately. The preview shows the columns and up to 100 rows.</p>
+            <p>
+              Pasted JSON needs Convert to CSV. A valid uploaded file and Load sample JSON convert immediately.
+              The table shows the columns and up to 100 rows.
+              Editing the JSON after that does not clear the table, and Rows from returns to Whole JSON.
+              If the editor still has JSON, changing the delimiter, header row, spreadsheet-safe export, or Rows from converts again.
+            </p>
           </article>
           <article class="step-card">
             <h3>Step 4: Copy or download</h3>
-            <p>Copy the CSV or download converted-data.csv. Download CSV contains all converted rows, not only the preview.</p>
+            <p>
+              Copy CSV converts the current JSON and options, then copies that CSV.
+              Download CSV converts the current JSON and options, then saves converted-data.csv as UTF-8 with a leading byte-order mark.
+              Copy CSV does not add that mark.
+              Neither button copies the table on the page.
+              Both include every converted row, not only the 100-row preview.
+            </p>
           </article>
         </div>
       </section>
@@ -259,6 +270,11 @@ Sara,null</code></pre>
           parses the JSON, because not every integer can be represented exactly.
         </p>
         <p>
+          CSV columns follow the first flattened field the converter sees.
+          A field that first appears on a later record is added at the end.
+          A record that does not have that field leaves the cell blank.
+        </p>
+        <p>
           An array inside an object stays in one cell when Rows from is Whole JSON. That keeps every
           item instead of dropping the list or inventing extra rows. Choose that array under Rows from
           when every item is an object and you want one row per object. Arrays reached only by going
@@ -291,8 +307,24 @@ Sara,null</code></pre>
         <h2 id="faq-heading">Frequently Asked Questions</h2>
         <h3>Does this json to csv tool upload my data?</h3>
         <p>No. Parsing, flattening, preview, copy, and download all run in your browser.</p>
+        <h3>Why is the old CSV preview still visible after editing JSON?</h3>
+        <p>
+          The table stays on screen while you edit the JSON.
+          Rows from also returns to Whole JSON.
+          Convert to CSV rebuilds the table from the current editor.
+        </p>
+        <h3>Does Copy CSV copy the visible preview table?</h3>
+        <p>
+          No. Copy CSV converts the current JSON and options, then copies that CSV text.
+          Download CSV runs the same conversion and saves converted-data.csv.
+          The table on screen can be older than the editor, and it shows at most 100 rows.
+          Copy and Download use the full converted result.
+        </p>
         <h3>How are commas and quotes handled?</h3>
-        <p>Fields that contain the delimiter, a double quote, or a line break are wrapped in double quotes. Quotes inside a field are doubled.</p>
+        <p>
+          Fields that contain the delimiter, a double quote, a line break, or a leading or trailing space are wrapped in double quotes.
+          Quotes inside a field are doubled.
+        </p>
         <h3>What does spreadsheet-safe export change?</h3>
         <p>Nothing, unless you check Spreadsheet-safe export. It is off by default, so the CSV keeps the original cell text.</p>
         <h3>Can I convert a JSON file to CSV?</h3>
