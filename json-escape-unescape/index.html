@@ -154,6 +154,27 @@
           </p>
         </section>
 
+        <section class="info-section" aria-labelledby="when-unescape-heading">
+          <h2 id="when-unescape-heading">When Should You Unescape a JSON String?</h2>
+          <p>
+            Use Unescape when you have copied one quoted JSON string, not a bare object.
+            Logs, stack traces, and some API fields often store a message as a JSON string,
+            so the paste still shows <code>\n</code> and <code>\"</code> instead of a real
+            newline or quote.
+          </p>
+          <p>
+            Unescape converts those sequences back into readable text. If the string contains
+            serialized object text, for example <code>"{\"name\":\"Ali\"}"</code>, the output
+            is <code>{"name":"Ali"}</code>. That output is plain text. It is not a parsed
+            JSON object and not a formatted tree. A bare <code>{"name":"Ali"}</code> is rejected.
+          </p>
+          <p>
+            JSON unescaping is different from URL decoding, HTML entity decoding, and JSON
+            beautifying. Those tools change percent-encoding, entities, or object indentation.
+            This page only decodes one JSON string.
+          </p>
+        </section>
+
         <section class="how-to-section" aria-labelledby="how-heading">
           <h2 id="how-heading">How to Escape and Unescape JSON</h2>
           <div class="step-grid">
