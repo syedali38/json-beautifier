@@ -160,10 +160,98 @@
       <section class="info-section" aria-labelledby="what-heading">
         <h2 id="what-heading">What Is JSON to CSV Conversion?</h2>
         <p>
-          JSON to CSV conversion turns structured JSON into rows and columns that a
-          spreadsheet can open. A json to csv converter reads each object as one record
-          and each property as a column. You can convert json to csv online on this page
-          without sending the text to a server.
+          JSON holds nested objects and arrays. CSV is a table: each line is a record,
+          and commas (or another delimiter) separate the columns. Conversion is useful
+          when the JSON is a list of similar objects, because each object can become one
+          row and each property can become one column.
+        </p>
+        <p>
+          A top-level array of objects is the straightforward case. The first object’s
+          fields become column names, and later objects fill those columns. Nested
+          objects are flattened, so <code>address.city</code> is its own column instead
+          of a nested block. JSON arrays, true, false, and null are written as cell
+          text; CSV does not keep the original JSON types.
+        </p>
+        <p>
+          Parsing, flattening, preview, copy, and download run in this browser. The JSON
+          is not sent to a server run by this website.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="when-heading">
+        <h2 id="when-heading">When Should You Convert JSON to CSV?</h2>
+        <p>
+          Convert when you need a spreadsheet, not when you need to keep the JSON as
+          JSON. Excel and Google Sheets open CSV. They do not open a nested API payload
+          without this kind of flattening.
+        </p>
+        <h3>API data for Excel or Google Sheets</h3>
+        <p>
+          If an API returns a list of records, paste that JSON here, convert it, then
+          download <code>converted-data.csv</code> and open the file in Excel or Google
+          Sheets. Use a comma delimiter for most spreadsheet apps. Choose semicolon if
+          your locale expects that separator.
+        </p>
+        <h3>Product or customer records</h3>
+        <p>
+          Catalog exports and customer lists are a good fit when each item is an object
+          with the same kind of fields: sku, name, email, plan, and so on. One object
+          becomes one row. Missing fields stay blank instead of shifting later columns.
+        </p>
+        <h3>Nested fields such as address.city</h3>
+        <p>
+          A nested <code>address</code> object does not become extra rows. It becomes
+          dotted columns such as <code>address.city</code> and
+          <code>address.country</code>. That keeps one customer or product on one line.
+        </p>
+        <h3>Choosing the array with Rows from</h3>
+        <p>
+          Many APIs wrap the list: a timestamp plus a <code>customers</code> or
+          <code>products</code> array. Whole JSON treats that wrapper as one object, so
+          the array stays in a single cell. Choose that array under Rows from to make
+          each item a row. Other wrapper fields are left out.
+        </p>
+        <p>This payload is one object with a products array:</p>
+        <pre class="json-example"><code>{
+  "exported_at": "2026-03-12",
+  "products": [
+    {
+      "sku": "MUG-12",
+      "name": "Ceramic mug",
+      "price": 8.5,
+      "stock": { "warehouse": "KHI", "qty": 40 }
+    },
+    {
+      "sku": "NB-01",
+      "name": "Notebook",
+      "price": 3,
+      "stock": { "warehouse": "LHE", "qty": 120 }
+    }
+  ]
+}</code></pre>
+        <p>
+          With Rows from set to products, the CSV is two rows. <code>exported_at</code>
+          is not a column, because wrapper fields are omitted:
+        </p>
+        <pre class="json-example"><code>sku,name,price,stock.warehouse,stock.qty
+MUG-12,Ceramic mug,8.5,KHI,40
+NB-01,Notebook,3,LHE,120</code></pre>
+        <h3>When not to convert JSON to CSV</h3>
+        <p>
+          Skip CSV when the data is a deep tree: orders that contain line items, each
+          with nested options. Arrays stay in one cell, so those lists do not become
+          extra rows unless you pick that array under Rows from. Arrays nested inside
+          another array are not offered.
+        </p>
+        <p>
+          A mixed array is rejected. Every element must be an object, so
+          <code>["pen", {"sku": "MUG-12"}]</code> cannot become a table. Keep the JSON
+          when you still need types and structure: numbers stay numbers, objects stay
+          nested, and null is not the text <code>null</code>. Use the
+          <a href="/json-viewer/">JSON Viewer</a>
+          or the
+          <a href="/">JSON Beautifier</a>
+          for that, not this converter.
         </p>
       </section>
 
@@ -327,7 +415,15 @@ Sara,null</code></pre>
           Quotes inside a field are doubled.
         </p>
         <h3>What does spreadsheet-safe export change?</h3>
-        <p>Nothing, unless you check Spreadsheet-safe export. It is off by default, so the CSV keeps the original cell text.</p>
+        <p>
+          The checkbox is off by default, so Copy CSV and Download CSV keep the original
+          cell text. When you check Spreadsheet-safe export, those two actions add a
+          leading apostrophe to any cell that starts with <code>=</code>,
+          <code>+</code>, <code>-</code>, <code>@</code>, a tab, or a carriage return.
+          Spreadsheets can treat those characters as formulas. The apostrophe keeps the
+          cell as text in the generated CSV. The preview table still shows the original
+          value.
+        </p>
         <h3>Can I convert a JSON file to CSV?</h3>
         <p>
           Yes. Upload a local .json file to convert a JSON file to CSV.
