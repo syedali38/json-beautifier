@@ -53,27 +53,50 @@
         </nav>
         <h1>About JSONForgeKit</h1>
         <p class="subtitle">
-          JSONForgeKit is a small website of free JSON tools. Each page runs in
-          your browser so you can format, inspect, or convert data without
-          creating an account.
+          JSONForgeKit is a small set of free browser tools for JSON, YAML, and
+          CSV. It is built and operated by Syed Fahad Ali. There is no account
+          to create.
         </p>
       </header>
 
       <main>
-        <section class="info-section" aria-labelledby="what-heading">
-          <h2 id="what-heading">What this site is</h2>
+        <section class="info-section" aria-labelledby="why-heading">
+          <h2 id="why-heading">Why this site exists</h2>
           <p>
-            JSONForgeKit is the name of this website. It is a collection of
-            focused tools for JSON, YAML, and CSV, not a described company
-            office or a support desk.
+            JSONForgeKit exists so you can format, inspect, and convert data
+            you already have, without signing in. The pages are small on
+            purpose: each one does one job, then tells you what the browser
+            actually did, including the cases where the output is not a
+            character-for-character copy of the input.
           </p>
           <p>
-            The homepage is a
-            <a href="/">JSON Beautifier</a>
-            that formats, validates, and minifies JSON. The other pages cover
-            jobs that sit next to that: reading a tree, turning objects into a
-            spreadsheet, moving between JSON and YAML, and escaping a JSON
-            string.
+            Many JSON utilities only show a success message. These tools also
+            document limits that come from the browser itself, such as how
+            JavaScript stores numbers, how YAML 1.1 and YAML 1.2 disagree on
+            words like <code>yes</code>, and how nested JSON becomes CSV
+            columns. That is the reason the site was written this way.
+          </p>
+          <p>
+            JSONForgeKit is the name of this website. It is not a company, a
+            team, or an office. Support is the
+            <a href="/contact/">Contact</a>
+            page, not a helpdesk.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="operator-heading">
+          <h2 id="operator-heading">Who operates it</h2>
+          <p>
+            Syed Fahad Ali operates JSONForgeKit. He is an IT professional and
+            an independent developer. He builds and maintains the pages
+            himself.
+          </p>
+          <p>
+            Questions about the site can go to
+            <a href="mailto:support@jsonforgekit.com">support@jsonforgekit.com</a>
+            or to the form on the
+            <a href="/contact/">Contact</a>
+            page.
           </p>
         </section>
 
@@ -81,14 +104,10 @@
           <h2 id="who-heading">Who it is for</h2>
           <p>
             The tools are for people who already have some JSON, YAML, or CSV
-            in front of them and need to read it or change its shape.
-          </p>
-          <p>
-            Developers often paste an API response to indent it, check a nested
-            value, or flatten records for a spreadsheet. Students use the same
-            pages to see how objects, arrays, and YAML mappings relate. Anyone
-            working with config files, exports, or sample payloads can convert
-            or inspect that text here.
+            and need to read it or change its shape. Developers often paste an
+            API response to indent it, check a nested value, or flatten records
+            for a spreadsheet. The same pages are usable for config files,
+            exports, and sample payloads.
           </p>
           <p>
             You do not need an account. Open a page and paste text. Most tools
@@ -96,47 +115,84 @@
           </p>
         </section>
 
+        <section class="info-section" aria-labelledby="differ-heading">
+          <h2 id="differ-heading">How these tools behave</h2>
+          <p>
+            Formatting, viewing, conversion, copy, download, and opening a
+            local file run in this browser. Text you paste or read from a file
+            is not uploaded to a server run by this website. That does not
+            describe every request the site can make: optional analytics and
+            the contact form are separate, and the
+            <a href="/privacy/">Privacy policy</a>
+            covers them.
+          </p>
+          <p>
+            The
+            <a href="/">JSON Beautifier</a>
+            uses the browser’s <code>JSON.parse</code> and
+            <code>JSON.stringify</code>. Beautify writes two-space indentation.
+            Minify writes the same parsed value without extra whitespace.
+            Because the value is parsed first, the result can differ from the
+            input even when the JSON is valid: a repeated key keeps the last
+            value, some integer-like keys are written in numeric order, a
+            trailing <code>.0</code> is not kept, integers outside JavaScript’s
+            safe integer range can change, and <code>-0</code> is written as
+            <code>0</code>. Validate JSON only updates the status line. It does
+            not rewrite the text, and this site does not repair invalid JSON.
+          </p>
+          <p>
+            YAML is not one dialect.
+            <a href="/json-to-yaml/">JSON to YAML</a>
+            writes YAML with quoting that is meant to keep strings such as
+            <code>yes</code> and <code>01</code> as text for readers that still
+            follow YAML 1.1. That quoting is practical help, not a claim of
+            complete YAML 1.1 compatibility.
+            <a href="/yaml-to-json/">YAML to JSON</a>
+            reads one YAML 1.2 document with the core schema, so unquoted
+            <code>yes</code> and <code>no</code> stay strings, while
+            <code>true</code> and <code>false</code> become booleans. A file
+            with more than one document, separated by <code>---</code>, is
+            rejected. The two converters are not mirrors of each other.
+          </p>
+          <p>
+            <a href="/json-to-csv/">JSON to CSV</a>
+            flattens nested objects into dotted column names such as
+            <code>address.city</code>. Arrays stay in one cell unless you
+            choose that array under Rows from, which uses those objects as
+            rows and leaves the rest of the wrapper out. The table previews at
+            most 100 rows; Copy CSV and Download CSV use the full conversion.
+            If a dotted property and a nested object flatten to the same
+            column, conversion stops instead of merging values.
+          </p>
+        </section>
+
         <section class="info-section" aria-labelledby="tools-heading">
           <h2 id="tools-heading">The six tools</h2>
           <p>
             <a href="/">JSON Beautifier</a>
-            is the homepage. Paste JSON, then beautify it with two-space
-            indentation, minify it, validate the syntax, or copy the result.
-            The input stays as you pasted it. Invalid JSON is reported; it is
-            not rewritten for you. Trailing commas, single quotes, and comments
-            are common reasons validation fails.
+            is the homepage. Paste JSON, then beautify it, minify it, validate
+            the syntax, or copy the result. The input stays as you pasted it.
           </p>
           <p>
             <a href="/json-viewer/">JSON Viewer</a>
             turns JSON into an expandable tree. You can search keys and values,
-            copy a path such as <code>$.tags[0]</code>, open a local .json
-            file, or load a small sample. Copy formatted JSON makes an indented
-            copy without changing the editor. A file larger than 5 MiB is
-            rejected before it is read.
+            copy a path such as <code>$.tags[0]</code>, or open a local .json
+            file. A file larger than 5 MiB is rejected before it is read. Copy
+            formatted JSON makes an indented copy without changing the editor.
           </p>
           <p>
             <a href="/json-to-csv/">JSON to CSV</a>
-            flattens objects into rows and columns. Nested objects become
-            dotted names such as <code>address.city</code>. You can choose a
-            comma, semicolon, or tab delimiter, include a header row, preview
-            the table, copy the CSV, or download it. When JSON wraps an array
-            of objects, Rows from can use that array as the records.
+            builds rows and columns from objects, with delimiter, header, and
+            Rows from options. You can preview the table, copy the CSV, or
+            download <code>converted-data.csv</code>.
           </p>
           <p>
             <a href="/json-to-yaml/">JSON to YAML</a>
-            writes the same values as YAML. You can paste JSON or open a .json
-            file, then copy or download <code>converted-data.yaml</code>.
-            Strings that a YAML 1.1 reader might treat as booleans or numbers,
-            such as <code>yes</code> or <code>01</code>, are quoted so they
-            stay text.
-          </p>
-          <p>
+            writes YAML from parsed JSON. Copy or download
+            <code>converted-data.yaml</code>.
             <a href="/yaml-to-json/">YAML to JSON</a>
-            reads one YAML 1.2 document using the core schema. Open a .yaml or
-            .yml file, or paste YAML, then copy or download JSON. Unquoted
-            <code>yes</code> and <code>no</code> stay strings in this version
-            of YAML. A file with more than one document, separated by
-            <code>---</code>, is rejected.
+            does the reverse for one YAML or YML document and downloads
+            <code>converted-data.json</code>.
           </p>
           <p>
             <a href="/json-escape-unescape/">JSON Escape / Unescape</a>
@@ -147,28 +203,13 @@
           </p>
         </section>
 
-        <section class="info-section" aria-labelledby="browser-heading">
-          <h2 id="browser-heading">Processing in your browser</h2>
-          <p>
-            Formatting, viewing, conversion, copy, download, and opening a
-            local file run in this browser. The text you paste or read from a
-            file is not uploaded to a server run by this website.
-          </p>
-          <p>
-            JavaScript numbers cannot keep every integer exactly. Several tools
-            mention that a very large whole number can change after it is
-            parsed. The converters also describe their own limits, such as file
-            size and which YAML features they reject.
-          </p>
-        </section>
-
         <section class="info-section" aria-labelledby="privacy-heading">
           <h2 id="privacy-heading">Privacy</h2>
           <p>
-            The JSON or YAML you put in a tool is not the same as the
-            optional analytics on this site. Google Analytics 4 loads only if
-            you choose Accept analytics. Until then, and after you reject, this
-            site does not request the Google tag.
+            The JSON or YAML you put in a tool is not the same as the optional
+            analytics on this site. Google Analytics 4 loads only if you choose
+            Accept analytics. Until then, and after you reject, this site does
+            not request the Google tag.
           </p>
           <p>
             Accept analytics grants analytics storage only. Advertising storage
