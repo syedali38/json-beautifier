@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      gtag('set', 'ads_data_redaction', true);
+      window.loadGoogleAnalytics = function () {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TLZNPLNGX8';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-TLZNPLNGX8');
+      };
+      try {
+        if (localStorage.getItem('jsonforgekit-analytics-consent') === 'granted') {
+          window.loadGoogleAnalytics();
+        }
+      } catch (error) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-3484730538241255">
+    <title>JSON to XML Converter – Free, No Upload | JSONForgeKit</title>
+    <meta
+      name="description"
+      content="Convert JSON to XML free in your browser: paste JSON, name the root element, and get clean, indented XML instantly. No upload, no signup. Try it free."
+    />
+    <link rel="canonical" href="https://jsonforgekit.com/json-to-xml/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON to XML Converter Online",
+        "url": "https://jsonforgekit.com/json-to-xml/",
+        "description": "Convert JSON to XML online for free. Paste JSON, name the root element, and copy indented XML in your browser.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I convert JSON to XML online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Paste your JSON, name the root element (default \"root\"), and press Convert to XML. The XML appears instantly with a declaration and indentation — copy it with the Copy XML button. Free, no signup."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the root element in XML?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "XML needs exactly one top-level element, so the converter wraps your JSON in one. It defaults to \"root\" — name it whatever your target system expects, e.g. \"catalog\" or \"response\"."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are JSON arrays converted to XML?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each array item becomes a repeated element with the same tag. [\"pen\", \"book\"] under \"items\" becomes <items>pen</items> followed by <items>book</items>."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I add attributes to XML from JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Prefix the key with @: {\"book\": {\"@id\": \"7\", \"#text\": \"Dune\"}} makes <book id=\"7\">Dune</book>. The @ is dropped from the attribute name."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens to null values?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Null becomes a self-closing tag, e.g. <note />. There is no text to put inside it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my JSON uploaded?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The conversion runs entirely in your browser with JavaScript — your JSON is never sent to a server, logged or stored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I convert XML back to JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not with this tool — it converts JSON to XML only, because the two directions need different conventions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my JSON is invalid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The converter tells you in plain language (e.g. a missing comma or an unquoted key) and produces no XML until the JSON parses. Fix the input, then convert again."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/consent.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/">JSON to YAML</a>
+          <a href="/yaml-to-json/">YAML to JSON</a>
+          <a href="/json-to-xml/" aria-current="page">JSON to XML</a>
+          <a href="/json-escape-unescape/">JSON Escape</a>
+        </nav>
+        <h1>JSON to XML Converter Online – Free, No Upload</h1>
+        <p class="subtitle">
+          Paste JSON, name the root element, and convert JSON to XML in your browser.
+          The text stays on this page and is not uploaded.
+        </p>
+      </header>
+
+      <main>
+        <div class="editor-grid">
+          <section class="panel" aria-labelledby="input-heading">
+            <h2 id="input-heading">JSON input</h2>
+            <label class="editor-label" for="json-input">JSON to convert</label>
+            <textarea
+              id="json-input"
+              class="editor"
+              spellcheck="false"
+              autocomplete="off"
+              aria-describedby="status-message"
+              placeholder='Paste JSON here, for example: {"order":{"id":1001}}'
+            ></textarea>
+            <div class="actions" role="group" aria-label="JSON input actions">
+              <label class="btn btn-secondary file-btn">
+                Open JSON File
+                <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+              </label>
+              <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
+              <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+            </div>
+            <p id="status-message" class="status" role="status" aria-live="polite"></p>
+          </section>
+
+          <section class="panel" aria-labelledby="output-heading">
+            <h2 id="output-heading">XML output</h2>
+            <div class="options">
+              <div class="option">
+                <label class="editor-label" for="root-name">Root element name</label>
+                <input id="root-name" class="text-input" type="text" value="root" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="option">
+                <label class="editor-label" for="indent">Indentation</label>
+                <select id="indent">
+                  <option value="2" selected>2 spaces</option>
+                  <option value="4">4 spaces</option>
+                </select>
+              </div>
+              <label class="check" for="xml-decl">
+                <input id="xml-decl" type="checkbox" checked />
+                Include XML declaration
+              </label>
+            </div>
+            <div class="actions" role="group" aria-label="XML actions">
+              <button type="button" id="convert-btn" class="btn btn-primary">Convert to XML</button>
+              <button type="button" id="copy-btn" class="btn btn-secondary">Copy XML</button>
+              <button type="button" id="download-btn" class="btn btn-secondary">Download XML</button>
+            </div>
+            <p id="xml-empty" class="empty">Convert JSON to see XML here.</p>
+            <pre id="xml-output" class="xml-output" hidden tabindex="0" aria-label="XML output"></pre>
+          </section>
+        </div>
+
+        <section class="info-section" aria-labelledby="quick-heading">
+          <h2 id="quick-heading">Quick answer</h2>
+          <p>
+            This JSON to XML converter wraps your JSON in one root element, then
+            writes nested objects as nested tags and arrays as repeated tags.
+            For
+            <code>{"order": {"id": 1001, "total": 29.5, "items": ["pen", "book"]}}</code>
+            with root <code>root</code> and 2-space indent, the XML is:
+          </p>
+          <pre class="json-example"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+  &lt;order&gt;
+    &lt;id&gt;1001&lt;/id&gt;
+    &lt;total&gt;29.5&lt;/total&gt;
+    &lt;items&gt;pen&lt;/items&gt;
+    &lt;items&gt;book&lt;/items&gt;
+  &lt;/order&gt;
+&lt;/root&gt;</code></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="what-heading">
+          <h2 id="what-heading">What this converter does</h2>
+          <p>
+            It reads the editor with JSON.parse, then walks the value and writes
+            indented XML. Conversion runs in this browser. The JSON is not uploaded.
+          </p>
+          <p>
+            Use it when a SOAP API, a legacy system, or an enterprise feed expects
+            XML and you already have JSON. Format the JSON first in the
+            <a href="/">JSON Formatter</a>
+            or inspect it in the
+            <a href="/json-viewer/">JSON Viewer</a>
+            if you need to read the structure before converting.
+          </p>
+          <p>
+            This page converts JSON to XML only. It does not convert XML back to
+            JSON — that is a separate direction with different conventions. For
+            YAML instead of XML, use the
+            <a href="/json-to-yaml/">JSON to YAML converter</a>
+            or the
+            <a href="/yaml-to-json/">YAML to JSON converter</a>.
+          </p>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="how-heading">
+          <h2 id="how-heading">How to convert JSON to XML</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Step 1: Add JSON</h3>
+              <p>
+                Paste JSON into the editor, choose Open JSON File, or choose Load Sample JSON.
+                Open JSON File converts as soon as a valid file is read.
+                Load Sample JSON converts immediately.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Step 2: Choose options</h3>
+              <p>
+                Name the root element (default root), pick 2-space or 4-space
+                indentation, and keep the XML declaration on unless you need the
+                fragment without it.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Step 3: Convert pasted JSON</h3>
+              <p>
+                Pasted JSON needs Convert to XML. Invalid JSON stays in the editor.
+                The status line explains the problem in plain language, and the XML
+                preview is cleared.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Step 4: Copy or download</h3>
+              <p>
+                Copy XML converts the current editor text, then copies that XML.
+                Download XML converts the current editor text and saves converted-data.xml.
+                Neither button copies a stale preview. Clear empties both panels.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="map-heading">
+          <h2 id="map-heading">How JSON maps to XML</h2>
+          <p>
+            The mapping is element-only, which is the common convention for this
+            kind of converter.
+          </p>
+          <h3>Objects become nested elements</h3>
+          <p>Each object key becomes a nested element. Nested objects nest further.</p>
+          <pre class="json-example"><code>{"user": {"name": "Ada"}}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;user&gt;
+    &lt;name&gt;Ada&lt;/name&gt;
+  &lt;/user&gt;
+&lt;/root&gt;</code></pre>
+          <h3>Arrays become repeated elements</h3>
+          <p>Array items share the same tag as the key.</p>
+          <pre class="json-example"><code>{"items": ["pen", "book"]}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;items&gt;pen&lt;/items&gt;
+  &lt;items&gt;book&lt;/items&gt;
+&lt;/root&gt;</code></pre>
+          <h3>Strings, numbers, and booleans become text</h3>
+          <pre class="json-example"><code>{"id": 1001, "active": true, "city": "Quetta"}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;id&gt;1001&lt;/id&gt;
+  &lt;active&gt;true&lt;/active&gt;
+  &lt;city&gt;Quetta&lt;/city&gt;
+&lt;/root&gt;</code></pre>
+          <h3>Null becomes a self-closing tag</h3>
+          <pre class="json-example"><code>{"note": null}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;note /&gt;
+&lt;/root&gt;</code></pre>
+          <h3>Invalid names are sanitized</h3>
+          <p>
+            Keys that start with a digit or contain spaces are rewritten with
+            underscores so the XML names stay valid.
+          </p>
+          <pre class="json-example"><code>{"2nd item": 1}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;_2nd_item&gt;1&lt;/_2nd_item&gt;
+&lt;/root&gt;</code></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="arrays-heading">
+          <h2 id="arrays-heading">Arrays and nested objects</h2>
+          <p>
+            Nesting depth is kept. An object inside an array item becomes a nested
+            element under that repeated tag. The items array below is two
+            <code>&lt;items&gt;</code> elements; it is not one parent with numbered children.
+          </p>
+          <pre class="json-example"><code>{
+  "order": {
+    "id": 1001,
+    "items": ["pen", "book"]
+  }
+}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;order&gt;
+    &lt;id&gt;1001&lt;/id&gt;
+    &lt;items&gt;pen&lt;/items&gt;
+    &lt;items&gt;book&lt;/items&gt;
+  &lt;/order&gt;
+&lt;/root&gt;</code></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="attr-heading">
+          <h2 id="attr-heading">Attributes and text</h2>
+          <p>
+            A key that starts with <code>@</code> becomes an attribute of its parent
+            element. The <code>@</code> prefix is dropped from the attribute name.
+            A key called <code>#text</code> becomes that element’s text content.
+          </p>
+          <pre class="json-example"><code>{"book": {"@id": "7", "#text": "Dune"}}</code></pre>
+          <pre class="json-example"><code>&lt;root&gt;
+  &lt;book id="7"&gt;Dune&lt;/book&gt;
+&lt;/root&gt;</code></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="worked-heading">
+          <h2 id="worked-heading">Worked example</h2>
+          <p>Input:</p>
+          <pre class="json-example"><code>{"order": {"id": 1001, "total": 29.5, "items": ["pen", "book"]}}</code></pre>
+          <p>
+            Output with 2-space indentation, the XML declaration on, and root
+            <code>root</code>:
+          </p>
+          <pre class="json-example"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+  &lt;order&gt;
+    &lt;id&gt;1001&lt;/id&gt;
+    &lt;total&gt;29.5&lt;/total&gt;
+    &lt;items&gt;pen&lt;/items&gt;
+    &lt;items&gt;book&lt;/items&gt;
+  &lt;/order&gt;
+&lt;/root&gt;</code></pre>
+          <p>
+            The top-level object is wrapped in <code>&lt;root&gt;</code> because XML needs
+            exactly one root. <code>order</code> becomes a nested element.
+            <code>id</code> and <code>total</code> become text elements. The
+            <code>items</code> array becomes two repeated <code>&lt;items&gt;</code> elements.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently asked questions</h2>
+          <h3>How do I convert JSON to XML online?</h3>
+          <p>
+            Paste your JSON, name the root element (default "root"), and press Convert to XML. The XML appears instantly with a declaration and indentation — copy it with the Copy XML button. Free, no signup.
+          </p>
+          <h3>What is the root element in XML?</h3>
+          <p>
+            XML needs exactly one top-level element, so the converter wraps your JSON in one. It defaults to "root" — name it whatever your target system expects, e.g. "catalog" or "response".
+          </p>
+          <h3>How are JSON arrays converted to XML?</h3>
+          <p>
+            Each array item becomes a repeated element with the same tag. ["pen", "book"] under "items" becomes &lt;items&gt;pen&lt;/items&gt; followed by &lt;items&gt;book&lt;/items&gt;.
+          </p>
+          <h3>How do I add attributes to XML from JSON?</h3>
+          <p>
+            Prefix the key with @: {"book": {"@id": "7", "#text": "Dune"}} makes &lt;book id="7"&gt;Dune&lt;/book&gt;. The @ is dropped from the attribute name.
+          </p>
+          <h3>What happens to null values?</h3>
+          <p>
+            Null becomes a self-closing tag, e.g. &lt;note /&gt;. There is no text to put inside it.
+          </p>
+          <h3>Is my JSON uploaded?</h3>
+          <p>
+            No. The conversion runs entirely in your browser with JavaScript — your JSON is never sent to a server, logged or stored.
+          </p>
+          <h3>Can I convert XML back to JSON?</h3>
+          <p>
+            Not with this tool — it converts JSON to XML only, because the two directions need different conventions.
+          </p>
+          <h3>What if my JSON is invalid?</h3>
+          <p>
+            The converter tells you in plain language (e.g. a missing comma or an unquoted key) and produces no XML until the JSON parses. Fix the input, then convert again.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="disclaimer-heading">
+          <h2 id="disclaimer-heading">Disclaimer</h2>
+          <p>
+            Free tool, runs entirely in your browser. Nothing you paste is uploaded or stored.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        Files and pasted data stay in your browser. Nothing is sent to this site's server. No accounts.
+        <span class="footer-links">
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/privacy/">Privacy policy</a>
+          <button type="button" id="privacy-choices" class="privacy-choice">Privacy choices</button>
+        </span>
+      </footer>
+    </div>
+    <script src="/consent.js" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
