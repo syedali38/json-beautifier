@@ -31,10 +31,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-3484730538241255">
-    <title>JSON Escape &amp; Unescape Online – Free JSON String Tool</title>
+    <title>JSON Escape &amp; Unescape Online – Free String Encoder</title>
     <meta
       name="description"
-      content="Escape text into a JSON string or unescape a quoted JSON string online. Handle quotes, backslashes, newlines and Unicode for free in your browser."
+      content="Escape or unescape a JSON string free in your browser. Encode quotes, newlines and backslashes instantly. No upload, no signup. Try it free right now."
     />
     <link rel="canonical" href="https://jsonforgekit.com/json-escape-unescape/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -54,6 +54,78 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this tool upload my text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Escape, unescape, copy, opening a local file, and downloading the generated text all run in your browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this a string unescape tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, for one quoted JSON string. It decodes escaped quotes, backslashes, newlines, tabs, and Unicode escapes such as \\u6771. This string unescape does not decode URL percent-encoding such as %20, or HTML entities such as &quot;."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do the results include quotation marks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Escape adds the surrounding double quotes. Unescape requires those quotes and returns the text inside them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I unescape JSON online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Paste one JSON string, including the surrounding double quotes, and choose Unescape. The output is the text inside the string. Parsing and copy run in your browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does JSON unescape fail?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unescape accepts one quoted JSON string. A bare object, array, number, true, false, or null is rejected, and the output is cleared. A missing quote, an invalid escape such as \\x41, or text after the closing quote also stops the conversion. Unpaired Unicode surrogates are rejected on Escape and Unescape."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the old output still visible after I edited the input?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Editing the input does not clear the output box. That previous result is no longer valid for Copy output or Download output. Choose Escape or Unescape again."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What file does Download output save?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "After Escape, Download output saves json-escaped.txt. After Unescape, it saves json-unescaped.txt. The file contains the last successful conversion."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I format the JSON first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the JSON Beautifier to format a document, the JSON Viewer to inspect a tree, or the JSON to CSV and JSON to YAML tools when you need another format. If your source data is YAML, use the YAML to JSON converter to convert it into JSON first."
+            }
+          }
+        ]
+      }
+    </script>
     <link rel="stylesheet" href="/consent.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -68,7 +140,7 @@
           <a href="/yaml-to-json/">YAML to JSON</a>
           <a href="/json-escape-unescape/" aria-current="page">JSON Escape</a>
         </nav>
-        <h1>JSON Escape and Unescape Online</h1>
+        <h1>JSON Escape &amp; Unescape Online — Free String Encoder</h1>
         <p class="subtitle">
           Escape raw text into a JSON string, or unescape one JSON string back to text.
           Escape includes the surrounding double quotes. The text stays in your browser.

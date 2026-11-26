@@ -31,10 +31,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-3484730538241255">
-    <title>JSON Beautifier Online – Free JSON Formatter & Validator</title>
+    <title>JSON Formatter Online Tool – Free, Private, No Upload</title>
     <meta
       name="description"
-      content="Free online JSON Beautifier to format, validate, and minify JSON instantly. Easy-to-use JSON formatter with error detection and copy functionality."
+      content="Format, beautify, validate & minify JSON free in your browser. No upload, no signup. Paste JSON and get clean, readable output instantly. Try it free."
     />
     <meta name="google-site-verification" content="_pJf2t0NHVwm36MKMScqiHSbcZvKOcYvoelIY5sXo7g" />
     <link rel="canonical" href="https://jsonforgekit.com/" />
@@ -57,6 +57,54 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does the JSON Beautifier fix invalid JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Invalid JSON is reported on the status line. Beautify JSON and Minify JSON clear the result panel. Trailing commas, single-quoted strings, comments, and the other errors above are not rewritten."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why did a number or key order change after Beautify?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Beautify JSON and Minify JSON re-serialize the parsed value. 1.0 becomes 1, 9007199254740993 becomes 9007199254740992, -0 becomes 0, a repeated key keeps the last value, and integer-like keys such as 1, 2, and 10 are written in numeric order."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does my JSON leave the browser?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Beautify, minify, validate, copy, and clear run in this browser. The JSON in the editors is not uploaded to a server. Optional Google Analytics loads only if you choose Accept analytics. That choice is not the JSON you paste."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does Copy JSON require Beautify or Minify first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Copy JSON reads the result panel. Validate JSON does not write that panel. If the result is empty, the status is Beautify or minify JSON first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Validate change my JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Validate JSON only updates the status line. The input and result panels stay as they are."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div class="page">
@@ -73,10 +121,13 @@
           <span aria-hidden="true">·</span>
           <a href="/json-escape-unescape/">JSON Escape / Unescape</a>
         </nav>
-        <h1>Free Online JSON Beautifier & Formatter</h1>
+        <h1>JSON Formatter Online — Free, Private, No Upload</h1>
         <p class="subtitle">
           Paste JSON below, then beautify it, minify it, or clear the editor.
-          Everything stays in your browser.
+          This JSON Beautifier keeps everything in your browser.
+        </p>
+        <p class="section-intro">
+          100% client-side — your JSON never leaves your browser. No upload, no signup.
         </p>
       </header>
 
@@ -127,6 +178,42 @@
           </div>
 
           <p id="status-message" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="our-json-tools-heading">
+          <h2 id="our-json-tools-heading">Our JSON Tools</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3><a href="/json-viewer/">JSON Viewer</a></h3>
+              <p>
+                Inspect JSON as an expandable tree, search keys and values, and copy a path.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/json-to-csv/">JSON to CSV</a></h3>
+              <p>
+                Flatten JSON objects into table columns, preview rows, and download CSV.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/json-to-yaml/">JSON to YAML</a></h3>
+              <p>
+                Convert JSON into YAML in your browser, then copy or download the result.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/yaml-to-json/">YAML to JSON</a></h3>
+              <p>
+                Convert a YAML or YML document into JSON, then copy or download it.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3><a href="/json-escape-unescape/">JSON Escape / Unescape</a></h3>
+              <p>
+                Escape text as a JSON string, or unescape a quoted JSON string.
+              </p>
+            </article>
+          </div>
         </section>
 
         <section class="info-section" aria-labelledby="json-beautifier-heading">

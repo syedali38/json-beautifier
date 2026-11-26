@@ -31,10 +31,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-3484730538241255">
-    <title>JSON Viewer Online – Free JSON Tree Viewer</title>
+    <title>JSON Viewer Online – Free Tree Viewer, Search &amp; Copy Path</title>
     <meta
       name="description"
-      content="View JSON online with a free interactive JSON viewer. Explore JSON objects and arrays in an expandable tree, search data and copy JSON paths."
+      content="View JSON online in a free interactive tree. Expand nested objects, search keys and values, and copy any JSON path — no upload, no signup. Try it free."
     />
     <link rel="canonical" href="https://jsonforgekit.com/json-viewer/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -54,6 +54,86 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a JSON path?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A JSON path is a short address for one value. $.owner.name points at a property, and $.tags[0] points at the first item in an array. A key that is not a simple identifier, such as user-id, is copied as $[\"user-id\"], not $.user-id. Copy path on a row copies that address."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this viewer upload my JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The editor, parser, search, and tree all run in your browser. This page does not send the JSON you paste to a server."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a file size limit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An uploaded file larger than 5 MiB is rejected before it is read. The text already in the editor stays as it is. Pasted JSON is not checked against that file-size cap."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why did other properties disappear after I searched?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Search keeps matching keys or values and the rows that lead to them. Other siblings are hidden until you clear the search box."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the tree still showing old JSON after I edited the editor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The tree does not update as you type. Choose View JSON to rebuild it from the current editor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is a long string cut off in the tree?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The row preview shows at most 80 characters, then an ellipsis. The JSON in the editor still has the full string. Copy formatted JSON copies that complete value."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why did the viewer refuse my text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The text is not valid JSON. The status line includes the parser message. Trailing commas, comments, and single quotes are common reasons JSON is rejected."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can search miss a match?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Search looks through keys and values. A very large document can reach a safety limit, and the search stops before every match is found. The status line says when that happens. The number it reports is only the matches found before it stopped."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does a large array show only some items?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A large array or object shows its children in batches of up to 50. Choose Show more for the next batch. The remaining values are still in the JSON; they are only waiting to be drawn. Expand All can also stop before every branch is open. The status line then tells you to use Show more or open a branch for the rest."
+            }
+          }
+        ]
+      }
+    </script>
     <link rel="stylesheet" href="/consent.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -68,7 +148,7 @@
           <a href="/yaml-to-json/">YAML to JSON</a>
           <a href="/json-escape-unescape/">Escape / Unescape</a>
         </nav>
-        <h1>Free Online JSON Viewer</h1>
+        <h1>JSON Viewer Online — Free Tree Viewer, Search &amp; Copy Path</h1>
         <p class="subtitle">
           Paste JSON, then explore it as a tree. Expand nested objects and arrays,
           search keys and values, and copy a path to any property. Everything stays

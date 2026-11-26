@@ -31,10 +31,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-3484730538241255">
-    <title>JSON to YAML Converter Online – Free Browser Tool</title>
+    <title>JSON to YAML Converter Online Tool – Free, No Upload</title>
     <meta
       name="description"
-      content="Convert JSON to YAML online for free. Open a JSON file, preview YAML, and copy or download the result in your browser."
+      content="Convert JSON to YAML free in your browser. Paste JSON, get clean YAML instantly. No upload, no signup, nothing leaves your device. Try it free today!"
     />
     <link rel="canonical" href="https://jsonforgekit.com/json-to-yaml/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -54,6 +54,54 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why is the old YAML preview still visible after I edit the JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This page does not clear the YAML when the JSON editor changes. Convert to YAML updates the preview from the current editor. Copy YAML and Download YAML also convert the current editor first. Clear empties both panels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Copy YAML copy the preview or convert the current input?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Copy YAML converts the current JSON, then copies that YAML. It does not copy a stale preview. Download YAML converts the current JSON, then saves converted-data.yaml. If conversion fails, nothing is copied or downloaded."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why are some YAML strings quoted?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A plain yes, no, on, off, true, or number-like string can be read as another type by YAML 1.1 tools. Quotes keep the original text a string. That is YAML 1.1-compatible quoting, not a guarantee that every YAML 1.1 program will accept the file."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can JSON arrays or primitive values be converted?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. A JSON array, string, number, boolean, or null is converted. The root value does not have to be an object."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I inspect the JSON first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the JSON Viewer to open the tree, the JSON Beautifier to format the text, or the JSON to CSV converter when you need a table. Use JSON Escape and Unescape when you need to escape or unescape a JSON string rather than convert JSON into YAML. Use the YAML to JSON converter when you already have YAML and need JSON."
+            }
+          }
+        ]
+      }
+    </script>
     <link rel="stylesheet" href="/consent.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -68,7 +116,7 @@
           <a href="/yaml-to-json/">YAML to JSON</a>
           <a href="/json-escape-unescape/">JSON Escape</a>
         </nav>
-        <h1>Free Online JSON to YAML Converter</h1>
+        <h1>JSON to YAML Converter Online — Free, No Upload</h1>
         <p class="subtitle">
           Paste JSON or open a .json file, then convert JSON to YAML in your browser.
           The text stays on this page and is not uploaded.

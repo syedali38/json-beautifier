@@ -31,10 +31,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-3484730538241255">
-    <title>JSON to CSV Converter – Convert JSON Files Online Free</title>
+    <title>JSON to CSV Converter Online – Free, Flatten Nested JSON</title>
     <meta
       name="description"
-      content="Convert JSON files to CSV online for free. Upload a JSON file or paste data, flatten nested objects into columns, preview results and download CSV."
+      content="Convert JSON to CSV free in your browser. Nested objects flatten to columns, no upload, no signup. Paste JSON and download a clean CSV file. Try it free."
     />
     <link rel="canonical" href="https://jsonforgekit.com/json-to-csv/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -54,6 +54,70 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this json to csv tool upload my data?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Parsing, flattening, preview, copy, and download all run in your browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the old CSV preview still visible after editing JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The table stays on screen while you edit the JSON. Rows from also returns to Whole JSON. Convert to CSV rebuilds the table from the current editor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Copy CSV copy the visible preview table?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Copy CSV converts the current JSON and options, then copies that CSV text. Download CSV runs the same conversion and saves converted-data.csv. The table on screen can be older than the editor, and it shows at most 100 rows. Copy and Download use the full converted result."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are commas and quotes handled?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fields that contain the delimiter, a double quote, a line break, or a leading or trailing space are wrapped in double quotes. Quotes inside a field are doubled."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does spreadsheet-safe export change?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The checkbox is off by default, so Copy CSV and Download CSV keep the original cell text. When you check Spreadsheet-safe export, those two actions add a leading apostrophe to any cell that starts with =, +, -, @, a tab, or a carriage return. Spreadsheets can treat those characters as formulas. The apostrophe keeps the cell as text in the generated CSV. The preview table still shows the original value."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I convert a JSON file to CSV?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Upload a local .json file to convert a JSON file to CSV. Supported JSON is converted in your browser. A file larger than 12,000,000 bytes is rejected and is not read."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I inspect the JSON first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the JSON Viewer to open the tree, or the JSON Beautifier to format the text, then come back and convert it. Use the JSON to YAML converter when you need a structured configuration document instead of a spreadsheet table. Use JSON Escape and Unescape when you need to encode or decode a JSON string."
+            }
+          }
+        ]
+      }
+    </script>
     <link rel="stylesheet" href="/consent.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -68,7 +132,7 @@
           <a href="/yaml-to-json/">YAML to JSON</a>
           <a href="/json-escape-unescape/">JSON Escape</a>
         </nav>
-        <h1>JSON to CSV Converter Online</h1>
+        <h1>JSON to CSV Converter Online — Free, Flatten Nested JSON</h1>
         <p class="subtitle">
           Paste JSON or upload a .json file, then convert JSON to CSV in your browser.
           Nested objects become dotted columns, and the file never leaves this page.
