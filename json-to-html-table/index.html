@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      gtag('set', 'ads_data_redaction', true);
+      window.loadGoogleAnalytics = function () {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TLZNPLNGX8';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-TLZNPLNGX8');
+      };
+      try {
+        if (localStorage.getItem('jsonforgekit-analytics-consent') === 'granted') {
+          window.loadGoogleAnalytics();
+        }
+      } catch (error) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert JSON to an HTML table free in your browser: paste a JSON array and get clean, escaped table markup instantly. No upload, no signup. Try it free." />
+    <meta name="google-adsense-account" content="ca-pub-3484730538241255">
+    <title>JSON to HTML Table Converter Online – Free | JSONForgeKit</title>
+    <link rel="canonical" href="https://jsonforgekit.com/json-to-html-table/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON to HTML Table Converter Online",
+        "url": "https://jsonforgekit.com/json-to-html-table/",
+        "description": "Convert JSON to an HTML table online for free. Paste a JSON array and copy escaped table markup in your browser.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I convert JSON to an HTML table?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Paste a JSON array of objects. The converter writes a table with one row per object and one column per key. Copy the markup into your page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my JSON is a single object, not an array?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The converter treats one object as a one-row table — you do not need to wrap it in square brackets yourself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are nested objects handled?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They are flattened into dotted columns. {\"address\": {\"city\": \"Karachi\"}} becomes the column address.city."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens to missing keys?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The cell stays empty. The column still appears, because the headers are the union of all keys across every object."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the HTML escaped?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. &, <, >, quotes and apostrophes are escaped, so markup inside your data shows as text and cannot run."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I style the table?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Add a CSS class (for example for Bootstrap or Tailwind) and a caption; the markup is plain and ready to style with your own CSS."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my JSON uploaded?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The conversion runs entirely in your browser with JavaScript — your JSON is never sent to a server, logged or stored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my JSON is invalid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The converter tells you in plain language (e.g. a missing comma or an unquoted key) and produces no table until the JSON parses. Fix the input, then convert again."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/consent.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <nav class="nav" aria-label="JSON tools">
+          <a href="/">JSON Beautifier</a>
+          <a href="/json-viewer/">JSON Viewer</a>
+          <a href="/json-to-csv/">JSON to CSV</a>
+          <a href="/json-to-yaml/">JSON to YAML</a>
+          <a href="/yaml-to-json/">YAML to JSON</a>
+          <a href="/json-to-xml/">JSON to XML</a>
+          <a href="/json-to-html-table/" aria-current="page">JSON to HTML Table</a>
+          <a href="/json-escape-unescape/">JSON Escape</a>
+        </nav>
+        <h1>JSON to HTML Table Converter Online – Free, No Upload</h1>
+        <p class="subtitle">
+          Paste a JSON array and convert JSON to an HTML table in your browser.
+          The text stays on this page and is not uploaded.
+        </p>
+      </header>
+
+      <main>
+        <div class="editor-grid">
+          <section class="panel" aria-labelledby="input-heading">
+            <h2 id="input-heading">JSON input</h2>
+            <label class="editor-label" for="json-input">JSON to convert</label>
+            <textarea
+              id="json-input"
+              class="editor"
+              spellcheck="false"
+              autocomplete="off"
+              aria-describedby="status-message"
+              placeholder='Paste JSON here, for example: [{"name":"Ayesha","city":"Karachi"}]'
+            ></textarea>
+            <div class="actions" role="group" aria-label="JSON input actions">
+              <label class="btn btn-secondary file-btn">
+                Open JSON File
+                <input id="file-input" class="file-input" type="file" accept=".json,application/json" />
+              </label>
+              <button type="button" id="sample-btn" class="btn btn-secondary">Load Sample JSON</button>
+              <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+            </div>
+            <p id="status-message" class="status" role="status" aria-live="polite"></p>
+          </section>
+
+          <section class="panel" aria-labelledby="output-heading">
+            <h2 id="output-heading">HTML table output</h2>
+            <div class="options">
+              <label class="check" for="flatten-input">
+                <input id="flatten-input" type="checkbox" checked />
+                Flatten nested keys
+              </label>
+              <label class="check" for="sections-input">
+                <input id="sections-input" type="checkbox" checked />
+                Include thead and tbody
+              </label>
+              <div class="option">
+                <label class="editor-label" for="caption-input">Caption</label>
+                <input id="caption-input" class="text-input" type="text" autocomplete="off" spellcheck="false" placeholder="Optional table caption" />
+              </div>
+              <div class="option">
+                <label class="editor-label" for="class-input">CSS class</label>
+                <input id="class-input" class="text-input" type="text" autocomplete="off" spellcheck="false" placeholder="Optional, e.g. table" />
+              </div>
+              <div class="option">
+                <label class="editor-label" for="indent">Indentation</label>
+                <select id="indent">
+                  <option value="2" selected>2 spaces</option>
+                  <option value="4">4 spaces</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions" role="group" aria-label="HTML table actions">
+              <button type="button" id="convert-btn" class="btn btn-primary">Convert to HTML</button>
+              <button type="button" id="copy-btn" class="btn btn-secondary">Copy HTML</button>
+              <button type="button" id="download-btn" class="btn btn-secondary">Download HTML</button>
+            </div>
+            <p id="html-empty" class="empty">Convert JSON to see HTML table markup here.</p>
+            <pre id="html-output" class="html-output" hidden tabindex="0" aria-label="HTML table markup"></pre>
+          </section>
+        </div>
+
+        <section class="panel preview-panel" aria-labelledby="preview-heading">
+          <h2 id="preview-heading">Live table preview</h2>
+          <p id="preview-empty" class="empty">Convert JSON to see a rendered table here.</p>
+          <div id="preview-wrap" class="table-wrap" hidden></div>
+        </section>
+
+        <section class="info-section" aria-labelledby="quick-heading">
+          <h2 id="quick-heading">Quick answer</h2>
+          <p>
+            Paste a JSON array of objects and convert it to an HTML table. Headers
+            are the union of all keys in first-seen order. Missing keys leave an
+            empty cell. For this input:
+          </p>
+          <pre class="json-example"><code>[
+  {"name": "Ayesha", "age": 28, "city": "Karachi"},
+  {"name": "Bilal", "age": 34, "city": "Lahore", "plan": "Pro"}
+]</code></pre>
+          <p>the markup (2-space indent, thead and tbody on) is:</p>
+          <pre class="json-example"><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;name&lt;/th&gt;
+      &lt;th scope="col"&gt;age&lt;/th&gt;
+      &lt;th scope="col"&gt;city&lt;/th&gt;
+      &lt;th scope="col"&gt;plan&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ayesha&lt;/td&gt;
+      &lt;td&gt;28&lt;/td&gt;
+      &lt;td&gt;Karachi&lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bilal&lt;/td&gt;
+      &lt;td&gt;34&lt;/td&gt;
+      &lt;td&gt;Lahore&lt;/td&gt;
+      &lt;td&gt;Pro&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        </section>
+
+        <section class="info-section" aria-labelledby="what-heading">
+          <h2 id="what-heading">What this converter does</h2>
+          <p>
+            It turns a JSON array of objects into HTML table markup for a web page,
+            an email, or a report. Conversion runs in this browser with JSON.parse.
+            The JSON is not uploaded.
+          </p>
+          <p>
+            Use it when you have API data, a spreadsheet export as JSON, or a list
+            of records and you need a table you can paste into HTML. Format the JSON
+            first in the
+            <a href="/">JSON Formatter</a>
+            or inspect it in the
+            <a href="/json-viewer/">JSON Viewer</a>
+            if you need to read the structure before converting.
+          </p>
+          <p>
+            This page converts JSON to HTML tables only. It does not write Markdown
+            or CSV. For a spreadsheet file, use the
+            <a href="/json-to-csv/">JSON to CSV converter</a>.
+            For XML instead of a table, use the
+            <a href="/json-to-xml/">JSON to XML converter</a>.
+          </p>
+        </section>
+
+        <section class="how-to-section" aria-labelledby="how-heading">
+          <h2 id="how-heading">How to convert JSON to an HTML table</h2>
+          <div class="step-grid">
+            <article class="step-card">
+              <h3>Step 1: Add JSON</h3>
+              <p>
+                Paste JSON into the editor, choose Open JSON File, or choose Load Sample JSON.
+                Open JSON File converts as soon as a valid file is read.
+                Load Sample JSON converts immediately.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Step 2: Choose options</h3>
+              <p>
+                Keep flatten nested keys on for dotted columns such as address.city.
+                Keep thead and tbody on unless you need a bare table. Add an optional
+                caption or CSS class, and pick 2-space or 4-space indentation.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Step 3: Convert pasted JSON</h3>
+              <p>
+                Pasted JSON needs Convert to HTML. Invalid JSON stays in the editor.
+                The status line explains the problem in plain language, and the table
+                preview is cleared.
+              </p>
+            </article>
+            <article class="step-card">
+              <h3>Step 4: Copy or download</h3>
+              <p>
+                Copy HTML converts the current editor text, then copies that markup.
+                Download HTML converts the current editor text and saves table.html.
+                Neither button copies a stale preview. Clear empties both panels.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="map-heading">
+          <h2 id="map-heading">How JSON maps to a table</h2>
+          <p>
+            An array of objects becomes one row per object. The headers are the
+            union of all keys, in first-seen order. Each key becomes a
+            <code>&lt;th scope="col"&gt;</code> header.
+          </p>
+          <h3>Nested objects become dotted columns</h3>
+          <p>
+            With flatten nested keys on (the default), nested objects become dotted
+            columns. <code>{"user": {"name": "Ayesha", "address": {"city": "Karachi"}}}</code>
+            becomes the columns <code>user.name</code> and <code>user.address.city</code>.
+          </p>
+          <h3>Arrays stay in one cell</h3>
+          <p>
+            Arrays of plain values are joined with semicolons in one cell.
+            Arrays of objects are shown as compact JSON in one cell.
+          </p>
+          <h3>Missing keys leave an empty cell</h3>
+          <p>
+            If one object has a key that another object does not, the column still
+            appears. The missing cell is empty.
+          </p>
+          <h3>A single object is one row</h3>
+          <p>
+            A JSON object that is not wrapped in an array is treated as a one-row
+            table. A root that is neither an array nor an object fails with a
+            plain-language error before any markup is produced.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="escape-heading">
+          <h2 id="escape-heading">Escaping and safety</h2>
+          <p>
+            Every key and value is HTML-escaped. <code>&amp;</code>, <code>&lt;</code>,
+            <code>&gt;</code>, quotes and apostrophes become entities, so markup
+            inside the data shows as text and cannot run. A value like
+            <code>&lt;img onerror=…&gt;</code> appears as text in the cell; it is
+            not inserted as live HTML.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="options-heading">
+          <h2 id="options-heading">Options</h2>
+          <h3>Flatten nested keys</h3>
+          <p>
+            On by default. Nested objects become dotted columns such as
+            <code>address.city</code>. Turn it off to keep a nested object as compact
+            JSON in one cell.
+          </p>
+          <h3>Include thead and tbody</h3>
+          <p>
+            On by default. The header row is wrapped in <code>&lt;thead&gt;</code>
+            and the data rows in <code>&lt;tbody&gt;</code>. Turn it off for a table
+            with only <code>&lt;tr&gt;</code> rows.
+          </p>
+          <h3>Caption</h3>
+          <p>
+            Optional. When filled, the converter adds a <code>&lt;caption&gt;</code>
+            as the first child of the table.
+          </p>
+          <h3>CSS class</h3>
+          <p>
+            Optional. Adds a class to the <code>&lt;table&gt;</code> so you can hook
+            Bootstrap, Tailwind, or your own stylesheet.
+          </p>
+          <h3>Indentation</h3>
+          <p>2 spaces (default) or 4 spaces in the generated markup.</p>
+        </section>
+
+        <section class="info-section" aria-labelledby="worked-heading">
+          <h2 id="worked-heading">Worked example</h2>
+          <p>Input:</p>
+          <pre class="json-example"><code>[
+  {"name": "Ayesha", "age": 28, "city": "Karachi"},
+  {"name": "Bilal", "age": 34, "city": "Lahore", "plan": "Pro"}
+]</code></pre>
+          <p>
+            Output with 2-space indentation, thead and tbody on, and no caption or
+            class:
+          </p>
+          <pre class="json-example"><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;name&lt;/th&gt;
+      &lt;th scope="col"&gt;age&lt;/th&gt;
+      &lt;th scope="col"&gt;city&lt;/th&gt;
+      &lt;th scope="col"&gt;plan&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ayesha&lt;/td&gt;
+      &lt;td&gt;28&lt;/td&gt;
+      &lt;td&gt;Karachi&lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bilal&lt;/td&gt;
+      &lt;td&gt;34&lt;/td&gt;
+      &lt;td&gt;Lahore&lt;/td&gt;
+      &lt;td&gt;Pro&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          <p>
+            Headers are the union of all keys in first-seen order: name, age, city,
+            plan. The first record has no plan, so its cell is empty. Flattening
+            example: <code>{"user": {"name": "Ayesha", "address": {"city": "Karachi"}}}</code>
+            becomes the columns <code>user.name</code> and <code>user.address.city</code>.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently asked questions</h2>
+          <h3>How do I convert JSON to an HTML table?</h3>
+          <p>
+            Paste a JSON array of objects. The converter writes a table with one row per object and one column per key. Copy the markup into your page.
+          </p>
+          <h3>What if my JSON is a single object, not an array?</h3>
+          <p>
+            The converter treats one object as a one-row table — you do not need to wrap it in square brackets yourself.
+          </p>
+          <h3>How are nested objects handled?</h3>
+          <p>
+            They are flattened into dotted columns. {"address": {"city": "Karachi"}} becomes the column address.city.
+          </p>
+          <h3>What happens to missing keys?</h3>
+          <p>
+            The cell stays empty. The column still appears, because the headers are the union of all keys across every object.
+          </p>
+          <h3>Is the HTML escaped?</h3>
+          <p>
+            Yes. &amp;, &lt;, &gt;, quotes and apostrophes are escaped, so markup inside your data shows as text and cannot run.
+          </p>
+          <h3>Can I style the table?</h3>
+          <p>
+            Yes. Add a CSS class (for example for Bootstrap or Tailwind) and a caption; the markup is plain and ready to style with your own CSS.
+          </p>
+          <h3>Is my JSON uploaded?</h3>
+          <p>
+            No. The conversion runs entirely in your browser with JavaScript — your JSON is never sent to a server, logged or stored.
+          </p>
+          <h3>What if my JSON is invalid?</h3>
+          <p>
+            The converter tells you in plain language (e.g. a missing comma or an unquoted key) and produces no table until the JSON parses. Fix the input, then convert again.
+          </p>
+        </section>
+
+        <section class="info-section" aria-labelledby="disclaimer-heading">
+          <h2 id="disclaimer-heading">Disclaimer</h2>
+          <p>
+            Free tool, runs entirely in your browser. Nothing you paste is uploaded or stored.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        Files and pasted data stay in your browser. Nothing is sent to this site's server. No accounts.
+        <span class="footer-links">
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/privacy/">Privacy policy</a>
+          <button type="button" id="privacy-choices" class="privacy-choice">Privacy choices</button>
+        </span>
+      </footer>
+    </div>
+    <script src="/consent.js" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
